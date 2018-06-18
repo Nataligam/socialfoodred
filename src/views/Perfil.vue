@@ -7,7 +7,16 @@
 						<div class="row">
 							<div class="col">
 								<center>
-									<img src="../assets/avatar.png" width="200">
+									<div class="row">
+										<div class="col">
+											<img src="../assets/avatar.png" width="200">
+										</div>
+									</div>									
+									<div class="row mt-5">
+										<div class="col">
+											<button type="submit" class="btn btn-outline-info2">Actualizar Datos del Perfil</button>
+										</div>	
+									</div>	
 								</center>
 							</div>
 							<div class="col">
@@ -24,10 +33,7 @@
 										<div class="form-group">
 											<label >Contraseña:</label>
 											<input type="password" class="form-control">
-										</div>
-										<center>
-										<button type="submit" class="btn btn-outline-info2">Actualizar</button>
-										</center>										
+										</div>															
 									</form>
 								</div>
 							</div>

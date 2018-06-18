@@ -2,7 +2,7 @@
 	<header class="header">
 		<nav class="navbar navbar-light bg-light">
 			<a class="navbar-brand" href="#">
-				<img src="../assets/socialfood2.png" width="60" class="d-inline-block align-top" alt=""></a>				
+				<img src="../assets/socialfoodnew.png" width="70" class="d-inline-block align-top" alt=""></a>				
 		</nav>
 	</header>
 
@@ -19,7 +19,7 @@ export default{
 <style>
 
 .bg-light{
-	background: #ff6b6b!important;
+	background: #ff9600!important;
 }
 
 </style>

@@ -15,7 +15,7 @@
 			<div class="container mt-5 mb-5">
 				<div class="row">
 					<div class="col p-4">
-						<img src="../assets/bannerSocialFood.jpg" class="mr-5" height="218" width="656">
+						<img src="../assets/socialfoodnew.jpg" class="mr-5" height="218" width="656">
 						<hr class="mr-5">
 						<p class="mt-5 text-justify mr-5">Social food es una red social diseñada para aquellos programadores amantes de la cocina que deseen abrir un espacio dentro de su quehacer diario para compartir sus mejores recetas, con un toque de codigo y conocer mas sobre la gastronomia preferida de otros colegas.</p>
 

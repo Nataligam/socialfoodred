@@ -8,7 +8,9 @@
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item ">
-							<a class="nav-link" href="#"><span class="icon-home"></span></a>
+							<router-link to="/Inicio">
+								<a class="nav-link" href="#"><span class="icon-home"></span></a>
+							</router-link>
 						</li>						
 						<li class="nav-item">
 							<a class="nav-link" href="#"><span class="icon-people"></span></a>
@@ -22,7 +24,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<router-link to="/Perfil">
-								<a class="dropdown-item" href="#"><span class="icon-user"></span> Perfil</a>
+									<a class="dropdown-item" href="#"><span class="icon-user"></span> Perfil</a>
 								</router-link>
 								<a class="dropdown-item" href="#"><span class="icon-wrench"></span> Configuraciones</a>
 								<a class="dropdown-item" href="#"><span class="icon-power"></span> Salir</a>
@@ -45,8 +47,7 @@
 			</div>
 			<div class="col-3 bg-conectados mt-2">
 				<main class="main-section ">
-					<slot name="contentColumn2"></slot>
-					<p>aca va la lista de conectados</p>				
+					<slot name="contentColumn2"></slot>							
 				</main>
 			</div>
 		</div>	
