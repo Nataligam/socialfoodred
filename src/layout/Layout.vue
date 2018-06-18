@@ -39,15 +39,10 @@
 				<button class="btn btn-outline-info2" type="submit"><span class="icon-magnifier"></span></button>
 			</form>
 		</nav>
-		<div class="row">
-			<div class="col-9">
+		<div class="row mt-5 mb-5 ">
+			<div class="col">
 				<main class="main-section">
 					<slot name="contentColumn1"></slot>									
-				</main>
-			</div>
-			<div class="col-3 bg-conectados mt-2">
-				<main class="main-section ">
-					<slot name="contentColumn2"></slot>							
 				</main>
 			</div>
 		</div>	

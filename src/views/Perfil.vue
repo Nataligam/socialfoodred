@@ -3,9 +3,12 @@
 		<section slot="content" class="ContenidoPerfil">	
 			<Layout>
 				<section slot="contentColumn1">
-					<div class=" p-3 m-5">
-						<div class="row">
-							<div class="col">
+					<center><h4 class="mb-5">Datos del perfil de usuario</h4>
+						<hr>
+					</center>
+					<div class=" p-3 ">
+						<div class="row">							
+							<div class="col-md-3 offset-md-2 col-sm-12">
 								<center>
 									<div class="row">
 										<div class="col">
@@ -14,14 +17,14 @@
 									</div>									
 									<div class="row mt-5">
 										<div class="col">
-											<button type="submit" class="btn btn-outline-info2">Actualizar Datos del Perfil</button>
+											<button type="submit" class="btn btn-outline-info2 mb-1">Actualizar Datos</button>
 										</div>	
 									</div>	
 								</center>
 							</div>
-							<div class="col">
+							<div class="col-md-5 col-sm-12">
 								<div class="borde p-3">
-									<form>
+									<form >
 										<div class="form-group">
 											<label >Correo:</label>
 											<input type="email" class="form-control">	
@@ -79,8 +82,6 @@ export default{
 	border: 2px #48dbfb solid;
 }
 
-.divpublicar{
-	width: 70%;	
-}
+
 
 </style>

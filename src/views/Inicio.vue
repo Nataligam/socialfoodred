@@ -4,13 +4,23 @@
 		<section slot="content" class="ContenidoInicio">			
 			<Layout>
 				<section slot="contentColumn1" >
-					<div class="borde p-3 m-5 divpublicar">
-					<form class="form-inline">								
-						<h4 class="ml-5">¡Crea y comparte tu receta!</h4>
-						<router-link to="/Receta">
-						<button class="btn btn-outline-info2 btn-lg ml-5" type="submit">Publicar Ahora</button>							
-						</router-link>
-					</form>	
+					<div class="row">
+						<div class="col-md-6 offset-md-3">
+							<div class="borde p-3 ">
+								<form class="form-inline">
+									<div class="row">
+										<div class="col-lg-8 col-md-12 col-sm-12 ">
+											<h4 >¡Crea y comparte tu receta!</h4>
+										</div>
+										<div class=" col-lg-4 col-md-12 col-sm-12">
+											<router-link to="/Receta">
+												<button class="btn btn-outline-info2 btn-lg" type="submit">Publicar Ahora</button>						
+											</router-link>
+										</div>
+									</div>								
+								</form>	
+							</div>
+						</div>
 					</div>
 				</section>
 			</Layout>				
@@ -59,7 +69,7 @@ export default{
 }
 
 .divpublicar{
-	width: 70%;	
+	width: 70% !important;	
 }
 
 
