@@ -4,128 +4,110 @@
 		<section slot="content" class="ContenidoReceta">			
 			<Layout>
 				<section slot="contentColumn1" >
-					<div class="borde divpublicar col-md-12">
-					<form class="form-horizontal">
+                    <div class="borde col-md-8 offset-md-2 col-sm-12">
+                        <center><h4 class="mt-4 mb-5">Crear y Compartir Receta:</h4></center>
                         <div class="row">
-                        <div class="form-group col-md-2">
-                            <h3 class="m-3" > Receta</h3>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <input type="nombreReceta" class="m-3 form-control"  placeholder="Mi Receta">
-                         </div>
-                        <div class="col-md-1">
-                             <button class="m-3 btn btn-outline-info2" type="submit" >Publicar</button>
-                        </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-md-8 centro">
-                            <img class="img-responsive imgReceta" src="https://www.cocinacaserayfacil.net/wp-content/uploads/2018/02/patatas-bravas-receta.jpg">  
+                            <div class="col-md-12 offset-md-1 col-sm-12">
+                             <form class="w-75 ">
+                              <div class="form-group">                            
+                                <input type="text" class="form-control" placeholder="Ingrese el nombre de la receta">                        
                             </div>
-                        
-                            <div clas="col-md-1">
-                                <button class="m-2 btn btn-outline-info2 btn-md ml-5" type="submit"> <span class="fas fa-plus"></span></button>
+                            <label>Seleccione las imagenes:</label>
+                            <div class="input-group mb-3">                            
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input">
+                                <label class="custom-file-label"></label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Cargar</span>
                             </div>
                         </div>
-                        <br>
+                        <div class="form-group">
+                            <label >Nombre de la categoria:</label>                            
+                            <input type="text" class="form-control" placeholder="Postre, Plato Fuerte,  Entrada">                        
+                        </div>
+                        <div class="form-group">
+                            <h5>Ingredientes:</h5>
+                            <div class="borde p-3">
+                                <div class="row">
+                                    <div class="col-5">
+                                      <label>Nombre:</label>
+                                      <input type="text" class="form-control" placeholder="Nombre del ingrediente">
+                                  </div>
+                                  <div class="col-5">
+                                     <label>Cantidad:</label>
+                                     <input type="number" class="form-control" placeholder="Nombre del ingrediente">
+                                 </div>
+                                 <div class="col-2">
+                                    <label>Añadir:</label>
+                                     <button class="btn btn-outline-info2" type="submit"><span class="icon-plus"></span></button>
+                                 </div>
+                             </div>
+                             <!--Lista de ingredientes-->
+                             <div class="mt-3">
+                                 <ul class="list-group">
+                                  <label>Ingredientes agregados:</label>                                  
+                                  <li class="list-group-item">Ingrediente 1<button class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button></li>
+                                  <li class="list-group-item">Ingrediente 2<button class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button></li>                     
+                              </ul>
+                          </div>
+                          <!--Lista de ingredientes-->                               
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <h5>Pasos:</h5>
+                    <div class="borde p-3">
                         <div class="row">
-                        
-                        <div class="col-md-9 centro">
-                        <label >Descripccion</label><br>					
-                        <textarea class="form-control" rows="5" id="descripcion"></textarea>
+                            <div class="col-5">
+                                <label >Nombre:</label>
+                                <input type="text" class="form-control" placeholder="Nombre del paso">
+                            </div>
+                            <div class="col-5">
+                                <label >Descripción:</label>
+                                <textarea class="form-control" rows="1"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <label>Añadir:</label>
+                             <button class="btn btn-outline-info2" type="submit"><span class="icon-plus"></span></button>
+                         </div>                        
+                     </div>
+                     <!--Lista de pasos-->
+                     <div class="mt-3">
+                         <ul class="list-group">
+                          <label>Pasos agregados:</label>                                  
+                          <li class="list-group-item">Paso1<button class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button></li>
+                          <li class="list-group-item">Paso2<button class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button></li>                     
+                      </ul>
+                  </div>
+                  <!--Lista de pasos--> 
+              </div>
+          </div>
+          <button type="submit" class="btn btn-outline-info2 mb-5 btnIzq">PUBLICAR</button>     
+      </form>
+  </div>
+</div>
+
+
+
+<!--
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                         </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="">Upload</span>
                         </div>
-                        <br>
-                        
-                        <div class="borde container">
-                            
-                            <form action="" class="form-horizontal">
-                            <div class="row">
-                            <div class="col-md-10">
-                            <h3  class="m-2">Ingredientes</h3>
-                            </div>
-                            <div class="col-md-2  text-right">
-                                <button style="" class="m-2 btn btn-outline-info2 btn-md ml-5" type="submit"> <span class="fas fa-plus"></span></button>
-                            </div>
-                            </div>
+                    </div>                
+                -->
 
-                            <div class="row">
-                            <div class="col-md-6 col-sm-12 form-group">
-                                <label for="nombreIngrediente">Nombre: </label><br>
-                                <input class="form-control" type="text" id="nombreIngrediente" name="nombreIngrediente" placeholder="Nombre"/>
 
-                            </div>
 
-                            <div class="col-md-6 col-sm-12  form-group">
-                            <label for="cantidadIngrediente">Cantidad: </label>
-                            <input class="form-control" id="cantidadIngrediente" name="cantidadIngrediente" type="text" placeholder="Cantidad"/>
-                            </div>
-
-                            <div id="listaDeIngredientes" class="p-3 col-md-12 list-group centro ">
-                                <a href="#" class="list-group-item active">
-                                    Ingredientes
-                                </a>
-                                <a href="#" class="list-group-item">Carne</a>
-                                <a href="#" class="list-group-item">Pollo</a>
-                                <a href="#" class="list-group-item">Sal</a>
-                                <a href="#" class="list-group-item">Azucar</a>
-                                </div> 
-                                <br> 
-
-                            </div>   
-
-                            </form>
-                        </div>
-                        
-                        <br>
-                        <div class="borde ">
-                            <form action="" class="form-horizontals">
-                            
-                            
-                            <div class="row">
-                            <div class="col-md-10">
-                            <h3  class="p-2 m-2">Metodos</h3>
-                            </div>
-                            <div clas="col-md-2 text-right">
-                                <button style="" class="m-2 btn btn-outline-info2 btn-md ml-5" type="submit"> <span class="fas fa-plus"></span></button>
-                            </div>
-                            </div>
-                            <div class="row">
-                            <div class="col-md-6 col-sm-12  form-group">
-                                <label for="nombreMetodo">Nombre: </label><br>
-                                <input class="form-control" type="text" id="nombreMetodo" name="nombreMetodo" placeholder="Nombre"/>
-
-                            </div>
-
-                            <div class="col-md-6 col-sm-12  form-group">
-                            <label for="parametroMetodo">Parametros: </label>
-                            <input class="form-control" id="parametroMetodo" name="parametroMetodo" type="text" placeholder="Parametros"/>
-                            </div>
-                            <div class="col-md-12 form-group">
-                            <label for="cantidadIngrediente">Descripcion: </label>
-                            <textarea class="form-control" rows="2" id="descripcionMetodo"></textarea>
-                            </div>
-                             <div id="listaDeIngredientes" class="p-3 col-md-12 list-group centro ">
-                                <a href="#" class="list-group-item active">
-                                    Metodos
-                                </a>
-                                <a href="#" class="list-group-item">Carne</a>
-                                <a href="#" class="list-group-item">Pollo</a>
-                                <a href="#" class="list-group-item">Sal</a>
-                                <a href="#" class="list-group-item">Azucar</a>
-                                </div> 
-                                <br> 
-                            </div>
-
-                            </form>
-                            
-                        </div>
-                        <br>
-                    </form>	
-					</div>
-				</section>
-			</Layout>				
-		</section>
-	</DefaultLayout>
+            </div>                           
+        </section>
+    </Layout>				
+</section>
+</DefaultLayout>
 </template>
 
 <script >
@@ -169,23 +151,26 @@ export default{
 }
 
 .divpublicar{
-   
-    
+
+
     margin: 10px;
     margin-top: 50px;
-	width: 98%;	
+    width: 98%;	
 }
 .centro{
     margin: auto;
 }
 
 .imgReceta{
-margin: auto;
-width: 100%;
-height: 100%;
+    margin: auto;
+    width: 100%;
+    height: 100%;
 
 }
 
+.btnIzq{
+    float: right;
+}
 
 
 
