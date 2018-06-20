@@ -23,9 +23,9 @@
 								<span class="icon-settings"></span>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<router-link to="/Perfil">
+								<router-link to="/Perfil">		
 									<a class="dropdown-item" href="#"><span class="icon-user"></span> Perfil</a>
-								</router-link>
+								</router-link>						
 								<a class="dropdown-item" href="#"><span class="icon-wrench"></span> Configuraciones</a>
 								<a class="dropdown-item" href="#"><span class="icon-power"></span> Salir</a>
 							</div>
@@ -52,7 +52,14 @@
 <script >
 export default{
 	name:'Layout',
+	data(){
+		return {
+			
+		};
+	},
 	components:{
+	},
+	methods:{
 
 	}
 }
