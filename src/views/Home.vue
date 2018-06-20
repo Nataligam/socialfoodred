@@ -36,6 +36,7 @@
 								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
 							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
+								<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="buscarAmigo">Buscar</button>
 						</form>
 					</div>
 				</div>
@@ -54,11 +55,11 @@ export default{
 	data(){
 		return {
        usuario:[],
-			 usuario,
-			 correo,
-			 contrasena,
-			 username,
-			 password
+			 usuario:'',
+			 correo:'',
+			 contrasena:'',
+			 username:'',
+			 password:''
 		};
 	},
 	methods:{
@@ -101,7 +102,7 @@ export default{
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 			 console.log('registrar')
-			 axios.post('http://fd755025.ngrok.io/v1/usuario',{
+			 axios.post('http://bb6c93af.ngrok.io/v1/usuario',{
 
 			 nickname:this.usuario,
 			 correo:this.correo,
@@ -114,7 +115,7 @@ export default{
 		 },
 		 login(){
 		 console.log('login')
-			 axios.post('http://fd755025.ngrok.io/v1/usuario/login',{
+			 axios.post('http://bb6c93af.ngrok.io/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})
@@ -129,7 +130,16 @@ export default{
 				 this.$router.push('/')
 			 }
 			})
-		 }
+		 },
+		 buscarAmigo(){
+		  console.log("buscaramigo");
+			 var buscar = 'pedro'
+			axios.get('http://bb6c93af.ngrok.io/v1/usuarios/' + buscar,{
+			})
+			.then(response =>{
+			 console.log(response);
+			})
+		},
 		 // ACA TERMINA USUARIO
 	},
 	components:{
