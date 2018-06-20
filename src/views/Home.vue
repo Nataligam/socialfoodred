@@ -5,10 +5,10 @@
 			<nav class="navbar navbar-light bg-nav2 justify-content-between">
 				<a class="navbar-brand"></a>
 				<form class="form-inline">
-					<input class="form-control mr-sm-2" type="text" placeholder="Usuario">
-					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña">
+					<input class="form-control mr-sm-2" type="text" placeholder="Usuario" v-model='username'>
+					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña" v-model='password'>
 
-						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="validar">Iniciar Sesión</button>
+						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
 
 				</form>
 			</nav>
@@ -25,17 +25,17 @@
 						<form class="mt-4">
 							<div class="form-group">
 								<label>Usuario:</label>
-								<input type="text" class="form-control" placeholder="Example">
+								<input type="text" class="form-control" placeholder="Example" v-model='usuario'>
 							</div>
 							<div class="form-group">
 								<label>Correo:</label>
-								<input type="email" class="form-control" placeholder="name@example.com">
+								<input type="email" class="form-control" placeholder="name@example.com" v-model='correo'>
 							</div>
 							<div class="form-group">
 								<label>Contraseña:</label>
-								<input type="password" class="form-control" placeholder="************">
+								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
-							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit">Registrarse</button>
+							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
 						</form>
 					</div>
 				</div>
@@ -53,14 +53,19 @@ export default{
 	name:'Home',
 	data(){
 		return {
-       usuario:[]
+       usuario:[],
+			 usuario,
+			 correo,
+			 contrasena,
+			 username,
+			 password
 		};
 	},
 	methods:{
 		 validar(){
 		 console.log("memo");
 			 axios.get('http://fd755025.ngrok.io/v1/usuario/1',{
-        
+
 			 })
 			 .then(response =>{
 				console.log(response);
@@ -81,6 +86,7 @@ export default{
 		 },
 		 actualizar(){
 		 console.log("memoedit");
+		    console.log(this.usuario)
 			 axios.put('http://fd755025.ngrok.io/v1/usuario/6',{
 
 				nickname:'benito camelas',
@@ -92,76 +98,39 @@ export default{
 				console.log(response);
 			 })
 		 },
-		 ingresar(){
-		     //esto es otra manera de hacer la peticion
-				 console.log("memo22");
-				  var urlServer= 'http://fd755025.ngrok.io/v1/usuario/1';
-					var configAxios={
-					url:urlServer,
-					method:'get',
-					responseType:'json',
-					headers:{
-						'content-type':'application/json'
-						}
-					};
-					axios.
-					request(configAxios).
-					then(function(response){
-						console.log(response);
-					})
-					.catch(function (error) {
-				    console.log(error);
-			  	});
-		 },
+		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
-		 console.log('registrar')
-				 var urlServer= 'http://fd755025.ngrok.io/v1/usuario';
-				 var configAxios={
-					 url:urlServer,
-					 method:'post',
-					 responseType:'json',
-					 headers:{
-					 'Content-Type':'application/json'
-			 	 	}
-		 		}
-				axios.
-				request(configAxios,{
+			 console.log('registrar')
+			 axios.post('http://fd755025.ngrok.io/v1/usuario',{
 
-					 nickname:'pedro',
-					 correo:'pedrolop90.gmail.com',
-					 password:'12345'
+			 nickname:this.usuario,
+			 correo:this.correo,
+			 password:this.contrasena
 
-				}).
-				then(function(response){
-					console.log(response);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
+			})
+			.then(response =>{
+			 console.log(response);
+			})
 		 },
-		 registrarReceta(){
-		 console.log('registrar')
-				 var urlServer= 'http://fd755025.ngrok.io/v1/receta';
-				 var configAxios={
-					 url:urlServer,
-					 method:'post',
-					 responseType:'json',
-					 headers:{
-					 'content-type':'application/json'
-			 	 	}
-		 		}
-				axios.
-				request(configAxios,{
-					 nombre:'memoreceta'
-				}).
-				then(function(response){
-					console.log(response);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
+		 login(){
+		 console.log('login')
+			 axios.post('http://fd755025.ngrok.io/v1/usuario/login',{
+			 correo:this.username,
+			 password:this.password
+			})
+			.then(response =>{
+			 console.log(response);
+			 console.log(response.data)
+			 if(response.data > 0){
+			  console.log("entro");
+				this.$router.push('Inicio')
+			 }else{
+			   console.log("no entro")
+				 this.$router.push('/')
+			 }
+			})
 		 }
-
+		 // ACA TERMINA USUARIO
 	},
 	components:{
 		DefaultLayout,
