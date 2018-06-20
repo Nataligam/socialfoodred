@@ -7,9 +7,9 @@
 				<form class="form-inline">
 					<input class="form-control mr-sm-2" type="text" placeholder="Usuario">
 					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña">
-					<router-link to="/Inicio">
-						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit">Iniciar Sesión</button>
-					</router-link>
+
+						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="validar">Iniciar Sesión</button>
+
 				</form>
 			</nav>
 			<div class="container mt-5 mb-5">
@@ -53,8 +53,115 @@ export default{
 	name:'Home',
 	data(){
 		return {
-
+       usuario:[]
 		};
+	},
+	methods:{
+		 validar(){
+		 console.log("memo");
+			 axios.get('http://fd755025.ngrok.io/v1/usuario/1',{
+        
+			 })
+			 .then(response =>{
+				console.log(response);
+			 })
+		 },
+		 save(){
+		 console.log("memosave");
+			 axios.post('http://fd755025.ngrok.io/v1/usuario',{
+
+				nickname:'pedro',
+				correo:'pedrolop90789.gmail.com',
+				password:'12345'
+
+			 })
+			 .then(response =>{
+				console.log(response);
+			 })
+		 },
+		 actualizar(){
+		 console.log("memoedit");
+			 axios.put('http://fd755025.ngrok.io/v1/usuario/6',{
+
+				nickname:'benito camelas',
+				correo:'benito.gmail.com',
+				password:'memo1234'
+
+			 })
+			 .then(response =>{
+				console.log(response);
+			 })
+		 },
+		 ingresar(){
+		     //esto es otra manera de hacer la peticion
+				 console.log("memo22");
+				  var urlServer= 'http://fd755025.ngrok.io/v1/usuario/1';
+					var configAxios={
+					url:urlServer,
+					method:'get',
+					responseType:'json',
+					headers:{
+						'content-type':'application/json'
+						}
+					};
+					axios.
+					request(configAxios).
+					then(function(response){
+						console.log(response);
+					})
+					.catch(function (error) {
+				    console.log(error);
+			  	});
+		 },
+		 registrarUsuario(){
+		 console.log('registrar')
+				 var urlServer= 'http://fd755025.ngrok.io/v1/usuario';
+				 var configAxios={
+					 url:urlServer,
+					 method:'post',
+					 responseType:'json',
+					 headers:{
+					 'Content-Type':'application/json'
+			 	 	}
+		 		}
+				axios.
+				request(configAxios,{
+
+					 nickname:'pedro',
+					 correo:'pedrolop90.gmail.com',
+					 password:'12345'
+
+				}).
+				then(function(response){
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		 },
+		 registrarReceta(){
+		 console.log('registrar')
+				 var urlServer= 'http://fd755025.ngrok.io/v1/receta';
+				 var configAxios={
+					 url:urlServer,
+					 method:'post',
+					 responseType:'json',
+					 headers:{
+					 'content-type':'application/json'
+			 	 	}
+		 		}
+				axios.
+				request(configAxios,{
+					 nombre:'memoreceta'
+				}).
+				then(function(response){
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		 }
+
 	},
 	components:{
 		DefaultLayout,
