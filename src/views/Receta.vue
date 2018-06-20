@@ -10,7 +10,7 @@
                             <div class="col-md-12 offset-md-1 col-sm-12">
                              <form class="w-75 ">
                               <div class="form-group">                            
-                                <input type="text" class="form-control" placeholder="Ingrese el nombre de la receta">                        
+                                <input v-model="titulo" type="text" class="form-control" placeholder="Ingrese el nombre de la receta">                        
                             </div>
                             <label>Seleccione las imagenes:</label>
                             <div class="input-group mb-3">                            
@@ -32,15 +32,19 @@
                                 <div class="row">
                                     <div class="col-5">
                                       <label>Nombre:</label>
-                                      <input type="text" class="form-control" placeholder="Nombre del ingrediente">
+                                      <input v-model="nombreing" type="text" class="form-control" placeholder="Nombre del ingrediente">
                                   </div>
-                                  <div class="col-5">
+                                  <div class="col-3">
                                      <label>Cantidad:</label>
-                                     <input type="number" class="form-control" placeholder="Nombre del ingrediente">
+                                     <input v-model="cantidading" type="number" class="form-control" placeholder="100">
+                                 </div>
+                                  <div class="col-2">
+                                     <label>Unidad:</label>
+                                     <input v-model="unidading" type="text" class="form-control" placeholder="g">
                                  </div>
                                  <div class="col-2">
                                     <label>Añadir:</label>
-                                     <button class="btn btn-outline-info2" type="submit"><span class="icon-plus"></span></button>
+                                     <button v-on:click="agregarIng" class="btn btn-outline-info2" type="submit"><span class="icon-plus"></span></button>
                                  </div>
                              </div>
                              <!--Lista de ingredientes-->
@@ -60,11 +64,11 @@
                         <div class="row">
                             <div class="col-5">
                                 <label >Nombre:</label>
-                                <input type="text" class="form-control" placeholder="Nombre del paso">
+                                <input  v-model="nombrepaso" type="text" class="form-control" placeholder="Nombre del paso">
                             </div>
                             <div class="col-5">
                                 <label >Descripción:</label>
-                                <textarea class="form-control" rows="1"></textarea>
+                                <textarea  v-model="descripcionpaso" class="form-control" rows="1"></textarea>
                             </div>
                             <div class="col-2">
                                 <label>Añadir:</label>
@@ -82,26 +86,13 @@
                   <!--Lista de pasos--> 
               </div>
           </div>
-          <button type="submit" class="btn btn-outline-info2 mb-5 btnIzq">PUBLICAR</button>     
+          <button type="submit" class="btn btn-outline-info2 mb-5 btnIzq">VER RECETA</button>     
       </form>
   </div>
 </div>
-
-
-
-<!--
-                        <div class="input-group mb-3">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile02">
-                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                        </div>
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="">Upload</span>
-                        </div>
-                    </div>                
-                -->
-
-
+<input v-model="message" placeholder="edit me">
+							<p>Message is: {{ message }}</p>
+							
 
             </div>                           
         </section>
@@ -120,8 +111,25 @@ export default{
 	data(){
 		return {
 
+            ingredientes:[],
+            titulo,
+            nombreing,
+            cantidading,
+            unidading,
+            nombrepaso,
+            descripcionpaso
+
+
 		}
-	},
+    },
+    methods:{
+		 agregarIng(){
+         this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading,unidad:this.unidading});
+         this.nombreing='';
+         this.cantidading='';
+         this.unidad='';
+         }
+    },
 	components:{
 		DefaultLayout,
 		Layout
