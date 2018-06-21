@@ -37,6 +37,7 @@
 							</div>
 							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
 						</form>
+				
 					</div>
 				</div>
 			</div>
@@ -52,6 +53,7 @@ import DefaultLayout from '@/layout/DefaultLayout'
 export default{
 	name:'Home',
 	data(){
+		
 		return {
        usuario:[],
 			 usuario:'',
