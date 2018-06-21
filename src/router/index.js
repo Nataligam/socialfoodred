@@ -16,14 +16,14 @@ export default new Router({
 		component: Home
 	},
 	{
-		path:'/inicio',
+		path:'/inicio/:id',
 		name:'Inicio',
-		component: Inicio,	
+		component: Inicio,
 	},
 	{
 		path:'/perfil',
 		name:'Perfil',
-		component: Perfil,	
+		component: Perfil,
 	},
 	{
 		path:'/Receta',

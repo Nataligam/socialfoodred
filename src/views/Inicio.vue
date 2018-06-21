@@ -3,7 +3,7 @@
 	<DefaultLayout>
 		<section slot="content" class="ContenidoInicio">
 			<Layout>
-				<section slot="contentColumn1" >
+				<section slot="contentColumn1"  >
 					<div class="row">
 						<div class="col-md-6 offset-md-3">
 							<div class="borde p-3 ">
@@ -14,8 +14,9 @@
 										</div>
 										<div class=" col-lg-4 col-md-12 col-sm-12">
 											<router-link to="/Receta">
-												<button class="btn btn-outline-info2 btn-lg" type="submit">Publicar Ahora</button>
+												<button class="btn btn-outline-info2 btn-lg" type="submit" >Publicar Ahora</button>
 											</router-link>
+
 										</div>
 									</div>
 								</form>
@@ -37,8 +38,15 @@ export default{
 	name:'Inicio',
 	data(){
 		return {
-        
+        id:''
 		}
+	},
+	methods:{
+	 leerIdRuta(){
+	 console.log("inicio");
+	  this.id = this.$route.params.id;
+		console.log(this.id);
+	 }
 	},
 	components:{
 		DefaultLayout,

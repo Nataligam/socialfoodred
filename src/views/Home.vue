@@ -6,7 +6,7 @@
 				<a class="navbar-brand"></a>
 				<form class="form-inline">
 					<input class="form-control mr-sm-2" type="text" placeholder="Usuario" v-model='username'>
-					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña" v-model='password'>
+					<input class="form-control mr-sm-2" type="password"  placeholder="Contraseña" v-model='password'>
 
 						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
 
@@ -36,7 +36,6 @@
 								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
 							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
-								<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="buscarAmigo">Buscar</button>
 						</form>
 					</div>
 				</div>
@@ -102,7 +101,7 @@ export default{
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 			 console.log('registrar')
-			 axios.post('http://bb6c93af.ngrok.io/v1/usuario',{
+			 axios.post('http://baab64d5.ngrok.io/v1/usuario',{
 
 			 nickname:this.usuario,
 			 correo:this.correo,
@@ -115,16 +114,22 @@ export default{
 		 },
 		 login(){
 		 console.log('login')
-			 axios.post('http://bb6c93af.ngrok.io/v1/usuario/login',{
+			 axios.post('http://baab64d5.ngrok.io/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})
 			.then(response =>{
 			 console.log(response);
 			 console.log(response.data)
+			 var idsesion = response.data;
 			 if(response.data > 0){
 			  console.log("entro");
-				this.$router.push('Inicio')
+				this.$router.push(
+						{
+						name:'Inicio',
+						params:{id:idsesion}
+						}
+				)
 			 }else{
 			   console.log("no entro")
 				 this.$router.push('/')
@@ -134,7 +139,7 @@ export default{
 		 buscarAmigo(){
 		  console.log("buscaramigo");
 			 var buscar = 'pedro'
-			axios.get('http://bb6c93af.ngrok.io/v1/usuarios/' + buscar,{
+			axios.get('http://baab64d5.ngrok.io/v1/usuarios/' + buscar,{
 			})
 			.then(response =>{
 			 console.log(response);
