@@ -34,9 +34,11 @@
 				</div>
 			</div>		 
 			<a class="navbar-brand"></a>
-			<form class="form-inline">
+			<form class="form-inline">				
 				<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-				<button class="btn btn-outline-info2" type="submit"><span class="icon-magnifier"></span></button>
+				<router-link to="/PerfilAmigo">	
+					<button class="btn btn-outline-info2" type="submit"><span class="icon-magnifier"></span></button>
+				</router-link>
 			</form>
 		</nav>
 		<div class="row mt-5 mb-5 ">
@@ -54,7 +56,7 @@ export default{
 	name:'Layout',
 	data(){
 		return {
-			
+			nombreBuscar:''
 		};
 	},
 	components:{

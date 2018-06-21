@@ -80,17 +80,16 @@ export default{
 	},
 	methods:{
 		CargarPerfil(){					
-			axios.get('http://bb6c93af.ngrok.io/v1/usuario/1',{        
+			axios.get('http://baab64d5.ngrok.io/v1/usuario/1',{        
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
-				this.usuarioPassword=response.data.password;				
-				
+				this.usuarioPassword=response.data.password;							
 			})
 		},
 		ActualizarPerfil(){						
-			axios.put('http://bb6c93af.ngrok.io/v1/usuario',{
+			axios.put('http://baab64d5.ngrok.io /v1/usuario',{
 				nickname: this.usuarioNickname,
 				correo: this.usuarioCorreo,
 				password: this.usuarioPassword

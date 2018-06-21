@@ -5,6 +5,7 @@ import Home from '@/views/Home'
 import Inicio from '@/views/Inicio'
 import Perfil from '@/views/Perfil'
 import Receta from '@/views/Receta'
+import PerfilAmigo from '@/views/PerfilAmigo'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
 		path:'/Receta',
 		name:'Receta',
 		component: Receta,
+	},
+	{
+		path:'/PerfilAmigo',
+		name:'PerfilAmigo',
+		component: PerfilAmigo,
 	}
 	]
 })

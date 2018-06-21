@@ -8,7 +8,7 @@
 					<input class="form-control mr-sm-2" type="text" placeholder="Usuario" v-model='username'>
 					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña" v-model='password'>
 
-						<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
+					<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
 
 				</form>
 			</nav>
@@ -35,10 +35,9 @@
 								<label>Contraseña:</label>
 								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
-							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
-								<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="buscarAmigo">Buscar</button>
+							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>							
 						</form>
-				
+
 					</div>
 				</div>
 			</div>
@@ -53,127 +52,118 @@ import DefaultLayout from '@/layout/DefaultLayout'
 /* eslint-disable */
 export default{
 	name:'Home',
-	data(){
-		
+	data(){		
 		return {
-       usuario:[],
-			 usuario:'',
-			 correo:'',
-			 contrasena:'',
-			 username:'',
-			 password:''
+			usuario:[],
+			usuario:'',
+			correo:'',
+			contrasena:'',
+			username:'',
+			password:''			
 		};
 	},
 	methods:{
-		 validar(){
-		 console.log("memo");
-			 axios.get('http://fd755025.ngrok.io/v1/usuario/1',{
+		validar(){
+			console.log("memo");
+			axios.get('http://fd755025.ngrok.io/v1/usuario/1',{
 
-			 })
-			 .then(response =>{
+			})
+			.then(response =>{
 				console.log(response);
-			 })
-		 },
-		 save(){
-		 console.log("memosave");
-			 axios.post('http://fd755025.ngrok.io/v1/usuario',{
+			})
+		},
+		save(){
+			console.log("memosave");
+			axios.post('http://fd755025.ngrok.io/v1/usuario',{
 
 				nickname:'pedro',
 				correo:'pedrolop90789.gmail.com',
 				password:'12345'
 
-			 })
-			 .then(response =>{
+			})
+			.then(response =>{
 				console.log(response);
-			 })
-		 },
-		 actualizar(){
-		 console.log("memoedit");
-		    console.log(this.usuario)
-			 axios.put('http://fd755025.ngrok.io/v1/usuario/6',{
+			})
+		},
+		actualizar(){
+			console.log("memoedit");
+			console.log(this.usuario)
+			axios.put('http://fd755025.ngrok.io/v1/usuario/6',{
 
 				nickname:'benito camelas',
 				correo:'benito.gmail.com',
 				password:'memo1234'
 
-			 })
-			 .then(response =>{
+			})
+			.then(response =>{
 				console.log(response);
-			 })
-		 },
-		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
-		 registrarUsuario(){
-			 console.log('registrar')
-			 axios.post('http://bb6c93af.ngrok.io/v1/usuario',{
-
-			 nickname:this.usuario,
-			 correo:this.correo,
-			 password:this.contrasena
-
-			})
-			.then(response =>{
-			 console.log(response);
-			})
-		 },
-		 login(){
-		 console.log('login')
-			 axios.post('http://bb6c93af.ngrok.io/v1/usuario/login',{
-			 correo:this.username,
-			 password:this.password
-			})
-			.then(response =>{
-			 console.log(response);
-			 console.log(response.data)
-			 if(response.data > 0){
-			  console.log("entro");
-				this.$router.push('Inicio')
-			 }else{
-			   console.log("no entro")
-				 this.$router.push('/')
-			 }
-			})
-		 },
-		 buscarAmigo(){
-		  console.log("buscaramigo");
-			 var buscar = 'pedro'
-			axios.get('http://bb6c93af.ngrok.io/v1/usuarios/' + buscar,{
-			})
-			.then(response =>{
-			 console.log(response);
 			})
 		},
+		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
+		 registrarUsuario(){
+		 	console.log('registrar')
+		 	axios.post('http://baab64d5.ngrok.io/v1/usuario',{
+
+		 		nickname:this.usuario,
+		 		correo:this.correo,
+		 		password:this.contrasena
+
+		 	})
+		 	.then(response =>{
+		 		console.log(response);
+		 	})
+		 },
+		 login(){
+		 	console.log('login')
+		 	axios.post('http://baab64d5.ngrok.io/v1/usuario/login',{
+		 		correo:this.username,
+		 		password:this.password
+		 	})
+		 	.then(response =>{
+		 		console.log(response);
+		 		console.log(response.data)
+		 		if(response.data > 0){
+		 			console.log("entro");
+		 			this.$router.push('Inicio')
+		 		}else{
+		 			console.log("no entro")
+		 			this.$router.push('/')
+		 		}
+		 	})
+		 },
+
 		 // ACA TERMINA USUARIO
-	},
-	components:{
-		DefaultLayout,
+		},
+		components:{
+			DefaultLayout,
 
-	},
-}
-</script>
+		},
+	}
+	</script>
 
 
-<style>
+	<style>
 
-.bg-nav2{
-	background: #f7f7f9!important;
-	box-shadow: 2px 2px 5px #999;
-}
+	.bg-nav2{
+		background: #f7f7f9!important;
+		box-shadow: 2px 2px 5px #999;
+	}
 
-.btn-outline-info2 {
-	color: #48dbfb;
-	background-color: transparent;
-	background-image: none;
-	border-color: #48dbfb;
-}
+	.btn-outline-info2 {
+		color: #48dbfb;
+		background-color: transparent;
+		background-image: none;
+		border-color: #48dbfb;
+	}
 
-.btn-outline-info2:hover {
-	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
-}
+	.btn-outline-info2:hover {
+		color: #fff;
+		background-color: #48dbfb;
+		border-color: #48dbfb;
+	}
 
-.borde{
-	border: 2px #48dbfb solid;
-}
+	.borde{
+		border: 2px #48dbfb solid;
+	}
 
-</style>
+	</style>
