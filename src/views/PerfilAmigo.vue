@@ -58,7 +58,7 @@ export default{
 	methods:{
 		buscar(){
 			console.log("buscaramigo");			 
-			axios.get('http://baab64d5.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
+			axios.get('http://58c09312.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
 				console.log(response.data);

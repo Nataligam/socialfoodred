@@ -80,7 +80,7 @@ export default{
 	},
 	methods:{
 		CargarPerfil(){					
-			axios.get('http://baab64d5.ngrok.io/v1/usuario/1',{        
+			axios.get('http://58c09312.ngrok.io/v1/usuario/1',{        
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
@@ -89,7 +89,7 @@ export default{
 			})
 		},
 		ActualizarPerfil(){						
-			axios.put('http://baab64d5.ngrok.io /v1/usuario',{
+			axios.put('http://58c09312.ngrok.io/v1/usuario',{
 				nickname: this.usuarioNickname,
 				correo: this.usuarioCorreo,
 				password: this.usuarioPassword
