@@ -4,9 +4,9 @@
 		<section slot="content" class="ContenidoReceta">			
 			<Layout>
 				<section slot="contentColumn1" >
-          <div class="borde col-md-8 offset-md-2 col-sm-12">
-            <center><h4 class="mt-4 mb-5">Crear y Compartir Receta:</h4></center>
-            <div class="row">
+          <div class="bordeSombra p-5 col-md-8 offset-md-2 col-sm-12">
+            <center><h4>Crear y Compartir Receta:</h4></center>
+            <div class="row mt-5">
               <div class="col-md-10 offset-md-1 col-sm-12">
                <form >
                 <div class="form-group">                            
@@ -129,7 +129,6 @@
                   </div>   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-info2 mb-5 btnIzq" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-outline-info2 mb-5 btnIzq">Publicar</button>
                 </div>
               </div>
@@ -219,6 +218,10 @@ components:{
 
 .borde{
 	border: 2px #48dbfb solid;
+}
+
+.bordeSombra{
+  box-shadow: 3px 3px 15px #999;
 }
 
 .recervada{
