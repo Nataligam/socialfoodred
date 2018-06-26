@@ -27,7 +27,7 @@
 									<a class="dropdown-item" href="#"><span class="icon-user"></span> Perfil</a>
 								</router-link>						
 								<a class="dropdown-item" href="#"><span class="icon-wrench"></span> Configuraciones</a>
-								<a class="dropdown-item" href="#"><span class="icon-power"></span> Salir</a>
+								<a class="dropdown-item" href="#" v-on:click="logout"><span class="icon-power"></span> Salir</a>
 							</div>
 						</li>
 					</ul>
@@ -62,7 +62,17 @@ export default{
 	components:{
 	},
 	methods:{
-
+        logout(){
+		console.log('cerrarlogin')
+			axios.post('http://baab64d5.ngrok.io/v1/usuario/cerrarSession',{
+		 })
+		 .then(response =>{
+			console.log(response);
+        if(response.data == true){
+			    this.$router.push('/')
+			 }
+		 })
+		}
 	}
 }
 

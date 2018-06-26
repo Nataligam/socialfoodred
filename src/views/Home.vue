@@ -6,7 +6,7 @@
 				<a class="navbar-brand"></a>
 				<form class="form-inline">
 					<input class="form-control mr-sm-2" type="text" placeholder="Usuario" v-model='username'>
-					<input class="form-control mr-sm-2" type="text" placeholder="Contraseña" v-model='password'>
+					<input class="form-control mr-sm-2" type="password" placeholder="Contraseña" v-model='password'>
 
 					<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
 
@@ -113,24 +113,39 @@ export default{
 		 		console.log(response);
 		 	})
 		 },
-		 login(){
-		 	console.log('login')
-		 	axios.post('http://baab64d5.ngrok.io/v1/usuario/login',{
-		 		correo:this.username,
-		 		password:this.password
-		 	})
-		 	.then(response =>{
-		 		console.log(response);
-		 		console.log(response.data)
-		 		if(response.data > 0){
-		 			console.log("entro");
-		 			this.$router.push('Inicio')
-		 		}else{
-		 			console.log("no entro")
-		 			this.$router.push('/')
-		 		}
-		 	})
+		login(){
+		 console.log('login')
+			 axios.post('http://baab64d5.ngrok.io/v1/usuario/login',{
+			 correo:this.username,
+			 password:this.password
+			})
+			.then(response =>{
+			 console.log(response);
+			 console.log(response.data)
+			 var idsesion = response.data;
+			 if(response.data > 0){
+			  console.log("entro");
+				this.$router.push(
+						{
+						name:'Inicio',
+						params:{id:idsesion}
+						}
+				)
+			 }else{
+			   console.log("no entro")
+				 this.$router.push('/')
+			 }
+			})
 		 },
+		  buscarAmigo(){
+		  console.log("buscaramigo");
+			 var buscar = 'pedro'
+			axios.get('http://baab64d5.ngrok.io/v1/usuarios/' + buscar,{
+			})
+			.then(response =>{
+			 console.log(response);
+			})
+		},
 
 		 // ACA TERMINA USUARIO
 		},
