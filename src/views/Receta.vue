@@ -1,7 +1,7 @@
 
 <template>
 	<DefaultLayout>
-		<section slot="content" class="ContenidoReceta">			
+		<section slot="content" class="ContenidoReceta">
 			<Layout>
 				<section slot="contentColumn1" >
           <div class="borde col-md-8 offset-md-2 col-sm-12">
@@ -9,22 +9,23 @@
             <div class="row">
               <div class="col-md-10 offset-md-1 col-sm-12">
                <form >
-                <div class="form-group">                            
-                  <input v-model="titulo" type="text" class="form-control" placeholder="Ingrese el nombre de la receta">                        
+                <div class="form-group">
+                  <input v-model="titulo" type="text" class="form-control" placeholder="Ingrese el nombre de la receta">
                 </div>
                 <label>Seleccione las imagenes:</label>
-                <div class="input-group mb-3">                            
+                <div class="input-group mb-3">
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input">
+                    <input type="file" class="custom-file-input" id="fichero">
                     <label class="custom-file-label"></label>
                   </div>
                   <div class="input-group-append">
-                    <span class="input-group-text">Cargar</span>
+									  <input type="button" @click="subirImagen" class="input-group-text" value="cargar">
+
                   </div>
                 </div>
                 <div class="form-group">
-                  <label >Nombre de la categoria:</label>                            
-                  <input type="text" class="form-control" placeholder="Postre, Plato Fuerte,  Entrada">                        
+                  <label >Nombre de la categoria:</label>
+                  <input type="text" class="form-control" placeholder="Postre, Plato Fuerte,  Entrada">
                 </div>
                 <div class="form-group">
                   <h5>Ingredientes:</h5>
@@ -50,14 +51,14 @@
                   <!--Lista de ingredientes-->
                   <div class="mt-3">
                    <ul class="list-group">
-                    <label>Ingredientes agregados:</label>                                  
+                    <label>Ingredientes agregados:</label>
                     <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.nombre" class="list-group-item">
                       {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.unidad}}
                       <button @click="eliminarIng(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                     </li>
                   </ul>
                 </div>
-                <!--Lista de ingredientes-->                               
+                <!--Lista de ingredientes-->
               </div>
             </div>
             <div class="form-group">
@@ -82,19 +83,19 @@
                   <div class="col-2">
                     <label>Añadir:</label>
                     <button class="btn btn-outline-info2" type="submit" v-on:click="agregarpasos"><span class="icon-plus"></span></button>
-                  </div>                        
+                  </div>
                 </div>
                 <!--Lista de pasos-->
                 <div class="mt-3">
                  <ul class="list-group">
-                  <label>Pasos agregados:</label>                                  
+                  <label>Pasos agregados:</label>
                   <li v-for="(paso, index) in pasos" v-bind:key="paso.nombre" class="list-group-item">
-                    {{paso.nombre }} 
+                    {{paso.nombre }}
                     <button @click="eliminarpaso(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
                 </ul>
               </div>
-              <!--Lista de pasos--> 
+              <!--Lista de pasos-->
             </div>
           </div>
           <!-- Button trigger modal -->
@@ -126,7 +127,7 @@
                         }<br></span>
                       }
                     </p>
-                  </div>   
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-info2 mb-5 btnIzq" data-dismiss="modal">Close</button>
@@ -137,10 +138,10 @@
           </div>
         </form>
       </div>
-    </div>      
-  </div>                           
+    </div>
+  </div>
 </section>
-</Layout>				
+</Layout>
 </section>
 </DefaultLayout>
 </template>
@@ -192,6 +193,27 @@ export default{
    this.pasos.splice(index,1);
 
  },
+ subirImagen(){
+	var fichero;
+	var storageRef;
+
+		 storageRef = firebase.storage().ref();
+		 console.log(storageRef);
+		 fichero = document.getElementById("fichero");
+		 console.log(fichero)
+		 var img = fichero.files[0];
+		 console.log(img);
+		 var uploadTask = storageRef.child("imagenes/" + img.name).put(img);
+
+uploadTask.on('state_changed',
+function(snapshot){
+	}, function(error) {
+		}, function() {
+		uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+		console.log('File available at', downloadURL);
+	});
+});
+ }
 },
 components:{
   DefaultLayout,
@@ -230,7 +252,7 @@ components:{
 
   margin: 10px;
   margin-top: 50px;
-  width: 98%;	
+  width: 98%;
 }
 .centro{
   margin: auto;
