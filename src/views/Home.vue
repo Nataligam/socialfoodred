@@ -102,7 +102,7 @@ export default{
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 		 	console.log('registrar')
-		 	axios.post('http://baab64d5.ngrok.io/v1/usuario',{
+		 	axios.post('http://58c09312.ngrok.io/v1/usuario',{
 
 		 		nickname:this.usuario,
 		 		correo:this.correo,
@@ -115,7 +115,7 @@ export default{
 		 },
 		login(){
 		 console.log('login')
-			 axios.post('http://baab64d5.ngrok.io/v1/usuario/login',{
+			 axios.post('http://58c09312.ngrok.io/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})
@@ -137,6 +137,7 @@ export default{
 			 }
 			})
 		 },
+		 // este no va
 		  buscarAmigo(){
 		  console.log("buscaramigo");
 			 var buscar = 'pedro'
