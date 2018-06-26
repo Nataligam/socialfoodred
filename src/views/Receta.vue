@@ -173,7 +173,7 @@ export default{
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
     this.nombreing='';
     this.cantidading='';
-    this.unidad='';
+    this.unidading='';
   },
   agregarpasos(){
     console.log(this.ingredientes)
