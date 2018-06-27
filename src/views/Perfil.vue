@@ -41,7 +41,7 @@
 											v-model="usuarioPassword">
 										</div>
 										<div class="row">
-											<div class="col">
+											<div class="col-md-4 col-sm-12">
 												<div class="form-group">
 													<label for="switch-id">Privacidad</label><br>
 													<span class="switch">
@@ -50,15 +50,15 @@
 															<span v-else>Publico</span></label>
 														</span>
 													</div>
-												</div>
-												<div class="col">
-												<label>Seleccionar Imagen de perfil:</label>
-												<div class="input-group mb-3">                            
-													<div class="custom-file">
-														<input type="file" class="custom-file-input" :disabled="isDisabled">
-														<label class="custom-file-label"></label>
-													</div>										
-												</div>
+												</div>											
+												<div class="col-md-8 col-sm-12">
+													<label>Seleccionar Imagen de perfil:</label>
+													<div class="input-group mb-3">                            
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" :disabled="isDisabled">
+															<label class="custom-file-label"></label>								
+														</div>									
+													</div>
 												</div>
 											</div>
 										</form>
@@ -100,7 +100,7 @@
 		methods:{
 			CargarPerfil(){					
 
-				axios.get('http://600a25ce.ngrok.io/v1/usuario/3',{        
+				axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{        
 
 				})
 				.then(response =>{
@@ -111,7 +111,7 @@
 				})
 			},
 			ActualizarPerfil(){						
-				axios.put('http://600a25ce.ngrok.io/v1/usuario',{
+				axios.put('http://53cf2ad0.ngrok.io/v1/usuario',{
 					nickname: this.usuarioNickname,
 					correo: this.usuarioCorreo,
 					password: this.usuarioPassword
