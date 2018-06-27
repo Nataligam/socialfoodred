@@ -60,7 +60,7 @@ export default{
 	methods:{
 		buscar(){
 			console.log("buscaramigo");			 
-			axios.get('http://600a25ce.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
+			axios.get('http://53cf2ad0.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
 				console.log(response.data);

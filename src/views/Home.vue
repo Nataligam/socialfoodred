@@ -102,7 +102,7 @@ export default{
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 		 	console.log('registrar')
-		 	axios.post('http://600a25ce.ngrok.io/v1/usuario',{
+		 	axios.post('http://53cf2ad0.ngrok.io/v1/usuario',{
 
 		 		nickname:this.usuario,
 		 		correo:this.correo,
@@ -115,7 +115,7 @@ export default{
 		 },
 		login(){
 		 console.log('login')
-			 axios.post('http://600a25ce.ngrok.io/v1/usuario/login',{
+			 axios.post('http://53cf2ad0.ngrok.io/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})

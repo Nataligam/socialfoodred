@@ -64,7 +64,7 @@ export default{
 	methods:{
 		logout(){
 			console.log('cerrarlogin')
-			axios.post('http://600a25ce.ngrok.io/v1/usuario/cerrarSession',{
+			axios.post('http://53cf2ad0.ngrok.io/v1/usuario/cerrarSession',{
 			})
 			.then(response =>{
 				console.log(response);

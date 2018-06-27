@@ -40,27 +40,29 @@
 											<input type="text" :disabled="isDisabled" class="form-control"
 											v-model="usuarioPassword">
 										</div>
-										<div class="form-group">
-										<label for="switch-id">Privacidad</label><br>
-										<span class="switch">
-										<input type="checkbox" :disabled="isDisabled" class="switch" id="switch-normal" v-model="privacidad">
-										<label for="switch-normal"><span v-if="privacidad">Privado</span>
-																   <span v-else>Publico</span></label>
-										</span>
-										</div>
-										{{$data}}
-										<label>Seleccionar Imagen de perfil:</label>
-										<div class="input-group mb-3">
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" :disabled="isDisabled" id="fichero">
-												<label class="custom-file-label"></label>
+										<div class="row">
+											<div class="col-md-4 col-sm-12">
+												<div class="form-group">
+													<label for="switch-id">Privacidad</label><br>
+													<span class="switch">
+														<input type="checkbox" :disabled="isDisabled" class="switch" id="switch-normal" v-model="privacidad">
+														<label for="switch-normal"><span v-if="privacidad">Privado</span>
+															<span v-else>Publico</span></label>
+														</span>
+													</div>
+												</div>
+												<div class="col-md-8 col-sm-12">
+													<label>Seleccionar Imagen de perfil:</label>
+													<div class="input-group mb-3">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" :disabled="isDisabled">
+															<label class="custom-file-label"></label>
+														</div>
+													</div>
+												</div>
 											</div>
-											<div class="input-group-append">
-											 <input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
-
-										 </div>
-										</div>
-									</form>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -84,6 +86,7 @@ export default{
 			usuarioNickname:'',
 			usuarioPassword:'',
 			usuarioFoto:'',
+			privacidad:'';
 			isDisabled: true,
 
 		}
@@ -143,103 +146,136 @@ export default{
 
 
 		},
+		components:{
+			DefaultLayout,
+			Layout,
 
-		HabilitarCampos(){
-			this.isDisabled=false
+
 		},
+		mounted: function (){
+			this.CargarPerfil();
+		},
+		methods:{
+			CargarPerfil(){
 
+				axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{
+
+				})
+				.then(response =>{
+					this.usuarioCorreo=response.data.correo;
+					this.usuarioNickname=response.data.nickname;
+					this.usuarioPassword=response.data.password;
+					this.privacidad=response.data.privacidad;
+				})
+			},
+			ActualizarPerfil(){
+				axios.put('http://53cf2ad0.ngrok.io/v1/usuario',{
+					nickname: this.usuarioNickname,
+					correo: this.usuarioCorreo,
+					password: this.usuarioPassword
+
+				})
+				.then(response =>{
+					console.log(response);
+				})
+
+			},
+			HabilitarCampos(){
+				this.isDisabled=false
+			},
+
+		}
 	}
-}
-</script>
+	</script>
 
-<style>
-.btn-outline-info2 {
-	color: #48dbfb;
-	background-color: transparent;
-	background-image: none;
-	border-color: #48dbfb;
-}
+	<style>
+	.btn-outline-info2 {
+		color: #48dbfb;
+		background-color: transparent;
+		background-image: none;
+		border-color: #48dbfb;
+	}
 
-.btn-outline-info2:hover {
-	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
-}
+	.btn-outline-info2:hover {
+		color: #fff;
+		background-color: #48dbfb;
+		border-color: #48dbfb;
+	}
 
-.borde{
-	border: 2px #48dbfb solid;
-}
-.switch {
-  font-size: 1rem;
-  position: relative;
-}
-.switch input {
-  position: absolute;
-  height: 1px;
-  width: 1px;
-  background: none;
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  overflow: hidden;
-  padding: 0;
-}
-.switch input + label {
-  position: relative;
-  min-width: calc(calc(2.375rem * .8) * 2);
-  border-radius: calc(2.375rem * .8);
-  height: calc(2.375rem * .8);
-  line-height: calc(2.375rem * .8);
-  display: inline-block;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
-  vertical-align: middle;
-  text-indent: calc(calc(calc(2.375rem * .8) * 2) + .5rem);
-}
-.switch input + label::before,
-.switch input + label::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(calc(2.375rem * .8) * 2);
-  bottom: 0;
-  display: block;
-}
-.switch input + label::before {
-  right: 0;
-  background-color: #dee2e6;
-  border-radius: calc(2.375rem * .8);
-  transition: 0.2s all;
-}
-.switch input + label::after {
-  top: 2px;
-  left: 2px;
-  width: calc(calc(2.375rem * .8) - calc(2px * 2));
-  height: calc(calc(2.375rem * .8) - calc(2px * 2));
-  border-radius: 50%;
-  background-color: white;
-  transition: 0.2s all;
-}
-.switch input:checked + label::before {
-  background-color: #08d;
-}
-.switch input:checked + label::after {
-  margin-left: calc(2.375rem * .8);
-}
-.switch input:focus + label::before {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(0, 136, 221, 0.25);
-}
-.switch input:disabled + label {
-  color: #868e96;
-  cursor: not-allowed;
-}
-.switch input:disabled + label::before {
-  background-color: #e9ecef;
-}
-
+	.borde{
+		border: 2px #48dbfb solid;
+	}
+	.switch {
+		font-size: 1rem;
+		position: relative;
+	}
+	.switch input {
+		position: absolute;
+		height: 1px;
+		width: 1px;
+		background: none;
+		border: 0;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		overflow: hidden;
+		padding: 0;
+	}
+	.switch input + label {
+		position: relative;
+		min-width: calc(calc(2.375rem * .8) * 2);
+		border-radius: calc(2.375rem * .8);
+		height: calc(2.375rem * .8);
+		line-height: calc(2.375rem * .8);
+		display: inline-block;
+		cursor: pointer;
+		outline: none;
+		user-select: none;
+		vertical-align: middle;
+		text-indent: calc(calc(calc(2.375rem * .8) * 2) + .5rem);
+	}
+	.switch input + label::before,
+	.switch input + label::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: calc(calc(2.375rem * .8) * 2);
+		bottom: 0;
+		display: block;
+	}
+	.switch input + label::before {
+		right: 0;
+		background-color: #dee2e6;
+		border-radius: calc(2.375rem * .8);
+		transition: 0.2s all;
+	}
+	.switch input + label::after {
+		top: 2px;
+		left: 2px;
+		width: calc(calc(2.375rem * .8) - calc(2px * 2));
+		height: calc(calc(2.375rem * .8) - calc(2px * 2));
+		border-radius: 50%;
+		background-color: white;
+		transition: 0.2s all;
+	}
+	.switch input:checked + label::before {
+		background-color: #08d;
+	}
+	.switch input:checked + label::after {
+		margin-left: calc(2.375rem * .8);
+	}
+	.switch input:focus + label::before {
+		outline: none;
+		box-shadow: 0 0 0 0.2rem rgba(0, 136, 221, 0.25);
+	}
+	.switch input:disabled + label {
+		color: #868e96;
+		cursor: not-allowed;
+	}
+	.switch input:disabled + label::before {
+		background-color: #e9ecef;
+	}
 
 
-</style>
+
+	</style>
