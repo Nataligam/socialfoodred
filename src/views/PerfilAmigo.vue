@@ -8,12 +8,12 @@
 							<div class="row borde mb-3" v-for="(item,index) in infoAmigo">
 								<div class="col-lg-3 col-md-4 col-sm-12">
 									<center>
-									<div class="card mb-4 mt-2"  style="width: 200px;">
-										<img class="card-img-top" src="../assets/avatar.png" alt="Card image cap">
-										<div class="card-body">
-											<p class="card-text size">{{item.nickname}}</p>				
+										<div class="card mb-4 mt-2"  style="width: 200px;">
+											<img class="card-img-top" src="../assets/avatar.png" alt="Card image cap">
+											<div class="card-body">
+												<p class="card-text size">{{item.nickname}}</p>				
+											</div>
 										</div>
-									</div>
 									</center>
 								</div>
 								<div class="col-lg-7 col-md-7 offset-md-1 col-sm-12">
@@ -44,7 +44,7 @@ export default{
 	name:'PerfilAmigo',
 	data(){
 		return {
-			nombreBuscar:'memo',
+			nombreBuscar:'',
 			infoAmigo:[]		
 		}
 	},
@@ -53,19 +53,24 @@ export default{
 		Layout
 	},
 	mounted: function (){
+		this.leerNombreAmigo();
 		this.buscar();
+		this.nombreBuscar=''
 	},
 	methods:{
 		buscar(){
 			console.log("buscaramigo");			 
-			axios.get('http://58c09312.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
+			axios.get('http://600a25ce.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
 				console.log(response.data);
-					this.infoAmigo=response.data
+				this.infoAmigo=response.data
 
 			})
 		},
+		leerNombreAmigo(){			
+			this.nombreBuscar = this.$route.params.nomamigo;			
+		}
 	}
 }
 </script>

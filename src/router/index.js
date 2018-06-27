@@ -32,7 +32,7 @@ export default new Router({
 		component: Receta,
 	},
 	{
-		path:'/PerfilAmigo',
+		path:'/PerfilAmigo/:nomamigo',
 		name:'PerfilAmigo',
 		component: PerfilAmigo,
 	}
