@@ -37,8 +37,15 @@ export default{
 	name:'Inicio',
 	data(){
 		return {
-        
+         id:''
 		}
+	},
+	methods:{
+	 leerIdRuta(){
+	 console.log("inicio");
+	  this.id = this.$route.params.id;
+		console.log(this.id);
+	 }
 	},
 	components:{
 		DefaultLayout,
