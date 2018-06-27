@@ -41,7 +41,7 @@
 											v-model="usuarioPassword">
 										</div>
 										<div class="row">
-											<div class="col-4">
+											<div class="col">
 												<div class="form-group">
 													<label for="switch-id">Privacidad</label><br>
 													<span class="switch">
@@ -51,14 +51,14 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-8">
-													<label>Seleccionar Imagen de perfil:</label>
-													<div class="input-group mb-3">                            
-														<div class="custom-file">
-															<input type="file" class="custom-file-input" :disabled="isDisabled">
-															<label class="custom-file-label"></label>
-														</div>										
-													</div>
+												<div class="col">
+												<label>Seleccionar Imagen de perfil:</label>
+												<div class="input-group mb-3">                            
+													<div class="custom-file">
+														<input type="file" class="custom-file-input" :disabled="isDisabled">
+														<label class="custom-file-label"></label>
+													</div>										
+												</div>
 												</div>
 											</div>
 										</form>

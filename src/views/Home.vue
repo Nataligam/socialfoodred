@@ -35,7 +35,7 @@
 								<label>Contraseña:</label>
 								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
-							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>							
+							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
 						</form>
 
 					</div>
@@ -52,14 +52,14 @@ import DefaultLayout from '@/layout/DefaultLayout'
 /* eslint-disable */
 export default{
 	name:'Home',
-	data(){		
+	data(){
 		return {
 			usuario:[],
 			usuario:'',
 			correo:'',
 			contrasena:'',
 			username:'',
-			password:''			
+			password:''
 		};
 	},
 	methods:{
