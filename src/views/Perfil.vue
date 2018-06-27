@@ -48,12 +48,17 @@
 																   <span v-else>Publico</span></label>
 										</span>
 										</div>
+										{{$data}}
 										<label>Seleccionar Imagen de perfil:</label>
 										<div class="input-group mb-3">
 											<div class="custom-file">
 												<input type="file" class="custom-file-input" :disabled="isDisabled" id="fichero">
 												<label class="custom-file-label"></label>
 											</div>
+											<div class="input-group-append">
+											 <input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
+
+										 </div>
 										</div>
 									</form>
 								</div>
@@ -78,13 +83,9 @@ export default{
 			usuarioCorreo:'',
 			usuarioNickname:'',
 			usuarioPassword:'',
-<<<<<<< HEAD
 			usuarioFoto:'',
 			isDisabled: true,
-=======
-			privacidad:'',
-			isDisabled: true,
->>>>>>> d8650b0ac342329f5136a7165b7604befb38e503
+
 		}
 	},
 	components:{
@@ -99,7 +100,7 @@ export default{
 	methods:{
 		CargarPerfil(){
 
-			axios.get('http://600a25ce.ngrok.io/v1/usuario/3',{
+			axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{
 
 			})
 			.then(response =>{
@@ -108,13 +109,11 @@ export default{
 				this.usuarioPassword=response.data.password;
 			})
 		},
-		ActualizarPerfil(){
-		console.log(this.usuarioNickname);
-		console.log(this.usuarioCorreo);
-		console.log(this.usuarioPassword);
+		cargarImagen(){
+		var self = this;
 		var fichero;
 		var storageRef;
-		var foto;
+		var foto = '';
 		var subio = false;
 
 		storageRef = firebase.storage().ref();
@@ -130,20 +129,19 @@ export default{
 			 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
 				 console.log('File available at', downloadURL);
 				 foto = downloadURL;
-				 console.log(foto);
+
 			 });
-
+			 console.log(foto);
+     this.usuarioFoto = foto;
 		 });
-				 axios.put('http://600a25ce.ngrok.io/v1/usuario',{
-				 nickname: this.usuarioNickname,
-				 correo: this.usuarioCorreo,
-				 password: this.usuarioPassword,
-				 imagen_usuario:foto
+		},
+		ActualizarPerfil(){
+		console.log(this.usuarioNickname);
+		console.log(this.usuarioCorreo);
+		console.log(this.usuarioPassword);
+		console.log(this.usuarioFoto);
 
-			 })
-			 .then(response =>{
-				 console.log(response);
-			 })
+
 		},
 
 		HabilitarCampos(){
