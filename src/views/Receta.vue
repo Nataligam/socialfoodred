@@ -25,7 +25,9 @@
                </div>
                <div class="form-group">
                 <label >Nombre de la categoria:</label>
-                <input type="text" class="form-control" placeholder="Postre, Plato Fuerte,  Entrada">
+                <select v-model="selectCategoria" class="form-control">
+                <option v-bind:value="categoria.id" v-for="categoria in categorias" v-bind:key="categoria.id" >{{categoria.nombre}}</option>
+                </select>
               </div>
               <div class="form-group">
                 <h5>Ingredientes:</h5>
@@ -54,6 +56,7 @@
                   <label>Ingredientes agregados:</label>
                   <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.nombre" class="list-group-item">
                     {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.unidad}}
+                    <button @click="modificarIng(ingrediente.nombre,ingrediente.cantidad,ingrediente.unidad,index)" class="btn btn-outline-primary btnIzq"><span class="icon-note"></span></button>
                     <button @click="eliminarIng(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
                 </ul>
@@ -91,6 +94,7 @@
                 <label>Pasos agregados:</label>
                 <li v-for="(paso, index) in pasos" v-bind:key="paso.nombre" class="list-group-item">
                   {{paso.nombre }}
+                  <button @click="modificarpaso(paso.nombre,paso.descripcion,index)" class="btn btn-outline-primary btnIzq"><span class="icon-note"></span></button>
                   <button @click="eliminarpaso(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                 </li>
               </ul>
@@ -156,6 +160,9 @@ export default{
 		return {
       ingredientes:[],
       pasos:[],
+      categorias:[
+        
+      ],
       titulo:'',
       selected:'',
       nombreing:'',
@@ -163,11 +170,25 @@ export default{
       unidading:'',
       nombrepaso:'',
       parametros:'',
+      selectCategoria:'',
       descripcionpaso:''
 
     }
   },
+  mounted: function (){
+		this.cargarCategorias();
+	},
   methods:{
+    cargarCategorias(){
+      alert('hi!');	
+      axios.get('http://600a25ce.ngrok.io/v1/categoria',{        
+			})
+			.then(response =>{
+      this.categorias=response.data;
+      					
+			})
+     
+    },
    agregarIng(){
 
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
@@ -183,12 +204,28 @@ export default{
 
   },
   eliminarIng(index){
+   
+   this.ingredientes.splice(index,1);
 
+ },
+ modificarIng(nombre, cantidad, unidad, index){
+
+   this.nombreing=nombre;
+   this.cantidading=cantidad;
+   this.unidading=unidad;
    this.ingredientes.splice(index,1);
 
  },
  eliminarpaso(index){
 
+   this.pasos.splice(index,1);
+
+ },
+ modificarpaso(nombrepaso,descripcionpaso,index){
+
+alert(nombrepaso);
+   this.nombrepaso=nombrepaso;
+   this.descripcionpaso=descripcionpaso;
    this.pasos.splice(index,1);
 
  },

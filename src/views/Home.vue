@@ -65,7 +65,7 @@ export default{
 	methods:{
 		validar(){
 			console.log("memo");
-			axios.get('http://fd755025.ngrok.io/v1/usuario/1',{
+			axios.get('http://600a25ce.ngrok.io/v1/usuario/1',{
 
 			})
 			.then(response =>{
@@ -74,7 +74,7 @@ export default{
 		},
 		save(){
 			console.log("memosave");
-			axios.post('http://fd755025.ngrok.io/v1/usuario',{
+			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
 
 				nickname:'pedro',
 				correo:'pedrolop90789.gmail.com',
@@ -88,7 +88,7 @@ export default{
 		actualizar(){
 			console.log("memoedit");
 			console.log(this.usuario)
-			axios.put('http://fd755025.ngrok.io/v1/usuario/6',{
+			axios.put('http://600a25ce.ngrok.io/v1/usuario/6',{
 
 				nickname:'benito camelas',
 				correo:'benito.gmail.com',
@@ -141,7 +141,7 @@ export default{
 		  buscarAmigo(){
 		  console.log("buscaramigo");
 			 var buscar = 'pedro'
-			axios.get('http://baab64d5.ngrok.io/v1/usuarios/' + buscar,{
+			axios.get('http://600a25ce.ngrok.io/v1/usuarios/' + buscar,{
 			})
 			.then(response =>{
 			 console.log(response);
