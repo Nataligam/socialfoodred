@@ -1,26 +1,26 @@
 <template>
 	<DefaultLayout>
-		<section slot="content" class="ContenidoPerfil">	
+		<section slot="content" class="ContenidoPerfil">
 			<Layout>
 				<section slot="contentColumn1">
 					<center><h4 class="mb-5">Datos del perfil de usuario</h4>
 						<hr>
 					</center>
 					<div class=" p-3 ">
-						<div class="row">							
+						<div class="row">
 							<div class="col-md-3 offset-md-2 col-sm-12 mt-5">
 								<center>
 									<div class="row">
 										<div class="col">
 											<img src="../assets/avatar.png" width="200">
 										</div>
-									</div>									
+									</div>
 									<div class="row mt-5">
 										<div class="col">
 											<button @click="HabilitarCampos" type="submit" class="btn btn-outline-info2 mb-1">Actualizar</button>
 											<button  @click="ActualizarPerfil" type="submit" class="btn btn-outline-info2 mb-1">Guardar</button>
-										</div>	
-									</div>	
+										</div>
+									</div>
 								</center>
 							</div>
 							<div class="col-md-5 col-sm-12">
@@ -28,29 +28,29 @@
 									<form >
 										<div class="form-group">
 											<label >Correo:</label>
-											<input type="email" :disabled="isDisabled" class="form-control" v-model="usuarioCorreo"  >	
+											<input type="email" :disabled="isDisabled" class="form-control" v-model="usuarioCorreo"  >
 										</div>
 										<div class="form-group">
 											<label >Usuario:</label>
-											<input type="text" :disabled="isDisabled" class="form-control" 
-											v-model="usuarioNickname">	
+											<input type="text" :disabled="isDisabled" class="form-control"
+											v-model="usuarioNickname">
 										</div>
 										<div class="form-group">
 											<label >Contraseña:</label>
-											<input type="text" :disabled="isDisabled" class="form-control" 
+											<input type="text" :disabled="isDisabled" class="form-control"
 											v-model="usuarioPassword">
 										</div>
 										<label>Seleccionar Imagen de perfil:</label>
-										<div class="input-group mb-3">                            
+										<div class="input-group mb-3">
 											<div class="custom-file">
-												<input type="file" class="custom-file-input" :disabled="isDisabled">
+												<input type="file" class="custom-file-input" :disabled="isDisabled" id="fichero">
 												<label class="custom-file-label"></label>
-											</div>											
+											</div>
 										</div>
 									</form>
 								</div>
 							</div>
-						</div>																	
+						</div>
 					</div>
 				</section>
 			</Layout>
@@ -68,7 +68,8 @@ export default{
 			usuarioCorreo:'',
 			usuarioNickname:'',
 			usuarioPassword:'',
-			isDisabled: true,			
+			usuarioFoto:'',
+			isDisabled: true,
 		}
 	},
 	components:{
@@ -79,27 +80,53 @@ export default{
 		this.CargarPerfil();
 	},
 	methods:{
-		CargarPerfil(){					
-			axios.get('http://58c09312.ngrok.io/v1/usuario/1',{        
+		CargarPerfil(){
+			axios.get('http://600a25ce.ngrok.io/v1/usuario/4',{
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
-				this.usuarioPassword=response.data.password;							
+				this.usuarioPassword=response.data.password;
 			})
 		},
-		ActualizarPerfil(){						
-			axios.put('http://58c09312.ngrok.io/v1/usuario',{
-				nickname: this.usuarioNickname,
-				correo: this.usuarioCorreo,
-				password: this.usuarioPassword
+		ActualizarPerfil(){
+		console.log(this.usuarioNickname);
+		console.log(this.usuarioCorreo);
+		console.log(this.usuarioPassword);
+		var fichero;
+		var storageRef;
+		var foto;
+		var subio = false;
 
-			})			
-			.then(response =>{
-				console.log(response);
-			})
-			
+		storageRef = firebase.storage().ref();
+		fichero = document.getElementById("fichero");
+		var img = fichero.files[0];
+		console.log(img);
+		var uploadTask = storageRef.child("perfil/" + img.name).put(img);
+
+		uploadTask.on('state_changed',
+		 function(snapshot){
+		 }, function(error) {
+		 }, function() {
+			 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+				 console.log('File available at', downloadURL);
+				 foto = downloadURL;
+				 console.log(foto);
+			 });
+
+		 });
+				 axios.put('http://600a25ce.ngrok.io/v1/usuario',{
+				 nickname: this.usuarioNickname,
+				 correo: this.usuarioCorreo,
+				 password: this.usuarioPassword,
+				 imagen_usuario:foto
+
+			 })
+			 .then(response =>{
+				 console.log(response);
+			 })
 		},
+		
 		HabilitarCampos(){
 			this.isDisabled=false
 		}
