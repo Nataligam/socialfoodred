@@ -161,7 +161,7 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
-        
+
       ],
       titulo:'',
       selected:'',
@@ -171,7 +171,8 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
-      descripcionpaso:''
+      descripcionpaso:'',
+      recetaFoto:''
 
     }
   },
@@ -180,14 +181,14 @@ export default{
 	},
   methods:{
     cargarCategorias(){
-      alert('hi!');	
-      axios.get('http://600a25ce.ngrok.io/v1/categoria',{        
+      alert('hi!');
+      axios.get('http://600a25ce.ngrok.io/v1/categoria',{
 			})
 			.then(response =>{
       this.categorias=response.data;
-      					
+
 			})
-     
+
     },
    agregarIng(){
 
@@ -204,7 +205,7 @@ export default{
 
   },
   eliminarIng(index){
-   
+
    this.ingredientes.splice(index,1);
 
  },
@@ -230,6 +231,7 @@ alert(nombrepaso);
 
  },
  subirImagen(){
+   var self = this;
    var fichero;
    var storageRef;
 
@@ -247,6 +249,7 @@ alert(nombrepaso);
     }, function() {
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
         console.log('File available at', downloadURL);
+        self.recetaFoto = downloadURL;
       });
     });
  }

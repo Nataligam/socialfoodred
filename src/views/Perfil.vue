@@ -12,7 +12,7 @@
 								<center>
 									<div class="row">
 										<div class="col">
-											<img src="../assets/avatar.png" width="200">
+											<img v-bind:src="usuarioFoto" width="200">
 										</div>
 									</div>
 									<div class="row mt-5">
@@ -55,9 +55,13 @@
 													<label>Seleccionar Imagen de perfil:</label>
 													<div class="input-group mb-3">
 														<div class="custom-file">
-															<input type="file" class="custom-file-input" :disabled="isDisabled">
+															<input type="file" class="custom-file-input" :disabled="isDisabled" id="fichero">
 															<label class="custom-file-label"></label>
 														</div>
+														<div class="input-group-append">
+														 <input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
+
+													 </div>
 													</div>
 												</div>
 											</div>
@@ -86,7 +90,7 @@ export default{
 			usuarioNickname:'',
 			usuarioPassword:'',
 			usuarioFoto:'',
-			privacidad:'';
+			privacidad:'',
 			isDisabled: true,
 
 		}
@@ -94,8 +98,6 @@ export default{
 	components:{
 		DefaultLayout,
 		Layout,
-
-
 	},
 	mounted: function (){
 		this.CargarPerfil();
@@ -103,13 +105,14 @@ export default{
 	methods:{
 		CargarPerfil(){
 
-			axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{
+			axios.get('http://20a24c27.ngrok.io/v1/usuario/14',{
 
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
+				this.usuarioFoto= response.data.imagen_usuario;
 			})
 		},
 		cargarImagen(){
@@ -117,7 +120,6 @@ export default{
 		var fichero;
 		var storageRef;
 		var foto = '';
-		var subio = false;
 
 		storageRef = firebase.storage().ref();
 		fichero = document.getElementById("fichero");
@@ -132,59 +134,33 @@ export default{
 			 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
 				 console.log('File available at', downloadURL);
 				 foto = downloadURL;
-
+         self.usuarioFoto = foto;
 			 });
-			 console.log(foto);
-     this.usuarioFoto = foto;
+
 		 });
 		},
 		ActualizarPerfil(){
-		console.log(this.usuarioNickname);
-		console.log(this.usuarioCorreo);
-		console.log(this.usuarioPassword);
-		console.log(this.usuarioFoto);
 
+		axios.put('http://20a24c27.ngrok.io/v1/usuario',{
+			nickname: this.usuarioNickname,
+			correo: this.usuarioCorreo,
+			password: this.usuarioPassword,
+			imagen_usuario:this.usuarioFoto
 
+		})
+		.then(response =>{
+			console.log(response);
+		})
+
+		},
+		HabilitarCampos(){
+			this.isDisabled=false
+		},
 		},
 		components:{
 			DefaultLayout,
-			Layout,
-
-
+			Layout
 		},
-		mounted: function (){
-			this.CargarPerfil();
-		},
-		methods:{
-			CargarPerfil(){
-
-				axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{
-
-				})
-				.then(response =>{
-					this.usuarioCorreo=response.data.correo;
-					this.usuarioNickname=response.data.nickname;
-					this.usuarioPassword=response.data.password;
-					this.privacidad=response.data.privacidad;
-				})
-			},
-			ActualizarPerfil(){
-				axios.put('http://53cf2ad0.ngrok.io/v1/usuario',{
-					nickname: this.usuarioNickname,
-					correo: this.usuarioCorreo,
-					password: this.usuarioPassword
-
-				})
-				.then(response =>{
-					console.log(response);
-				})
-
-			},
-			HabilitarCampos(){
-				this.isDisabled=false
-			},
-
-		}
 	}
 	</script>
 
