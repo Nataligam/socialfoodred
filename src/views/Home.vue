@@ -35,7 +35,6 @@
 								<label>Contraseña:</label>
 								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
 							</div>
-							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>							
 						</form>
 
 					</div>
@@ -52,47 +51,17 @@ import DefaultLayout from '@/layout/DefaultLayout'
 /* eslint-disable */
 export default{
 	name:'Home',
-	data(){		
 		return {
 			usuario:[],
 			usuario:'',
 			correo:'',
 			contrasena:'',
 			username:'',
-			password:''			
 		};
 	},
 	methods:{
 		validar(){
 			console.log("memo");
-			axios.get('http://20a24c27.ngrok.io/v1/usuario/1',{
-
-			})
-			.then(response =>{
-				console.log(response);
-			})
-		},
-		save(){
-			console.log("memosave");
-			axios.post('http://20a24c27.ngrok.io/v1/usuario',{
-
-				nickname:'pedro',
-				correo:'pedrolop90789.gmail.com',
-				password:'12345'
-
-			})
-			.then(response =>{
-				console.log(response);
-			})
-		},
-		actualizar(){
-			console.log("memoedit");
-			console.log(this.usuario)
-			axios.put('http://20a24c27.ngrok.io/v1/usuario/6',{
-
-				nickname:'benito camelas',
-				correo:'benito.gmail.com',
-				password:'memo1234'
 
 			})
 			.then(response =>{

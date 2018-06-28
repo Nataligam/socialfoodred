@@ -1,4 +1,3 @@
-  
 <template>
 	<DefaultLayout>
 		<section slot="content" class="ContenidoReceta">
@@ -56,7 +55,6 @@
                   <label>Ingredientes agregados:</label>
                   <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.nombre" class="list-group-item">
                     {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.unidad}}
-                    <button @click="modificarIng(ingrediente.nombre,ingrediente.cantidad,ingrediente.unidad,index)" class="btn btn-outline-primary btnIzq"><span class="icon-note"></span></button>
                     <button @click="eliminarIng(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
                 </ul>
@@ -94,7 +92,6 @@
                 <label>Pasos agregados:</label>
                 <li v-for="(paso, index) in pasos" v-bind:key="paso.nombre" class="list-group-item">
                   {{paso.nombre }}
-                  <button @click="modificarpaso(paso.nombre,paso.descripcion,index)" class="btn btn-outline-primary btnIzq"><span class="icon-note"></span></button>
                   <button @click="eliminarpaso(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                 </li>
               </ul>
@@ -161,7 +158,6 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
-        
       ],
       titulo:'',
       idReceta:'',
@@ -172,7 +168,6 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
-      descripcionpaso:''
 
     }
   },
@@ -181,14 +176,10 @@ export default{
 	},
   methods:{
     cargarCategorias(){
-     
-      axios.get('http://ad011c97.ngrok.io/v1/categoria',{        
 			})
 			.then(response =>{
       this.categorias=response.data;
-      				 alert('hi!');	
 			})
-     
     },
    agregarIng(){
 
@@ -220,7 +211,6 @@ export default{
 
   },
   eliminarIng(index){
-   
    this.ingredientes.splice(index,1);
 
  },

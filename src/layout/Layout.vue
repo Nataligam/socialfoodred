@@ -35,10 +35,10 @@
 			</div>		 
 			<a class="navbar-brand"></a>
 			<form class="form-inline">				
-				<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-				<router-link to="/PerfilAmigo">	
-					<button class="btn btn-outline-info2" type="submit"><span class="icon-magnifier"></span></button>
-				</router-link>
+				<input class="form-control mr-sm-2" v-model="nombreBuscar" type="search" placeholder="Buscar" aria-label="Buscar">
+				
+				<button class="btn btn-outline-info2" @click="enviarNombre" type="submit"><span class="icon-magnifier"></span></button>
+				
 			</form>
 		</nav>
 		<div class="row mt-5 mb-5 ">
@@ -62,16 +62,25 @@ export default{
 	components:{
 	},
 	methods:{
-        logout(){
-		console.log('cerrarlogin')
-			axios.post('http://baab64d5.ngrok.io/v1/usuario/cerrarSession',{
-		 })
-		 .then(response =>{
-			console.log(response);
-        if(response.data == true){
-			    this.$router.push('/')
-			 }
-		 })
+		logout(){
+			console.log('cerrarlogin')
+			axios.post('http://53cf2ad0.ngrok.io/v1/usuario/cerrarSession',{
+			})
+			.then(response =>{
+				console.log(response);
+				if(response.data == true){
+					this.$router.push('/')
+				}
+			})
+		},
+		enviarNombre(){
+			var nombre=this.nombreBuscar
+			this.$router.push(
+			{
+				name:'PerfilAmigo',
+				params:{nomamigo:nombre}
+			}
+			)
 		}
 	}
 }
