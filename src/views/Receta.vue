@@ -168,11 +168,6 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
-<<<<<<< HEAD
-=======
-      descripcionpaso:'',
-      recetaFoto:''
->>>>>>> parent of 316c599... revisar receta
 
     }
   },
@@ -188,7 +183,6 @@ export default{
     },
    agregarIng(){
 
-<<<<<<< HEAD
      
 			console.log("memosave");
 			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
@@ -203,8 +197,6 @@ export default{
 			})
 		
 
-=======
->>>>>>> parent of 316c599... revisar receta
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
     this.nombreing='';
     this.cantidading='';
