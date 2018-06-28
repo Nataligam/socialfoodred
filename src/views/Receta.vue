@@ -1,3 +1,4 @@
+
 <template>
 	<DefaultLayout>
 		<section slot="content" class="ContenidoReceta">
@@ -55,6 +56,7 @@
                   <label>Ingredientes agregados:</label>
                   <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.nombre" class="list-group-item">
                     {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.unidad}}
+                    <button @click="modificarIng(ingrediente.nombre,ingrediente.cantidad,ingrediente.unidad,index)" class="btn btn-outline-primary btnIzq ml-2"><span class="icon-note"></span></button>
                     <button @click="eliminarIng(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
                 </ul>
@@ -92,6 +94,7 @@
                 <label>Pasos agregados:</label>
                 <li v-for="(paso, index) in pasos" v-bind:key="paso.nombre" class="list-group-item">
                   {{paso.nombre }}
+                  <button @click="modificarpaso(paso.nombre,paso.descripcion,index)" class="btn btn-outline-primary btnIzq ml-2"><span class="icon-note"></span></button>
                   <button @click="eliminarpaso(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                 </li>
               </ul>
@@ -158,9 +161,9 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
+        
       ],
       titulo:'',
-      idReceta:'',
       selected:'',
       nombreing:'',
       cantidading:'',
@@ -168,6 +171,7 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
+      descripcionpaso:''
 
     }
   },
@@ -176,26 +180,16 @@ export default{
 	},
   methods:{
     cargarCategorias(){
+      alert('hi!');	
+      axios.get('http://600a25ce.ngrok.io/v1/categoria',{        
 			})
 			.then(response =>{
       this.categorias=response.data;
+      					
 			})
+     
     },
    agregarIng(){
-
-     
-			console.log("memosave");
-			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
-
-				nickname:'pedro',
-				correo:'pedrolop90789.gmail.com',
-				password:'12345'
-
-			})
-			.then(response =>{
-				console.log(response);
-			})
-		
 
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
     this.nombreing='';
@@ -205,12 +199,12 @@ export default{
   agregarpasos(){
     console.log(this.ingredientes)
     this.pasos.push({nombre:this.nombrepaso, parametro:this.parametros, descripcion:this.descripcionpaso});
-    alert(this.pasos);
     this.nombrepaso='';
     this.descripcionpaso='';
 
   },
   eliminarIng(index){
+   
    this.ingredientes.splice(index,1);
 
  },
