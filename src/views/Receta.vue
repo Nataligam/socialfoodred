@@ -1,3 +1,4 @@
+
 <template>
 	<DefaultLayout>
 		<section slot="content" class="ContenidoReceta">
@@ -55,13 +56,22 @@
                   <label>Ingredientes agregados:</label>
                   <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.nombre" class="list-group-item">
                     {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.unidad}}
+                    <button @click="modificarIng(ingrediente.nombre,ingrediente.cantidad,ingrediente.unidad,index)" class="btn btn-outline-primary btnIzq ml-2"><span class="icon-note"></span></button>
                     <button @click="eliminarIng(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
                 </ul>
               </div>
+
               <!--Lista de ingredientes-->
             </div>
           </div>
+					<div class="input-group mb-3">
+
+						<div class="input-group-append">
+						 <input type="button" @click="agregarReceta" class="input-group-text" value="cargar">
+
+					 </div>
+					</div>
           <div class="form-group">
             <h5>Pasos:</h5>
             <div class="borde p-3">
@@ -92,6 +102,7 @@
                 <label>Pasos agregados:</label>
                 <li v-for="(paso, index) in pasos" v-bind:key="paso.nombre" class="list-group-item">
                   {{paso.nombre }}
+                  <button @click="modificarpaso(paso.nombre,paso.descripcion,index)" class="btn btn-outline-primary btnIzq ml-2"><span class="icon-note"></span></button>
                   <button @click="eliminarpaso(index)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                 </li>
               </ul>
@@ -158,6 +169,7 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
+
       ],
       titulo:'',
       idReceta:'',
@@ -168,6 +180,9 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
+      descripcionpaso:'',
+      recetaFoto:'',
+			idReceta:''
 
     }
   },
@@ -176,12 +191,52 @@ export default{
 	},
   methods:{
     cargarCategorias(){
+      alert('hi!');
+      axios.get('http://600a25ce.ngrok.io/v1/categoria',{
 			})
 			.then(response =>{
       this.categorias=response.data;
+
 			})
+
     },
+		agregarReceta(){
+     console.log(this.titulo);
+		 var lista = [];
+		 lista.push({
+				nombre:this.nombreing,
+				cantidad:this.cantidading,
+				unidad:this.unidading
+			});
+			console.log(this.nombreing);
+	 	 console.log(this.cantidading);
+	 	 console.log(this.unidading);
+		 	 	 console.log(this.recetaFoto);
+		 console.log(lista);
+		 axios.post('http://20a24c27.ngrok.io/v1/receta',{
+		 nombre:this.titulo,
+		 imagen_receta:this.recetaFoto,
+		 id_categoria:1,
+		 ingredientes:lista
+		 })
+		 .then(response =>{
+		  console.log(response);
+		 })
+		},
    agregarIng(){
+	 console.log("ingrediente");
+	 console.log(this.nombreing);
+	 console.log(this.cantidading);
+	 console.log(this.unidading);
+    //this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
+		axios.post('http://20a24c27.ngrok.io/v1/ingrediente',{
+       nombre:this.nombreing,
+			 cantidad:this.cantidading,
+			 unidad:this.unidading
+		})
+		.then(response => {
+		  console.log(response);
+		})
 
      
 			console.log("memosave");
@@ -211,6 +266,7 @@ export default{
 
   },
   eliminarIng(index){
+
    this.ingredientes.splice(index,1);
 
  },
@@ -236,6 +292,7 @@ alert(nombrepaso);
 
  },
  subirImagen(){
+   var self = this;
    var fichero;
    var storageRef;
 
@@ -253,6 +310,7 @@ alert(nombrepaso);
     }, function() {
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
         console.log('File available at', downloadURL);
+        self.recetaFoto = downloadURL;
       });
     });
  }

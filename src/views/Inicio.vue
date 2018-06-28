@@ -57,7 +57,7 @@
 													<span v-for="ingrediente in publicacion.receta.ingredientes" v-bind:key="ingrediente.nombre">
 													<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
 													<span v-for="paso in  publicacion.receta.pasos" v-bind:key="paso.nombre">
-													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in ingredientes" v-bind:key="parametro">
+													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" v-bind:key="parametro">
 													<span v-if="Object.keys(parametros).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}, </span>
 													<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br>
 														//  {{paso.descripcion}} <br>
@@ -79,10 +79,10 @@
 										</div>
                 	</div>
 									
-									<div class="col-md-1">
+									<div class="col-md-2 col-sm-2">
 										<br><button type="button" class="btn btn-outline-primary mb-5"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
 									</div>
-										<div class="col-md-8">
+										<div class="col-md-8 col-sm-7 col-xs-12">
 											<br>
 										<input   type="text" class="form-control mb-5"> <button type="button" class="btn btn-outline-primary mb-5"><span class="icon-arrow-right"></span></button>
 										</div>
@@ -133,8 +133,8 @@ export default{
 			})
 			.then(response =>{
       		this.publicaciones=response.data;
-					
-			  alert(this.publicaciones);
+					alert(publicaciones.receta.pasos.ingrdientes);
+			  
 			  	
 			})
 	 }
