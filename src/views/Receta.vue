@@ -164,6 +164,7 @@ export default{
         
       ],
       titulo:'',
+      idReceta:'',
       selected:'',
       nombreing:'',
       cantidading:'',
@@ -180,16 +181,30 @@ export default{
 	},
   methods:{
     cargarCategorias(){
-      alert('hi!');	
-      axios.get('http://600a25ce.ngrok.io/v1/categoria',{        
+     
+      axios.get('http://ad011c97.ngrok.io/v1/categoria',{        
 			})
 			.then(response =>{
       this.categorias=response.data;
-      					
+      				 alert('hi!');	
 			})
      
     },
    agregarIng(){
+
+     
+			console.log("memosave");
+			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
+
+				nickname:'pedro',
+				correo:'pedrolop90789.gmail.com',
+				password:'12345'
+
+			})
+			.then(response =>{
+				console.log(response);
+			})
+		
 
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
     this.nombreing='';
@@ -199,6 +214,7 @@ export default{
   agregarpasos(){
     console.log(this.ingredientes)
     this.pasos.push({nombre:this.nombrepaso, parametro:this.parametros, descripcion:this.descripcionpaso});
+    alert(this.pasos);
     this.nombrepaso='';
     this.descripcionpaso='';
 

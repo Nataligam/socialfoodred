@@ -12,7 +12,7 @@
 								<center>
 									<div class="row">
 										<div class="col">
-											<img src="../assets/avatar.png" width="200">
+											
 										</div>
 									</div>									
 									<div class="row mt-5">
@@ -44,8 +44,8 @@
 										<label for="switch-id">Privacidad</label><br>
 										<span class="switch">
 										<input type="checkbox" :disabled="isDisabled" class="switch" id="switch-normal" v-model="privacidad">
-										<label for="switch-normal"><span v-if="privacidad">Privado</span>
-																   <span v-else>Publico</span></label>
+										<label for="switch-normal"><span v-if="privacidad">Publico</span>
+																   <span v-else>Privado</span></label>
 										</span>
 										</div>
 										<label>Seleccionar Imagen de perfil:</label>
@@ -77,6 +77,7 @@ export default{
 		return {
 			usuarioCorreo:'',
 			usuarioNickname:'',
+			imagenUsuario:'',
 			usuarioPassword:'',
 			privacidad:'',
 			isDisabled: true,			
@@ -93,17 +94,22 @@ export default{
 	},
 	methods:{
 		CargarPerfil(){					
-			axios.get('http://600a25ce.ngrok.io/v1/usuario/1',{        
+			axios.get('http://981d809c.ngrok.io/v1/usuario/1',{        
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
-				this.privacidad=response.data.privacidad;							
+				this.imagenUsuario=response.data.imagen_usuario,
+				
+				this.privacidad=response.data.privacidad;			
+
+				alert(response.data.privacidad);	
+							
 			})
 		},
 		ActualizarPerfil(){						
-			axios.put('http://600a25ce.ngrok.io/v1/usuario',{
+			axios.put('http://981d809c.ngrok.io/v1/usuario',{
 				nickname: this.usuarioNickname,
 				correo: this.usuarioCorreo,
 				password: this.usuarioPassword
