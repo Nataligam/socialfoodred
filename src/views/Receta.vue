@@ -61,9 +61,17 @@
                   </li>
                 </ul>
               </div>
+
               <!--Lista de ingredientes-->
             </div>
           </div>
+					<div class="input-group mb-3">
+
+						<div class="input-group-append">
+						 <input type="button" @click="agregarReceta" class="input-group-text" value="cargar">
+
+					 </div>
+					</div>
           <div class="form-group">
             <h5>Pasos:</h5>
             <div class="borde p-3">
@@ -161,7 +169,11 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
       ],
       titulo:'',
       selected:'',
@@ -171,7 +183,13 @@ export default{
       nombrepaso:'',
       parametros:'',
       selectCategoria:'',
+<<<<<<< HEAD
       descripcionpaso:''
+=======
+      descripcionpaso:'',
+      recetaFoto:'',
+			idReceta:''
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 
     }
   },
@@ -180,6 +198,7 @@ export default{
 	},
   methods:{
     cargarCategorias(){
+<<<<<<< HEAD
       alert('hi!');	
       axios.get('http://600a25ce.ngrok.io/v1/categoria',{        
 			})
@@ -188,8 +207,54 @@ export default{
       					
 			})
      
+=======
+      alert('hi!');
+      axios.get('http://600a25ce.ngrok.io/v1/categoria',{
+			})
+			.then(response =>{
+      this.categorias=response.data;
+
+			})
+
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
     },
+		agregarReceta(){
+     console.log(this.titulo);
+		 var lista = [];
+		 lista.push({
+				nombre:this.nombreing,
+				cantidad:this.cantidading,
+				unidad:this.unidading
+			});
+			console.log(this.nombreing);
+	 	 console.log(this.cantidading);
+	 	 console.log(this.unidading);
+		 	 	 console.log(this.recetaFoto);
+		 console.log(lista);
+		 axios.post('http://20a24c27.ngrok.io/v1/receta',{
+		 nombre:this.titulo,
+		 imagen_receta:this.recetaFoto,
+		 id_categoria:1,
+		 ingredientes:lista
+		 })
+		 .then(response =>{
+		  console.log(response);
+		 })
+		},
    agregarIng(){
+	 console.log("ingrediente");
+	 console.log(this.nombreing);
+	 console.log(this.cantidading);
+	 console.log(this.unidading);
+    //this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
+		axios.post('http://20a24c27.ngrok.io/v1/ingrediente',{
+       nombre:this.nombreing,
+			 cantidad:this.cantidading,
+			 unidad:this.unidading
+		})
+		.then(response => {
+		  console.log(response);
+		})
 
     this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
     this.nombreing='';
@@ -204,7 +269,11 @@ export default{
 
   },
   eliminarIng(index){
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
    this.ingredientes.splice(index,1);
 
  },
@@ -230,6 +299,7 @@ alert(nombrepaso);
 
  },
  subirImagen(){
+   var self = this;
    var fichero;
    var storageRef;
 
@@ -247,6 +317,7 @@ alert(nombrepaso);
     }, function() {
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
         console.log('File available at', downloadURL);
+        self.recetaFoto = downloadURL;
       });
     });
  }

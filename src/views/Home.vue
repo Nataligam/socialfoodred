@@ -65,6 +65,7 @@ export default{
 	methods:{
 		validar(){
 			console.log("memo");
+<<<<<<< HEAD
 			axios.get('http://600a25ce.ngrok.io/v1/usuario/1',{
 
 			})
@@ -93,6 +94,9 @@ export default{
 				nickname:'benito camelas',
 				correo:'benito.gmail.com',
 				password:'memo1234'
+=======
+			axios.get('http://20a24c27.ngrok.io/v1/usuario/1',{
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 
 			})
 			.then(response =>{

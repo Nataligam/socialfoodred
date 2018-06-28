@@ -1,26 +1,45 @@
 <template>
 	<DefaultLayout>
+<<<<<<< HEAD
 		<section slot="content" class="ContenidoPerfil">	
+=======
+		<section slot="content" class="ContenidoPerfil">
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 			<Layout>
 				<section slot="contentColumn1">
 					<center><h4 class="mb-5">Datos del perfil de usuario</h4>
 						<hr>
 					</center>
 					<div class=" p-3 ">
+<<<<<<< HEAD
 						<div class="row">							
+=======
+						<div class="row">
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 							<div class="col-md-3 offset-md-2 col-sm-12 mt-5">
 								<center>
 									<div class="row">
 										<div class="col">
+<<<<<<< HEAD
 											<img src="../assets/avatar.png" width="200">
 										</div>
 									</div>									
+=======
+											<img v-bind:src="usuarioFoto" width="200">
+										</div>
+									</div>
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 									<div class="row mt-5">
 										<div class="col">
 											<button @click="HabilitarCampos" type="submit" class="btn btn-outline-info2 mb-1">Actualizar</button>
 											<button  @click="ActualizarPerfil" type="submit" class="btn btn-outline-info2 mb-1">Guardar</button>
+<<<<<<< HEAD
 										</div>	
 									</div>	
+=======
+										</div>
+									</div>
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 								</center>
 							</div>
 							<div class="col-md-5 col-sm-12">
@@ -28,6 +47,7 @@
 									<form >
 										<div class="form-group">
 											<label >Correo:</label>
+<<<<<<< HEAD
 											<input type="email" :disabled="isDisabled" class="form-control" v-model="usuarioCorreo"  >	
 										</div>
 										<div class="form-group">
@@ -38,6 +58,18 @@
 										<div class="form-group">
 											<label >Contraseña:</label>
 											<input type="text" :disabled="isDisabled" class="form-control" 
+=======
+											<input type="email" :disabled="isDisabled" class="form-control" v-model="usuarioCorreo"  >
+										</div>
+										<div class="form-group">
+											<label >Usuario:</label>
+											<input type="text" :disabled="isDisabled" class="form-control"
+											v-model="usuarioNickname">
+										</div>
+										<div class="form-group">
+											<label >Contraseña:</label>
+											<input type="text" :disabled="isDisabled" class="form-control"
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 											v-model="usuarioPassword">
 										</div>
 										<div class="row">
@@ -50,6 +82,7 @@
 															<span v-else>Publico</span></label>
 														</span>
 													</div>
+<<<<<<< HEAD
 												</div>											
 												<div class="col-md-8 col-sm-12">
 													<label>Seleccionar Imagen de perfil:</label>
@@ -58,12 +91,27 @@
 															<input type="file" class="custom-file-input" :disabled="isDisabled">
 															<label class="custom-file-label"></label>								
 														</div>									
+=======
+												</div>
+												<div class="col-md-8 col-sm-12">
+													<label>Seleccionar Imagen de perfil:</label>
+													<div class="input-group mb-3">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" :disabled="isDisabled" id="fichero">
+															<label class="custom-file-label"></label>
+														</div>
+														<div class="input-group-append">
+														 <input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
+
+													 </div>
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 													</div>
 												</div>
 											</div>
 										</form>
 									</div>
 								</div>
+<<<<<<< HEAD
 							</div>																	
 						</div>
 					</section>
@@ -91,12 +139,99 @@
 		components:{
 			DefaultLayout,
 			Layout,
+=======
+							</div>
+						</div>
+					</div>
+				</section>
+			</Layout>
+		</section>
+	</DefaultLayout>
+</template>
+<script >
+import DefaultLayout from '@/layout/DefaultLayout'
+import Layout from '@/layout/Layout'
+
+
+
+export default{
+	name:'Perfil',
+	data(){
+		return {
+			usuarioCorreo:'',
+			usuarioNickname:'',
+			imagenUsuario:'',
+			usuarioPassword:'',
+			usuarioFoto:'',
+			privacidad:'',
+			isDisabled: true,
+
+		}
+	},
+	components:{
+		DefaultLayout,
+		Layout,
+	},
+	mounted: function (){
+		this.CargarPerfil();
+	},
+	methods:{
+		CargarPerfil(){
+
+			axios.get('http://20a24c27.ngrok.io/v1/usuario/14',{
+
+			})
+			.then(response =>{
+				this.usuarioCorreo=response.data.correo;
+				this.usuarioNickname=response.data.nickname;
+				this.usuarioPassword=response.data.password;
+				this.usuarioFoto= response.data.imagen_usuario;
+			})
+		},
+		cargarImagen(){
+		var self = this;
+		var fichero;
+		var storageRef;
+		var foto = '';
+
+		storageRef = firebase.storage().ref();
+		fichero = document.getElementById("fichero");
+		var img = fichero.files[0];
+		console.log(img);
+		var uploadTask = storageRef.child("perfil/" + img.name).put(img);
+
+		uploadTask.on('state_changed',
+		 function(snapshot){
+		 }, function(error) {
+		 }, function() {
+			 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+				 console.log('File available at', downloadURL);
+				 foto = downloadURL;
+         self.usuarioFoto = foto;
+			 });
+
+		 });
+		},
+		ActualizarPerfil(){
+
+		axios.put('http://20a24c27.ngrok.io/v1/usuario',{
+			nickname: this.usuarioNickname,
+			correo: this.usuarioCorreo,
+			password: this.usuarioPassword,
+			imagen_usuario:this.usuarioFoto
+
+		})
+		.then(response =>{
+			console.log(response);
+		})
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 
 
 		},
 		mounted: function (){
 			this.CargarPerfil();
 		},
+<<<<<<< HEAD
 		methods:{
 			CargarPerfil(){					
 
@@ -127,6 +262,16 @@
 			},
 
 		}
+=======
+		HabilitarCampos(){
+			this.isDisabled=false
+		},
+		},
+		components:{
+			DefaultLayout,
+			Layout
+		},
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 	}
 	</script>
 
@@ -142,6 +287,7 @@
 		color: #fff;
 		background-color: #48dbfb;
 		border-color: #48dbfb;
+<<<<<<< HEAD
 	}
 
 	.borde{
@@ -200,6 +346,66 @@
 		background-color: white;
 		transition: 0.2s all;
 	}
+=======
+	}
+
+	.borde{
+		border: 2px #48dbfb solid;
+	}
+	.switch {
+		font-size: 1rem;
+		position: relative;
+	}
+	.switch input {
+		position: absolute;
+		height: 1px;
+		width: 1px;
+		background: none;
+		border: 0;
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		overflow: hidden;
+		padding: 0;
+	}
+	.switch input + label {
+		position: relative;
+		min-width: calc(calc(2.375rem * .8) * 2);
+		border-radius: calc(2.375rem * .8);
+		height: calc(2.375rem * .8);
+		line-height: calc(2.375rem * .8);
+		display: inline-block;
+		cursor: pointer;
+		outline: none;
+		user-select: none;
+		vertical-align: middle;
+		text-indent: calc(calc(calc(2.375rem * .8) * 2) + .5rem);
+	}
+	.switch input + label::before,
+	.switch input + label::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: calc(calc(2.375rem * .8) * 2);
+		bottom: 0;
+		display: block;
+	}
+	.switch input + label::before {
+		right: 0;
+		background-color: #dee2e6;
+		border-radius: calc(2.375rem * .8);
+		transition: 0.2s all;
+	}
+	.switch input + label::after {
+		top: 2px;
+		left: 2px;
+		width: calc(calc(2.375rem * .8) - calc(2px * 2));
+		height: calc(calc(2.375rem * .8) - calc(2px * 2));
+		border-radius: 50%;
+		background-color: white;
+		transition: 0.2s all;
+	}
+>>>>>>> 7b50c2337a63361f993b7a9b9aba01f74a555225
 	.switch input:checked + label::before {
 		background-color: #08d;
 	}
