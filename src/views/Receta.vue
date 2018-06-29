@@ -168,8 +168,7 @@ export default{
 		return {
       ingredientes:[],
       pasos:[],
-      categorias:[
-      ],
+      categorias:[ ],
       titulo:'',
       selected:'',
       nombreing:'',
@@ -263,6 +262,7 @@ export default{
 
   },
   eliminarIng(index){
+
    this.ingredientes.splice(index,1);
 
  },

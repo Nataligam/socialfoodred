@@ -95,7 +95,6 @@ export default{
 				correo:'benito.gmail.com',
 				password:'memo1234'
 
-
 			})
 			.then(response =>{
 				console.log(response);

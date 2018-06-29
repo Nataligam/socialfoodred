@@ -157,9 +157,11 @@ export default{
 		})
 
 
+
 		},
 		mounted: function (){
 			this.CargarPerfil();
+
 		},
 		methods:{
 			CargarPerfil(){					
@@ -192,10 +194,40 @@ export default{
 
 		}
 		},
+		methods:{
+			CargarPerfil(){					
+
+				axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{        
+
+				})
+				.then(response =>{
+					this.usuarioCorreo=response.data.correo;
+					this.usuarioNickname=response.data.nickname;
+					this.usuarioPassword=response.data.password;
+					this.privacidad=response.data.privacidad;							
+				})
+			},
+			ActualizarPerfil(){						
+				axios.put('http://53cf2ad0.ngrok.io/v1/usuario',{
+					nickname: this.usuarioNickname,
+					correo: this.usuarioCorreo,
+					password: this.usuarioPassword
+
+				})			
+				.then(response =>{
+					console.log(response);
+				})
+
+			},
+			
+
+		
+		},
 		components:{
 			DefaultLayout,
 			Layout
 		},
+
 	}
 	</script>
 
