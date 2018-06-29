@@ -6,6 +6,7 @@ import Inicio from '@/views/Inicio'
 import Perfil from '@/views/Perfil'
 import Receta from '@/views/Receta'
 import PerfilAmigo from '@/views/PerfilAmigo'
+import UsuariosSeguidos from '@/views/UsuariosSeguidos'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
 		path:'/PerfilAmigo/:nomamigo',
 		name:'PerfilAmigo',
 		component: PerfilAmigo,
+	},
+	{
+		path:'/UsuariosSeguidos',
+		name:'UsuariosSeguidos',
+		component: UsuariosSeguidos,
 	}
 	]
 })

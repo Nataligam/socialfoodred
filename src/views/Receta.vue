@@ -169,10 +169,8 @@ export default{
       ingredientes:[],
       pasos:[],
       categorias:[
-
       ],
       titulo:'',
-      idReceta:'',
       selected:'',
       nombreing:'',
       cantidading:'',
@@ -192,7 +190,7 @@ export default{
   methods:{
     cargarCategorias(){
       alert('hi!');
-      axios.get('http://600a25ce.ngrok.io/v1/categoria',{
+      axios.get('http://676e50ae.ngrok.io/v1/categoria',{
 			})
 			.then(response =>{
       this.categorias=response.data;
@@ -213,7 +211,7 @@ export default{
 	 	 console.log(this.unidading);
 		 	 	 console.log(this.recetaFoto);
 		 console.log(lista);
-		 axios.post('http://20a24c27.ngrok.io/v1/receta',{
+		 axios.post('http://676e50ae.ngrok.io/v1/receta',{
 		 nombre:this.titulo,
 		 imagen_receta:this.recetaFoto,
 		 id_categoria:1,
@@ -229,7 +227,7 @@ export default{
 	 console.log(this.cantidading);
 	 console.log(this.unidading);
     //this.ingredientes.push({nombre:this.nombreing, cantidad:this.cantidading, unidad:this.unidading});
-		axios.post('http://20a24c27.ngrok.io/v1/ingrediente',{
+		axios.post('http://676e50ae.ngrok.io/v1/ingrediente',{
        nombre:this.nombreing,
 			 cantidad:this.cantidading,
 			 unidad:this.unidading
@@ -240,7 +238,7 @@ export default{
 
      
 			console.log("memosave");
-			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
+			axios.post('http://676e50ae.ngrok.io/v1/usuario',{
 
 				nickname:'pedro',
 				correo:'pedrolop90789.gmail.com',
@@ -260,13 +258,11 @@ export default{
   agregarpasos(){
     console.log(this.ingredientes)
     this.pasos.push({nombre:this.nombrepaso, parametro:this.parametros, descripcion:this.descripcionpaso});
-    alert(this.pasos);
     this.nombrepaso='';
     this.descripcionpaso='';
 
   },
   eliminarIng(index){
-
    this.ingredientes.splice(index,1);
 
  },

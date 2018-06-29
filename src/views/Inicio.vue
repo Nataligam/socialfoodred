@@ -57,9 +57,9 @@
 													<span v-for="ingrediente in publicacion.receta.ingredientes" v-bind:key="ingrediente.nombre">
 													<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
 													<span v-for="paso in  publicacion.receta.pasos" v-bind:key="paso.nombre">
-													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" v-bind:key="parametro">
-													<span v-if="Object.keys(parametros).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}, </span>
-													<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br>
+													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in pasos.ingredientes" v-bind:key="parametro">
+													<span v-if="Object.keys(parametros).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
+													<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> {{pasos.ingredientes}}
 														//  {{paso.descripcion}} <br>
 													}<br></span>
 													}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
@@ -111,12 +111,11 @@ export default{
 		return {
 		 id:'',
 		 publicaciones:[],
+		 publicaciones2:[],
 		 ingrdiente:[],
 		 pasos:[]
 
 		}
-	},mounted: function (){
-		this.ListarPublicaciones();
 	},
 	methods:{
 	 leerIdRuta(){
@@ -129,16 +128,29 @@ export default{
 	 },
 	 ListarPublicaciones(){
 		 
-		 axios.get('http://20a24c27.ngrok.io/v1/publicacion/publicas',{        
+		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
 			})
 			.then(response =>{
       		this.publicaciones=response.data;
-					alert(publicaciones.receta.pasos.ingrdientes);
+					
+
 			  
-			  	
+			  
+			})
+	 },
+	ListarPublicacionesseguidores(){
+		 
+		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
+			})
+			.then(response =>{
+      		this.publicaciones=response.data;
+					alert("hola que mas ");
+
+			  
+			  	 
 			})
 	 }
-	},
+	 },
 	components:{
 		DefaultLayout,
 		Layout
@@ -156,20 +168,6 @@ export default{
 	background-image: none;
 	border-color: #48dbfb;
 }
-.recervada{
-  color: blue;
-}
-
-.centro{
-	margin: auto;
-	
-}
-
-
-.slaider{
-	width: 100%;
-	max-height: 400px;
-}
 
 .btn-outline-info2:hover {
 	color: #fff;
@@ -182,7 +180,6 @@ export default{
 }
 
 .divpublicar{
-	
 	width: 70% !important;
 }
 

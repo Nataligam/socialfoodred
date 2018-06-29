@@ -45,8 +45,8 @@
 												<div class="form-group">
 													<label for="switch-id">Privacidad</label><br>
 													<span class="switch">
-														<input type="checkbox" :disabled="isDisabled" class="switch" id="switch-normal" v-model="privacidad">
-														<label for="switch-normal"><span v-if="privacidad">Privado</span>
+														<input type="checkbox" :disabled="isDisabled" class="switch" id="switch-normal" v-model="privacidadUsuario">
+														<label for="switch-normal"><span v-if="privacidadUsuario">Privado</span>
 															<span v-else>Publico</span></label>
 														</span>
 													</div>
@@ -91,7 +91,7 @@ export default{
 			imagenUsuario:'',
 			usuarioPassword:'',
 			usuarioFoto:'',
-			privacidad:'',
+			privacidadUsuario:false,
 			isDisabled: true,
 
 		}
@@ -106,14 +106,16 @@ export default{
 	methods:{
 		CargarPerfil(){
 
-			axios.get('http://20a24c27.ngrok.io/v1/usuario/14',{
+			axios.get('http://1ed39cb8.ngrok.io/v1/usuario/14',{
 
 			})
 			.then(response =>{
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
+				this.privacidadUsuario=response.data.privacidad;
 				this.usuarioFoto= response.data.imagen_usuario;
+				alert(this.privacidadUsuario);
 			})
 		},
 		cargarImagen(){
@@ -142,10 +144,11 @@ export default{
 		},
 		ActualizarPerfil(){
 
-		axios.put('http://20a24c27.ngrok.io/v1/usuario',{
+		axios.put('http://1ed39cb8.ngrok.io/v1/usuario/',{
 			nickname: this.usuarioNickname,
 			correo: this.usuarioCorreo,
 			password: this.usuarioPassword,
+			privacidad:this.privacidadUsuario,
 			imagen_usuario:this.usuarioFoto
 
 		})
@@ -153,10 +156,41 @@ export default{
 			console.log(response);
 		})
 
+
 		},
-		HabilitarCampos(){
-			this.isDisabled=false
+		mounted: function (){
+			this.CargarPerfil();
 		},
+		methods:{
+			CargarPerfil(){					
+
+				axios.get('http://53cf2ad0.ngrok.io/v1/usuario/24',{        
+
+				})
+				.then(response =>{
+					this.usuarioCorreo=response.data.correo;
+					this.usuarioNickname=response.data.nickname;
+					this.usuarioPassword=response.data.password;
+					this.privacidad=response.data.privacidad;							
+				})
+			},
+			ActualizarPerfil(){						
+				axios.put('http://53cf2ad0.ngrok.io/v1/usuario',{
+					nickname: this.usuarioNickname,
+					correo: this.usuarioCorreo,
+					password: this.usuarioPassword
+
+				})			
+				.then(response =>{
+					console.log(response);
+				})
+
+			},
+			HabilitarCampos(){
+				this.isDisabled=false
+			},
+
+		}
 		},
 		components:{
 			DefaultLayout,

@@ -65,7 +65,36 @@ export default{
 	methods:{
 		validar(){
 			console.log("memo");
-			axios.get('http://20a24c27.ngrok.io/v1/usuario/1',{
+
+			axios.get('http://600a25ce.ngrok.io/v1/usuario/1',{
+
+			})
+			.then(response =>{
+				console.log(response);
+			})
+		},
+		save(){
+			console.log("memosave");
+			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
+
+				nickname:'pedro',
+				correo:'pedrolop90789.gmail.com',
+				password:'12345'
+
+			})
+			.then(response =>{
+				console.log(response);
+			})
+		},
+		actualizar(){
+			console.log("memoedit");
+			console.log(this.usuario)
+			axios.put('http://600a25ce.ngrok.io/v1/usuario/6',{
+
+				nickname:'benito camelas',
+				correo:'benito.gmail.com',
+				password:'memo1234'
+
 
 			})
 			.then(response =>{
@@ -75,7 +104,7 @@ export default{
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 		 	console.log('registrar')
-		 	axios.post('http://20a24c27.ngrok.io/v1/usuario',{
+		 	axios.post('http://53cf2ad0.ngrok.io/v1/usuario',{
 
 		 		nickname:this.usuario,
 		 		correo:this.correo,
@@ -88,7 +117,7 @@ export default{
 		 },
 		login(){
 		 console.log('login')
-			 axios.post('http://20a24c27.ngrok.io/v1/usuario/login',{
+			 axios.post('http://53cf2ad0.ngrok.io/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})
@@ -114,7 +143,7 @@ export default{
 		  buscarAmigo(){
 		  console.log("buscaramigo");
 			 var buscar = 'pedro'
-			axios.get('http://20a24c27.ngrok.io/v1/usuarios/' + buscar,{
+			axios.get('http://600a25ce.ngrok.io/v1/usuarios/' + buscar,{
 			})
 			.then(response =>{
 			 console.log(response);

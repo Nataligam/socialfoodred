@@ -13,7 +13,9 @@
 							</router-link>
 						</li>						
 						<li class="nav-item">
+							<router-link to="/UsuariosSeguidos">
 							<a class="nav-link" href="#"><span class="icon-people"></span></a>
+							</router-link>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#"><span class="icon-bell"></span></a>
