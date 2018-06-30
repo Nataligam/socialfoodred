@@ -41,7 +41,7 @@
 											v-model="usuarioPassword">
 										</div>
 										<div class="row">
-											<div class="col-md-4 col-sm-12">
+											<div class="col-md-12 col-sm-12 col-lg-12 col-xl-4">
 												<div class="form-group">
 													<label for="switch-id">Privacidad</label><br>
 													<span class="switch">
@@ -51,7 +51,7 @@
 														</span>
 													</div>
 												</div>
-												<div class="col-md-8 col-sm-12">
+												<div class="col-md-12 col-sm-12 col-lg-12 col-xl-8">
 													<label>Seleccionar Imagen de perfil:</label>
 													<div class="input-group mb-3">
 														<div class="custom-file">
@@ -107,7 +107,7 @@ export default{
 	methods:{
 		CargarPerfil(){
 
-			axios.get(this.urlBase+'/v1/usuario/24',{
+			axios.get(this.urlBase+'/v1/usuario/2',{
 
 			})
 			.then(response =>{
@@ -128,8 +128,7 @@ export default{
 			fichero = document.getElementById("fichero");
 			var img = fichero.files[0];
 			console.log(img);
-			var uploadTask = storageRef.child("perfil/" + img.name).put(img);
-
+			var uploadTask = storageRef.child("perfil/" + img.name).put(img);			
 			uploadTask.on('state_changed',
 				function(snapshot){
 				}, function(error) {

@@ -9,7 +9,7 @@
 								<div class="col-lg-3 col-md-4 col-sm-12">
 									<center>
 										<div class="card mb-4 mt-2"  style="width: 200px;">
-											<img class="card-img-top" src="../assets/avatar.png" alt="Card image cap">
+											<img class="card-img-top" v-bind:src="item.imagen_usuario" alt="Card image cap">
 											<div class="card-body">
 												<p class="card-text size">{{item.nickname}}</p>				
 											</div>
@@ -64,8 +64,8 @@ export default{
 			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
-				console.log(response.data);
 				this.infoAmigo=response.data
+
 
 			})
 		},
