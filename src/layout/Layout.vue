@@ -58,7 +58,8 @@ export default{
 	name:'Layout',
 	data(){
 		return {
-			nombreBuscar:''
+			nombreBuscar:'',
+			urlBase:'http://7c2e187f.ngrok.io'
 		};
 	},
 	components:{
@@ -66,7 +67,7 @@ export default{
 	methods:{
 		logout(){
 			console.log('cerrarlogin')
-			axios.post('http://53cf2ad0.ngrok.io/v1/usuario/cerrarSession',{
+			axios.post(this.urlBase+'/v1/usuario/cerrarSession',{
 			})
 			.then(response =>{
 				console.log(response);

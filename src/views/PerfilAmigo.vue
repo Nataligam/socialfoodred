@@ -45,7 +45,8 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',
-			infoAmigo:[]		
+			infoAmigo:[],
+			urlBase:'http://7c2e187f.ngrok.io'		
 		}
 	},
 	components:{
@@ -60,7 +61,7 @@ export default{
 	methods:{
 		buscar(){
 			console.log("buscaramigo");			 
-			axios.get('http://676e50ae.ngrok.io/v1/usuarios/' + this.nombreBuscar,{
+			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
 				console.log(response.data);

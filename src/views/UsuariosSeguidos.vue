@@ -4,18 +4,14 @@
 			<Layout>
 				<section slot="contentColumn1" >
 					<div class="row">
-                        
-                    <div v-for="usuario in UsuariosSeguidos" v-bind:key="usuario.nombre">
-                        <div class="col-md-12 col-sm-12 col-xs-12 borde m-3 p-4">
-							
-                            <img  class="img-fluid  rounded mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50Qe1IT1Df3dhW1EJbAyhTH-BuvICovv8y01k_zGDRU180_ya" alt="Los Angeles">
-							{{usuario.nickname}} <br>
-                            <router-link to="/Receta">
-								<button class="btn btn-outline-info2 btn-lg" type="submit">ver publicaciones</button>
-						    </router-link>
-                            
-                        </div>
-                    </div>
+
+						<div v-for="usuario in UsuariosSeguidos" v-bind:key="usuario.nombre">
+							<div class="col-md-12 col-sm-12 col-xs-12 borde p-4 m-3">
+								<img  class="img-fluid  rounded mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50Qe1IT1Df3dhW1EJbAyhTH-BuvICovv8y01k_zGDRU180_ya" width="100px;">
+								{{usuario.nickname}} <br>								
+								<button @click="enviarIdAmigo" class="btn btn-outline-info2 btn-lg" type="submit">ver publicaciones</button>								
+							</div>
+						</div>
 					</div>
 				</section>
 			</Layout>
@@ -32,105 +28,109 @@ export default{
 	name:'UsuariosSeguidos',
 	data(){
 		return {
-         id:'',
-         UsuariosSeguidos:[{
-        id:'1',
-		nickname:'pedro',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      },
-      { id:'2',
-		nickname:'Gabriel',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      },
-      { id:'3',
+			id:'',
+			urlBase:'http://7c2e187f.ngrok.io',
+			UsuariosSeguidos:[{
+				id:'1',
+				nickname:'pedro',
+				correo:'pedrolop90@hotmail.com',
+				password:'12345',
+				imagen_usuario:'url de la imagen',
+				privacidad:'true'
+			},
+			{ id:'2',
+			nickname:'Gabriel',
+			correo:'pedrolop90@hotmail.com',
+			password:'12345',
+			imagen_usuario:'url de la imagen',
+			privacidad:'true'
+		},
+		{ id:'3',
 		nickname:'Juan',
 		correo:'pedrolop90@hotmail.com',
 		password:'12345',
 		imagen_usuario:'url de la imagen',
 		privacidad:'true'
-      },
-      { id:'4',
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      },
-      {
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      },{
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      }
-      ,{
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-      }
+	},
+	{ id:'4',
+	nickname:'Juan',
+	correo:'pedrolop90@hotmail.com',
+	password:'12345',
+	imagen_usuario:'url de la imagen',
+	privacidad:'true'
+},
+{
+	nickname:'Juan',
+	correo:'pedrolop90@hotmail.com',
+	password:'12345',
+	imagen_usuario:'url de la imagen',
+	privacidad:'true'
+},{
+	nickname:'Juan',
+	correo:'pedrolop90@hotmail.com',
+	password:'12345',
+	imagen_usuario:'url de la imagen',
+	privacidad:'true'
+}
+,{
+	nickname:'Juan',
+	correo:'pedrolop90@hotmail.com',
+	password:'12345',
+	imagen_usuario:'url de la imagen',
+	privacidad:'true'
+}
 ],
-		 publicaciones:[],
-		 publicaciones2:[],
-		 ingrdiente:[],
-		 pasos:[]
+publicaciones:[],
+publicaciones2:[],
+ingrdiente:[],
+pasos:[],
+idAmigo:'1'
 
+}
+},mounted: function (){
+	this.ListarPublicaciones();
+},
+methods:{
+	enviarIdAmigo(){
+
+		var id=this.idAmigo
+		this.$router.push(
+		{
+			name:'PublicacionesAmigo',
+			params:{idAmigo:id}
 		}
-	},mounted: function (){
-		this.ListarPublicaciones();
+		)
+		
 	},
-	methods:{
-	 leerIdRuta(){
-	 console.log("inicio");
-	  this.id = this.$route.params.id;
-		console.log(this.id);
-	 },
-	 toggleMostrar(pos){
-	 pos=!pos;
-	 },
-	 ListarPublicaciones(){
-		 
-		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
-			})
-			.then(response =>{
-      		this.publicaciones=response.data;
-					
+	toggleMostrar(pos){
+		pos=!pos;
+	},
+	ListarPublicaciones(){
 
-			  
-			  
-			})
-	 },
+		axios.get(this.urlBase+'/v1/publicacion/publicas',{        
+		})
+		.then(response =>{
+			this.publicaciones=response.data;
+		})
+	},
 	ListarPublicacionesseguidores(){
-		 
-		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
-			})
-			.then(response =>{
-      		this.publicaciones=response.data;
-					alert("hola que mas ");
 
-			  
-			  	 
-			})
-	 }
-	 },
-	components:{
-		DefaultLayout,
-		Layout
+		axios.get(this.urlBase+'/v1/publicacion/publicas',{        
+		})
+		.then(response =>{
+			this.publicaciones=response.data;
+			alert("hola que mas ");
 
-	},
+
+
+		})
+	}
+},
+components:{
+	DefaultLayout,
+	Layout
+
+},
 }
 </script>
 
@@ -143,7 +143,7 @@ export default{
 	border-color: #48dbfb;
 }
 .recervada{
-  color: blue;
+	color: blue;
 }
 
 .centro{

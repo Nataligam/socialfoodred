@@ -113,7 +113,8 @@ export default{
 		 publicaciones:[],
 		 publicaciones2:[],
 		 ingrdiente:[],
-		 pasos:[]
+		 pasos:[],
+		 urlBase:'http://7c2e187f.ngrok.io'
 
 		}
 	},
@@ -128,28 +129,24 @@ export default{
 	 },
 	 ListarPublicaciones(){
 		 
-		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
+		 axios.get(this.urlBase+'/v1/publicacion/publicas',{        
 			})
 			.then(response =>{
-      		this.publicaciones=response.data;
-					
-
-			  
-			  
+      		this.publicaciones=response.data;											
 			})
 	 },
+/*
 	ListarPublicacionesseguidores(){
 		 
-		 axios.get('http://1ed39cb8.ngrok.io/v1/publicacion/publicas',{        
+		 axios.get(this.urlBase+'/v1/publicacion/publicas',{        
 			})
 			.then(response =>{
       		this.publicaciones=response.data;
 					alert("hola que mas ");
-
-			  
-			  	 
+			  			  
 			})
 	 }
+	 */
 	 },
 	components:{
 		DefaultLayout,

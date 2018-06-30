@@ -59,10 +59,12 @@ export default{
 			correo:'',
 			contrasena:'',
 			username:'',
-			password:''
+			password:'',
+			urlBase:'http://7c2e187f.ngrok.io'
 		};
 	},
 	methods:{
+/*		
 		validar(){
 			console.log("memo");
 
@@ -100,10 +102,11 @@ export default{
 				console.log(response);
 			})
 		},
+*/		
 		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
 		 registrarUsuario(){
 		 	console.log('registrar')
-		 	axios.post('http://53cf2ad0.ngrok.io/v1/usuario',{
+		 	axios.post(this.urlBase+'/v1/usuario',{
 
 		 		nickname:this.usuario,
 		 		correo:this.correo,
@@ -116,7 +119,7 @@ export default{
 		 },
 		login(){
 		 console.log('login')
-			 axios.post('http://53cf2ad0.ngrok.io/v1/usuario/login',{
+			 axios.post(this.urlBase+'/v1/usuario/login',{
 			 correo:this.username,
 			 password:this.password
 			})
@@ -138,17 +141,6 @@ export default{
 			 }
 			})
 		 },
-		 // este no va
-		  buscarAmigo(){
-		  console.log("buscaramigo");
-			 var buscar = 'pedro'
-			axios.get('http://600a25ce.ngrok.io/v1/usuarios/' + buscar,{
-			})
-			.then(response =>{
-			 console.log(response);
-			})
-		},
-
 		 // ACA TERMINA USUARIO
 		},
 		components:{
