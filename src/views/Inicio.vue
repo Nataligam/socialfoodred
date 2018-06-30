@@ -10,7 +10,7 @@
 								<form class="form-inline">
 									<div class="row">
 										<div class="col-lg-8 col-md-12 col-sm-12 ">
-											<h4 >¡Crea y comparte tu receta!</h4>
+											<h4 >¡Crea y comparte tu receta!  {{hola}}</h4>
 										</div>
 										<div class=" col-lg-4 col-md-12 col-sm-12">
 											<router-link to="/Receta">
