@@ -6,10 +6,18 @@
 					<div class="row">
 
 						<div v-for="usuario in UsuariosSeguidos" v-bind:key="usuario.nombre">
-							<div class="col-md-12 col-sm-12 col-xs-12 borde p-4 m-3">
-								<img  class="img-fluid  rounded mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50Qe1IT1Df3dhW1EJbAyhTH-BuvICovv8y01k_zGDRU180_ya" width="100px;">
-								{{usuario.nickname}} <br>								
-								<button @click="enviarIdAmigo" class="btn btn-outline-info2 btn-lg" type="submit">ver publicaciones</button>								
+							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
+							<div class="card border-primary mb-3" style="max-width: 18rem;">
+								
+							 <div class="card-header">
+								 <img  class="img-fluid  rounded mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50Qe1IT1Df3dhW1EJbAyhTH-BuvICovv8y01k_zGDRU180_ya" width="100px;">
+							 </div>
+							<div class="card-body">
+								<h5 class="card-title">{{usuario.nickname}}</h5>
+								<p class="card-text"></p>
+								<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-lg" type="submit">ver publicaciones</button>								
+							</div>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -59,20 +67,20 @@ export default{
 	imagen_usuario:'url de la imagen',
 	privacidad:'true'
 },
-{
+{	id:'5',
 	nickname:'Juan',
 	correo:'pedrolop90@hotmail.com',
 	password:'12345',
 	imagen_usuario:'url de la imagen',
 	privacidad:'true'
-},{
+},{ id:'6',
 	nickname:'Juan',
 	correo:'pedrolop90@hotmail.com',
 	password:'12345',
 	imagen_usuario:'url de la imagen',
 	privacidad:'true'
 }
-,{
+,{	id:'7',
 	nickname:'Juan',
 	correo:'pedrolop90@hotmail.com',
 	password:'12345',
@@ -84,16 +92,16 @@ publicaciones:[],
 publicaciones2:[],
 ingrdiente:[],
 pasos:[],
-idAmigo:'1'
+idAmigo:''
 
 }
 },mounted: function (){
 	this.ListarPublicaciones();
 },
 methods:{
-	enviarIdAmigo(){
+	enviarIdAmigo(id){
 
-		var id=this.idAmigo
+		this.idAmigo=id;
 		this.$router.push(
 		{
 			name:'PublicacionesAmigo',
@@ -102,29 +110,16 @@ methods:{
 		)
 		
 	},
-	toggleMostrar(pos){
-		pos=!pos;
-	},
+	
 	ListarPublicaciones(){
 
-		axios.get(this.urlBase+'/v1/publicacion/publicas',{        
+		axios.get(this.urlBase+'//v1/usuario/seguidos',{        
 		})
 		.then(response =>{
 			this.publicaciones=response.data;
 		})
 	},
-	ListarPublicacionesseguidores(){
-
-		axios.get(this.urlBase+'/v1/publicacion/publicas',{        
-		})
-		.then(response =>{
-			this.publicaciones=response.data;
-			alert("hola que mas ");
-
-
-
-		})
-	}
+	
 },
 components:{
 	DefaultLayout,

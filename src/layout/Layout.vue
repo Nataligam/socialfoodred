@@ -59,7 +59,8 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',
-			urlBase:'http://7c2e187f.ngrok.io'
+			urlBase:'http://7c2e187f.ngrok.io',
+			hola:'hola que mas'
 		};
 	},
 	components:{
