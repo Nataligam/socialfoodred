@@ -9,10 +9,10 @@
 							<div class="borde p-3 ">
 								<form class="form-inline">
 									<div class="row">
-										<div class="col-lg-8 col-md-12 col-sm-12 ">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xl-8 ">
 											<h4 >¡Crea y comparte tu receta!  {{hola}}</h4>
 										</div>
-										<div class=" col-lg-4 col-md-12 col-sm-12">
+										<div class=" col-lg-12 col-md-12 col-sm-12 col-xl-4">
 											<router-link to="/Receta">
 												<button class="btn btn-outline-info2 btn-lg" type="submit">Publicar Ahora</button>
 											</router-link>

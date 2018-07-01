@@ -2,35 +2,30 @@
 	<DefaultLayout>
 		<section slot="content" class="ContenidoPerfil">	
 			<Layout>
-				<section slot="contentColumn1">
-					<div class="row ">
-						<div class="col-md-8 offset-md-2">
-							<div class="row borde mb-3" v-for="(item,index) in infoAmigo">
-								<div class="col-lg-3 col-md-4 col-sm-12">
-									<center>
-										<div class="card mb-4 mt-2"  style="width: 200px;">
-											<img class="card-img-top" v-bind:src="item.imagen_usuario" alt="Card image cap">
-											<div class="card-body">
-												<p class="card-text size">{{item.nickname}}</p>				
-											</div>
-										</div>
-									</center>
-								</div>
-								<div class="col-lg-7 col-md-7 offset-md-1 col-sm-12">
-									<div class=" p-3 mb-3 mt-3">
-										<p class="size"><span class="icon-envelope-open color"></span> Correo Electrónico: {{item.correo}}</p>
+				<section slot="contentColumn1">					
+					
+					<div class="row">
+						
+						<div v-for="(item,index) in infoAmigo">
+							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-4">
+								<div class="card border-primary mb-3" style="max-width: 18rem;">
+									<div class="card-header">
+										<img  class="img-fluid  rounded mx-auto d-block" :src="item.imagen_usuario" width="100px;">
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">{{item.nickname}}</h5>
+										<small class="card-text">Correo: {{item.correo}}</small>
 										<hr>
-										<p class="size"><span class="icon-user-following color"></span> Seguidores: {{item.seguidores}}</p>
+										<small class="card-text">Seguidores: {{item.seguidores}}</small>
 										<hr>
-										<p class="size"><span class="icon-user-follow color"></span> Seguidos: {{item.seguidos}}</p>
+										<small class="card-text">Seguidos: {{item.seguidos}}</small>
+										<hr>
+										<button type="button" class="btn btn-outline btn-sm">Publicaciones</button>			
 									</div>
 								</div>
-							</div>						
-							
-							
-						</div>
+							</div>
+						</div>					
 					</div>
-					
 				</section>
 			</Layout>
 		</section>
@@ -64,7 +59,7 @@ export default{
 			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
-				this.infoAmigo=response.data
+		this.infoAmigo=response.data
 
 
 			})

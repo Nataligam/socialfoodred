@@ -15,7 +15,7 @@
 							<div class="card-body">
 								<h5 class="card-title">{{usuario.nickname}}</h5>
 								<p class="card-text"></p>
-								<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-lg" type="submit">ver publicaciones</button>								
+								<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-sm" type="submit">ver publicaciones</button>								
 							</div>
 							</div>
 							</div>

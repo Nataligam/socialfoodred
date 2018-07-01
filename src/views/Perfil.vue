@@ -12,7 +12,7 @@
 								<center>
 									<div class="row">
 										<div class="col">
-											<img v-bind:src="usuarioFoto" width="200">
+											<img v-bind:src="usuarioFoto" height="200px;">
 										</div>
 									</div>
 									<div class="row mt-5">
@@ -107,7 +107,7 @@ export default{
 	methods:{
 		CargarPerfil(){
 
-			axios.get(this.urlBase+'/v1/usuario/2',{
+			axios.get(this.urlBase+'/v1/usuario/3',{
 
 			})
 			.then(response =>{

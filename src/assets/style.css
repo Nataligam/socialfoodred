@@ -1,0 +1,24 @@
+.btn-outline-info2 {
+	color: #48dbfb;
+	background-color: transparent;
+	background-image: none;
+	border-color: #48dbfb;
+}
+
+.btn-outline-info2:hover {
+	color: #fff;
+	background-color: #48dbfb;
+	border-color: #48dbfb;
+}
+
+.borde{
+	border: 2px #48dbfb solid;
+}
+
+.color{
+	color: #ff9600;	
+}
+
+.size{
+	font-size: 20px;
+}
