@@ -2,10 +2,8 @@
 	<DefaultLayout>
 		<section slot="content" class="ContenidoPerfil">	
 			<Layout>
-				<section slot="contentColumn1">					
-					
-					<div class="row">
-						
+				<section slot="contentColumn1">										
+					<div class="row">						
 						<div v-for="(item,index) in infoAmigo">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-4">
 								<div class="card border-primary mb-3" style="max-width: 18rem;">
@@ -16,11 +14,16 @@
 										<h5 class="card-title">{{item.nickname}}</h5>
 										<small class="card-text">Correo: {{item.correo}}</small>
 										<hr>
-										<small class="card-text">Seguidores: {{item.seguidores}}</small>
+										<div class="row">
+											<div class="col">
+												<small class="card-text"><span class="icon-user-following"></span> Seguidores: {{item.seguidores}}</small>
+											</div>
+											<div class="col">
+												<small class="card-text"><span class="icon-user-follow"></span> Seguidos: {{item.seguidos}}</small>
+											</div>
+										</div>												
 										<hr>
-										<small class="card-text">Seguidos: {{item.seguidos}}</small>
-										<hr>
-										<button type="button" class="btn btn-outline btn-sm">Publicaciones</button>			
+										<button type="button" class="btn btn-outline-info2 btn-sm">Publicaciones</button>						
 									</div>
 								</div>
 							</div>
@@ -34,67 +37,46 @@
 <script >
 import DefaultLayout from '@/layout/DefaultLayout'
 import Layout from '@/layout/Layout'
+import axios from 'axios'
 
 export default{
-	name:'PerfilAmigo',
+	name:'PerfilAmigo',	
 	data(){
 		return {
-			nombreBuscar:'',
-			infoAmigo:[],
-			urlBase:'http://7c2e187f.ngrok.io'		
+			nombreBuscar:'',			
+			urlBase:'http://9aae0ed5.ngrok.io',	
+			info:this.infoAmigo	
 		}
 	},
 	components:{
 		DefaultLayout,
 		Layout
 	},
-	mounted: function (){
-		this.leerNombreAmigo();
-		this.buscar();
+	mounted: function (){		
 		this.nombreBuscar=''
 	},
 	methods:{
-		buscar(){
-			console.log("buscaramigo");			 
-			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
-			})
-			.then(response =>{
-		this.infoAmigo=response.data
 
-
-			})
-		},
-		leerNombreAmigo(){			
-			this.nombreBuscar = this.$route.params.nomamigo;			
-		}
 	}
 }
 </script>
 
 <style>
 .btn-outline-info2 {
-	color: #48dbfb;
-	background-color: transparent;
-	background-image: none;
-	border-color: #48dbfb;
-}
+		color: #ff7043;
+		background-color: transparent;
+		background-image: none;
+		border-color:#ff7043;
+	}
 
-.btn-outline-info2:hover {
-	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
-}
+	.btn-outline-info2:hover {
+		color: #fff;
+		background-color: #ff7043;
+		border-color: #ff7043;
+	}
 
 .borde{
-	border: 2px #48dbfb solid;
-}
-
-.color{
-	color: #ff9600;	
-}
-
-.size{
-	font-size: 20px;
+	border: 1px #ff7043 solid;
 }
 
 </style>

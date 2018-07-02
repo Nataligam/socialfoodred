@@ -14,7 +14,7 @@
 						</li>						
 						<li class="nav-item">
 							<router-link to="/UsuariosSeguidos">
-							<a class="nav-link" href="#"><span class="icon-people"></span></a>
+								<a class="nav-link" href="#"><span class="icon-people"></span></a>
 							</router-link>
 						</li>
 						<li class="nav-item">
@@ -49,18 +49,20 @@
 					<slot name="contentColumn1"></slot>									
 				</main>
 			</div>
-		</div>	
-	</div>
+		</div>			
+	</div>	
 </template>
 
 <script >
+import axios from 'axios'
 export default{
 	name:'Layout',
 	data(){
 		return {
 			nombreBuscar:'',
-			urlBase:'http://7c2e187f.ngrok.io',
-			hola:'hola que mas'
+			urlBase:'http://9aae0ed5.ngrok.io',
+			hola:'hola que mas',
+			infoAmigo:[]
 		};
 	},
 	components:{
@@ -77,15 +79,18 @@ export default{
 				}
 			})
 		},
-		enviarNombre(){
-			var nombre=this.nombreBuscar
-			this.$router.push(
-			{
-				name:'PerfilAmigo',
-				params:{nomamigo:nombre}
-			}
-			)
-		}
+		enviarNombre(){	
+			console.log("buscaramigo");			 
+			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
+			})
+			.then(response =>{
+				this.infoAmigo=response.data				
+				this.$router.push({
+					name:'PerfilAmigo',					
+				}			
+				)
+			})									
+		},
 	}
 }
 
@@ -93,17 +98,18 @@ export default{
 
 <style>
 .btn-outline-info2 {
-	color: #48dbfb;
+	color: #ff7043;
 	background-color: transparent;
 	background-image: none;
-	border-color: #48dbfb;
+	border-color:#ff7043;
 }
 
 .btn-outline-info2:hover {
 	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
+	background-color: #ff7043;
+	border-color: #ff7043;
 }
+
 
 .bg-nav2{
 	background: #f7f7f9!important;

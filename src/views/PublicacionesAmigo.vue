@@ -85,6 +85,7 @@
 <script >
 import DefaultLayout from '@/layout/DefaultLayout'
 import Layout from '@/layout/Layout'
+import axios from 'axios'
 
 /* eslint-disable */
 export default{
@@ -92,7 +93,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://7c2e187f.ngrok.io',
+			urlBase:'http://9aae0ed5.ngrok.io',
 			UsuariosSeguidos:[{
 				id:'1',
 				nickname:'pedro',
@@ -187,11 +188,17 @@ components:{
 <style>
 
 .btn-outline-info2 {
-	color: #48dbfb;
-	background-color: transparent;
-	background-image: none;
-	border-color: #48dbfb;
-}
+		color: #ff7043;
+		background-color: transparent;
+		background-image: none;
+		border-color:#ff7043;
+	}
+
+	.btn-outline-info2:hover {
+		color: #fff;
+		background-color: #ff7043;
+		border-color: #ff7043;
+	}
 .recervada{
 	color: blue;
 }
@@ -205,14 +212,9 @@ components:{
 	max-height: 400px;
 }
 
-.btn-outline-info2:hover {
-	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
-}
 
 .borde{
-	border: 2px #48dbfb solid;
+	border: 1px #ff7043 solid;
 }
 
 .divpublicar{

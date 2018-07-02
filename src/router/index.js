@@ -19,7 +19,7 @@ export default new Router({
 		component: Home
 	},
 	{
-		path:'/inicio/:id',
+		path:'/inicio',
 		name:'Inicio',
 		component: Inicio,
 	},
@@ -34,9 +34,9 @@ export default new Router({
 		component: Receta,
 	},
 	{
-		path:'/PerfilAmigo/:nomamigo',
+		path:'/PerfilAmigo',
 		name:'PerfilAmigo',
-		component: PerfilAmigo,
+		component: PerfilAmigo,		
 	},
 	{
 		path:'/UsuariosSeguidos',

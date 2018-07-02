@@ -37,7 +37,7 @@
 										</div>
 										<div class="form-group">
 											<label >Contraseña:</label>
-											<input type="text" :disabled="isDisabled" class="form-control"
+											<input type="password" :disabled="isDisabled" class="form-control"
 											v-model="usuarioPassword">
 										</div>
 										<div class="row">
@@ -60,7 +60,6 @@
 														</div>
 														<div class="input-group-append">
 															<input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
-
 														</div>
 													</div>
 												</div>
@@ -79,6 +78,7 @@
 <script >
 import DefaultLayout from '@/layout/DefaultLayout'
 import Layout from '@/layout/Layout'
+import axios from 'axios'
 
 
 
@@ -93,7 +93,7 @@ export default{
 			usuarioFoto:'',
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://7c2e187f.ngrok.io'
+			urlBase:'http://9aae0ed5.ngrok.io'
 
 		}
 	},
@@ -102,15 +102,19 @@ export default{
 		Layout,
 	},
 	mounted: function (){
-		this.CargarPerfil();
+		this.CargarPerfil();		
 	},
 	methods:{
 		CargarPerfil(){
-
-			axios.get(this.urlBase+'/v1/usuario/3',{
-
+			var value= this.getCookie('Autorizacion');
+			var config = {
+				headers: {'Authorization': value}
+			};
+			console.log(value+ "TOKEN QUE SE ENVIA")
+			axios.get(this.urlBase+'/v1/usuario',config,{
 			})
 			.then(response =>{
+				console.log(response.data)
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
@@ -158,6 +162,22 @@ export default{
 		HabilitarCampos(){
 			this.isDisabled=false
 		},
+
+		getCookie(nombre) {
+			var name = nombre + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
 	},
 	components:{
 		DefaultLayout,
@@ -169,20 +189,19 @@ export default{
 
 <style>
 .btn-outline-info2 {
-	color: #48dbfb;
+	color: #ff7043;
 	background-color: transparent;
 	background-image: none;
-	border-color: #48dbfb;
+	border-color:#ff7043;
 }
 
 .btn-outline-info2:hover {
 	color: #fff;
-	background-color: #48dbfb;
-	border-color: #48dbfb;
+	background-color: #ff7043;
+	border-color: #ff7043;
 }
-
 .borde{
-	border: 2px #48dbfb solid;
+	border: 1px #ff7043 solid;
 }
 .switch {
 	font-size: 1rem;

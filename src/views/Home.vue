@@ -15,7 +15,24 @@
 			<div class="container mt-5 mb-5">
 				<div class="row">
 					<div class="col-md-7 col-sm-12  p-4">
-						<img src="../assets/socialfoodnew.jpg" class="img-fluid" width="100%">
+						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">							
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img class="d-block w-100" src="../assets/socialfoodnew.jpg" alt="First slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block w-100" src="../assets/socialfoodnew2.jpg" alt="Second slide">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>						
 						<hr>
 						<p class="mt-5 text-justify">Social food es una red social diseñada para aquellos programadores amantes de la cocina que deseen abrir un espacio dentro de su quehacer diario para compartir sus mejores recetas, con un toque de codigo y conocer mas sobre la gastronomia preferida de otros colegas.</p>
 
@@ -48,6 +65,7 @@
 
 <script >
 import DefaultLayout from '@/layout/DefaultLayout'
+import axios from 'axios'
 
 /* eslint-disable */
 export default{
@@ -60,119 +78,88 @@ export default{
 			contrasena:'',
 			username:'',
 			password:'',
-			urlBase:'http://7c2e187f.ngrok.io'
+			urlBase:'http://9aae0ed5.ngrok.io'
 		};
 	},
-	methods:{
-/*		
-		validar(){
-			console.log("memo");
+	methods:{	
 
-			axios.get('http://600a25ce.ngrok.io/v1/usuario/1',{
-
+		registrarUsuario(){
+			console.log('registrar')
+			axios.post(this.urlBase+'/v1/usuario',{
+				nickname:this.usuario,
+				correo:this.correo,
+				password:this.contrasena
 			})
 			.then(response =>{
-				console.log(response);
+				if(response.data != -1){
+					console.log(response.data);
+					this.setCookie('Autorizacion',response.data,1);
+				}else{
+					console.log("no registro")	
+					console.log(response.data)				
+				}
+
 			})
 		},
-		save(){
-			console.log("memosave");
-			axios.post('http://600a25ce.ngrok.io/v1/usuario',{
-
-				nickname:'pedro',
-				correo:'pedrolop90789.gmail.com',
-				password:'12345'
-
-			})
-			.then(response =>{
-				console.log(response);
-			})
-		},
-		actualizar(){
-			console.log("memoedit");
-			console.log(this.usuario)
-			axios.put('http://600a25ce.ngrok.io/v1/usuario/6',{
-
-				nickname:'benito camelas',
-				correo:'benito.gmail.com',
-				password:'memo1234'
-
-			})
-			.then(response =>{
-				console.log(response);
-			})
-		},
-*/		
-		 // METODOS QUE SI SIRVEN PARA EL MODELO USUARIO
-		 registrarUsuario(){
-		 	console.log('registrar')
-		 	axios.post(this.urlBase+'/v1/usuario',{
-
-		 		nickname:this.usuario,
-		 		correo:this.correo,
-		 		password:this.contrasena
-
-		 	})
-		 	.then(response =>{
-		 		console.log(response);
-		 	})
-		 },
 		login(){
-		 console.log('login')
-			 axios.post(this.urlBase+'/v1/usuario/login',{
-			 correo:this.username,
-			 password:this.password
+			console.log('login')
+			axios.post(this.urlBase+'/v1/usuario/login',{
+				correo:this.username,
+				password:this.password
 			})
-			.then(response =>{
-			 console.log(response);
-			 console.log(response.data)
-			 var idsesion = response.data;
-			 if(response.data > 0){
-			  console.log("entro");
-				this.$router.push(
-						{
-						name:'Inicio',
-						params:{id:idsesion}
-						}
-				)
-			 }else{
-			   console.log("no entro")
-				 this.$router.push('/')
-			 }
+			.then(response =>{		 		
+				console.log(response.data)		 		
+				if(response.data != -1){
+					console.log("entro");
+					this.setCookie('Autorizacion',response.data,1);			
+					this.$router.push(
+					{
+						name:'Inicio',		 			
+					}
+					)
+				}else{
+					console.log("no entro")
+					this.$router.push('/')
+				}
 			})
-		 },
-		 // ACA TERMINA USUARIO
 		},
-		components:{
-			DefaultLayout,
+		setCookie(nombre,valor,exdays){
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = "expires="+ d.toUTCString();
+			document.cookie = nombre + "=" + valor + ";" + expires + ";path=/";
+		}
 
-		},
-	}
-	</script>
+	},
+	components:{
+		DefaultLayout,
+	},
+}
+</script>
 
 
-	<style>
+<style>
 
-	.bg-nav2{
-		background: #f7f7f9!important;
-		box-shadow: 2px 2px 5px #999;
-	}
+.bg-nav2{
+	background: #f7f7f9!important;
+	box-shadow: 2px 2px 5px #999;
+}
 
-	.btn-outline-info2 {
-		color: #48dbfb;
-		background-color: transparent;
-		background-image: none;
-		border-color: #48dbfb;
-	}
+.btn-outline-info2 {
+	color: #ff7043;
+	background-color: transparent;
+	background-image: none;
+	border-color:#ff7043;
+}
 
-	.btn-outline-info2:hover {
-		color: #fff;
-		background-color: #48dbfb;
-		border-color: #48dbfb;
-	}
+.btn-outline-info2:hover {
+	color: #fff;
+	background-color: #ff7043;
+	border-color: #ff7043;
+}
 
-	.borde{
-		border: 2px #48dbfb solid;
-	}
+.borde{
+	border: 1px #ff7043 solid;
+}
 
-	</style>
+</style>
