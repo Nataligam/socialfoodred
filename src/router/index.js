@@ -34,7 +34,7 @@ export default new Router({
 		component: Receta,
 	},
 	{
-		path:'/PerfilAmigo',
+		path:'/PerfilAmigo/',
 		name:'PerfilAmigo',
 		component: PerfilAmigo,		
 	},

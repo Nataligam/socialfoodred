@@ -78,7 +78,7 @@ export default{
 			contrasena:'',
 			username:'',
 			password:'',
-			urlBase:'http://9aae0ed5.ngrok.io'
+			urlBase:'http://f5b62ead.ngrok.io'
 		};
 	},
 	methods:{	

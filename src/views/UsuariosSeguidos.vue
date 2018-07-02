@@ -38,7 +38,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://9aae0ed5.ngrok.io',
+			urlBase:'http://f5b62ead.ngrok.io',
 			UsuariosSeguidos:[{
 				id:'1',
 				nickname:'pedro',

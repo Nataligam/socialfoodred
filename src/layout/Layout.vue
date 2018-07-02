@@ -60,7 +60,7 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',
-			urlBase:'http://9aae0ed5.ngrok.io',
+			urlBase:'http://f5b62ead.ngrok.io',
 			hola:'hola que mas',
 			infoAmigo:[]
 		};
@@ -80,13 +80,14 @@ export default{
 			})
 		},
 		enviarNombre(){	
+			this.infoAmigo=null
 			console.log("buscaramigo");			 
 			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
 			})
 			.then(response =>{
 				this.infoAmigo=response.data				
 				this.$router.push({
-					name:'PerfilAmigo',					
+					name:'PerfilAmigo',		
 				}			
 				)
 			})									

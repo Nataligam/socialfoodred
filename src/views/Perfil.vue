@@ -12,7 +12,7 @@
 								<center>
 									<div class="row">
 										<div class="col">
-											<img v-bind:src="usuarioFoto" height="200px;">
+											<img v-bind:src="usuarioFoto" class="img-fluid">
 										</div>
 									</div>
 									<div class="row mt-5">
@@ -93,7 +93,7 @@ export default{
 			usuarioFoto:'',
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://9aae0ed5.ngrok.io'
+			urlBase:'http://f5b62ead.ngrok.io'
 
 		}
 	},

@@ -181,7 +181,7 @@ export default{
       descripcionpaso:'',
       recetaFoto:'',
       idReceta:'',
-      urlBase:'http://9aae0ed5.ngrok.io'
+      urlBase:'http://f5b62ead.ngrok.io'
 
     }
   },

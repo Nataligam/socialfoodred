@@ -23,7 +23,8 @@
 											</div>
 										</div>												
 										<hr>
-										<button type="button" class="btn btn-outline-info2 btn-sm">Publicaciones</button>						
+										<button type="button" class="btn btn-outline-info2 btn-sm">Publicaciones</button>	
+										<p>hola</p>					
 									</div>
 								</div>
 							</div>
@@ -44,8 +45,8 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',			
-			urlBase:'http://9aae0ed5.ngrok.io',	
-			info:this.infoAmigo	
+			urlBase:'http://f5b62ead.ngrok.io',	
+			infoAmigo:[]
 		}
 	},
 	components:{
@@ -63,17 +64,17 @@ export default{
 
 <style>
 .btn-outline-info2 {
-		color: #ff7043;
-		background-color: transparent;
-		background-image: none;
-		border-color:#ff7043;
-	}
+	color: #ff7043;
+	background-color: transparent;
+	background-image: none;
+	border-color:#ff7043;
+}
 
-	.btn-outline-info2:hover {
-		color: #fff;
-		background-color: #ff7043;
-		border-color: #ff7043;
-	}
+.btn-outline-info2:hover {
+	color: #fff;
+	background-color: #ff7043;
+	border-color: #ff7043;
+}
 
 .borde{
 	border: 1px #ff7043 solid;
