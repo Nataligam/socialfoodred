@@ -1,20 +1,20 @@
 <template>
 	<DefaultLayout>
-		<section slot="content" class="ContenidoUsuariosSeguidos">
+		<section slot="content" class="ContenidoUsuariosSeguidores">
 			<Layout>
 				<section slot="contentColumn1" >
-					<center><h4>Usuarios Seguidos</h4></center>
+					<center><h4>Usuarios Seguidores</h4></center>
 					<hr>
 					<div class="row">					
-						<div v-for="usuario in usuariosSeguidos" v-bind:key="usuario.nombre">
+						<div v-for="usuario in usuariosSeguidores" v-bind:key="usuario.nombre">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
 								<div class="card border-primary mb-3" style="max-width: 18rem;">
 									<div class="card-header">
-										<img  class="img-fluid rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
+										<img  class="img-fluid  rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
 									</div>
 									<div class="card-body">
 										<h6 class="card-title">{{usuario.nickname}}</h6>		
-										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>											
+										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>												
 									</div>
 									<div class="card-footer">
 										<div class="row">
@@ -48,39 +48,31 @@ import axios from 'axios'
 
 /* eslint-disable */
 export default{
-	name:'UsuariosSeguidos',
+	name:'UsuariosSeguidores',
 	data(){
 		return {
 			id:'',
 			urlBase:'http://f7a05d93.ngrok.io',
-			usuariosSeguidos:[],
+			usuariosSeguidores:[],
 			idAmigo:''
 
 		}
 	},mounted: function (){
-		this.ListarUsuariosSeguidos();
+		this.ListarUsuariosSeguidores();
 
 	},
-	methods:{
-		enviarIdAmigo(id){
-
-			this.idAmigo=id;
-			this.$router.push({
-				name:'PublicacionesAmigo',
-				params:{idAmigo:id}
-			})	
-		},	
-		ListarUsuariosSeguidos(){
+	methods:{	
+		ListarUsuariosSeguidores(){
 			var value= this.getCookie('Autorizacion');
 			var config = {
 				headers: {'Authorization': value}
 			};
 			console.log(value+ "TOKEN QUE SE ENVIA")
-			axios.get(this.urlBase+'/v1/usuario/seguidos', config,{        
+			axios.get(this.urlBase+'/v1/usuario/seguidores', config,{        
 			})
 			.then(response =>{
 				console.log(response.data)
-				this.usuariosSeguidos=response.data;
+				this.usuariosSeguidores=response.data;
 			})
 		},
 		getCookie(nombre) {

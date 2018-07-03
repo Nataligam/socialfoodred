@@ -12,10 +12,18 @@
 								<a class="nav-link" href="#"><span class="icon-home"></span></a>
 							</router-link>
 						</li>						
-						<li class="nav-item">
-							<router-link to="/UsuariosSeguidos">
-								<a class="nav-link" href="#"><span class="icon-people"></span></a>
-							</router-link>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="icon-people"></span>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<router-link to="/UsuariosSeguidos">		
+									<a class="dropdown-item" href="#"><span class="icon-user-follow"></span> Seguidos</a>
+								</router-link>	
+								<router-link to="/UsuariosSeguidores">					
+									<a class="dropdown-item" href="#"><span class="icon-user-following"></span> Seguidores</a>
+								</router-link>
+							</div>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#"><span class="icon-bell"></span></a>
@@ -27,8 +35,7 @@
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<router-link to="/Perfil">		
 									<a class="dropdown-item" href="#"><span class="icon-user"></span> Perfil</a>
-								</router-link>						
-								<a class="dropdown-item" href="#"><span class="icon-wrench"></span> Configuraciones</a>
+								</router-link>													
 								<a class="dropdown-item" href="#" v-on:click="logout"><span class="icon-power"></span> Salir</a>
 							</div>
 						</li>
@@ -36,10 +43,8 @@
 				</div>
 			</div>		 
 			<a class="navbar-brand"></a>
-			<form class="form-inline">				
-				<input class="form-control mr-sm-2" v-model="nombreBuscar" type="search" placeholder="Buscar" aria-label="Buscar">
-				
-				<button class="btn btn-outline-info2" @click="enviarNombre" type="submit"><span class="icon-magnifier"></span></button>
+			<form class="form-inline">											
+				<button class="btn btn-outline-info2" @click="Buscar" type="submit"><span class="icon-magnifier"></span> Buscar Amigos</button>
 				
 			</form>
 		</nav>
@@ -60,9 +65,8 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',
-			urlBase:'http://f5b62ead.ngrok.io',
-			hola:'hola que mas',
-			infoAmigo:[]
+			urlBase:'http://f7a05d93.ngrok.io'
+
 		};
 	},
 	components:{
@@ -75,23 +79,18 @@ export default{
 			.then(response =>{
 				console.log(response);
 				if(response.data == true){
+					document.cookie = "Autorizacion="
 					this.$router.push('/')
 				}
 			})
 		},
-		enviarNombre(){	
-			this.infoAmigo=null
-			console.log("buscaramigo");			 
-			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,{
-			})
-			.then(response =>{
-				this.infoAmigo=response.data				
-				this.$router.push({
-					name:'PerfilAmigo',		
-				}			
-				)
-			})									
+		Buscar(){	
+			this.$router.push({
+				name:'PerfilAmigo',				
+			})				
+
 		},
+
 	}
 }
 
