@@ -48,15 +48,15 @@
 						<form class="mt-4">
 							<div class="form-group">
 								<label>Usuario:</label>
-								<input type="text" class="form-control" placeholder="Example" v-model='usuario'>
+								<input type="text" class="form-control" placeholder="Example" v-model='usuario' required>
 							</div>
 							<div class="form-group">
 								<label>Correo:</label>
-								<input type="email" class="form-control" placeholder="name@example.com" v-model='correo'>
+								<input type="email" class="form-control" placeholder="name@example.com" v-model='correo' required>
 							</div>
 							<div class="form-group">
 								<label>Contraseña:</label>
-								<input type="password" class="form-control" placeholder="************" v-model='contrasena'>
+								<input type="password" class="form-control" placeholder="************" v-model='contrasena' required>
 							</div>
 							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
 						</form>
