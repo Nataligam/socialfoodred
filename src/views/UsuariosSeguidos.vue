@@ -23,10 +23,10 @@
 											</div>
 											<div class="col-6">
 												<div v-if="usuario.siguiendo==false">
-													<button class="btn btn-outline-info2 btn-sm"><span class="icon-user-follow"></span> Seguir</button>
+													<button @click="seguir(usuario.id)" class="btn btn-outline-info2 btn-sm"><span class="icon-user-follow"></span> Seguir</button>
 												</div>
 												<div v-if="usuario.siguiendo==true">
-													<button class="btn btn-outline-info2 btn-sm"><span class="icon-user-unfollow"></span> No seguir</button>
+													<button @click="noSeguir(usuario.id)" class="btn btn-outline-info2 btn-sm"><span class="icon-user-unfollow"></span> No seguir</button>
 												</div>											
 											</div>											
 										</div>
@@ -73,7 +73,40 @@ export default{
 				name:'PublicacionesAmigo',
 				params:{idAmigo:id}
 			})	
-		},	
+		},
+		seguir(id){
+			var value= this.getCookie('Autorizacion');
+			var config = {
+				headers: {'Authorization': value}
+			};
+			console.log(value+ "TOKEN QUE SE ENVIA")
+			axios.post(this.urlBase+'/v1/usuario/seguir',{
+				id_amigo:id
+			},{
+				headers: {'Authorization': value}
+			})
+			.then(response =>{
+				this.ListarUsuariosSeguidos()
+
+			})
+		},
+		noSeguir(id){
+			var value= this.getCookie('Autorizacion');
+			const headers = {
+				'Authorization': value
+			}
+			const data = {
+				id_amigo: id
+			}
+			axios.delete(this.urlBase+'/v1/usuario/seguir',{headers,data}
+				)
+			.then(response =>{
+				this.ListarUsuariosSeguidos();
+				console.log('dejo de seguir')
+
+			})
+
+		},
 		ListarUsuariosSeguidos(){
 			var value= this.getCookie('Autorizacion');
 			var config = {
