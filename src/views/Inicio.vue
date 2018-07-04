@@ -14,6 +14,7 @@
 										</div>
 										<div class=" col-lg-12 col-md-12 col-sm-12 col-xl-4">
 											<router-link to="/Receta">
+											
 												<button class="btn btn-outline-info2 btn-lg" type="submit">Publicar Ahora</button>
 											</router-link>
 										</div>
