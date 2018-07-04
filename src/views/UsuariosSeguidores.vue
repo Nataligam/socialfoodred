@@ -5,7 +5,11 @@
 				<section slot="contentColumn1" >
 					<center><h4>Usuarios Seguidores</h4></center>
 					<hr>
-					<div class="row">					
+					<div class="row">
+					<div class="alert alert-info alert-dismissible col-md-12 col-sm-12 col-xs-12 " v-if="usuariosSeguidores.length == 0">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<center><strong>No sigues a nadie por el momento</strong></center>
+					</div>
 						<div v-for="usuario in usuariosSeguidores" v-bind:key="usuario.nombre">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
 								<div class="card border-primary mb-3" style="max-width: 18rem;">
@@ -13,8 +17,8 @@
 										<img  class="img-fluid  rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
 									</div>
 									<div class="card-body">
-										<h6 class="card-title">{{usuario.nickname}}</h6>		
-										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>												
+										<h6 class="card-title">{{usuario.nickname}}</h6>
+										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>
 									</div>
 									<div class="card-footer">
 										<div class="row">
@@ -27,8 +31,8 @@
 												</div>
 												<div v-if="usuario.siguiendo==true">
 													<button @click="noSeguir(usuario.id)" class="btn btn-outline-info2 btn-sm"><span class="icon-user-unfollow"></span> No seguir</button>
-												</div>											
-											</div>											
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -67,8 +71,8 @@ export default{
 			this.$router.push({
 				name:'PublicacionesAmigo',
 				params:{idAmigo:id}
-			})	
-		},	
+			})
+		},
 		seguir(id){
 			var value= this.getCookie('Autorizacion');
 			var config = {
@@ -108,7 +112,7 @@ export default{
 				headers: {'Authorization': value}
 			};
 			console.log(value+ "TOKEN QUE SE ENVIA")
-			axios.get(this.urlBase+'/v1/usuario/seguidores', config,{        
+			axios.get(this.urlBase+'/v1/usuario/seguidores', config,{
 			})
 			.then(response =>{
 				console.log(response.data)
@@ -165,7 +169,7 @@ export default{
 
 .centro{
 	margin: auto;
-	
+
 }
 .slaider{
 	width: 100%;
@@ -178,7 +182,7 @@ export default{
 }
 
 .divpublicar{
-	
+
 	width: 70% !important;
 }
 

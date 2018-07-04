@@ -1,8 +1,8 @@
 <template>
 	<DefaultLayout>
-		<section slot="content" class="ContenidoPerfil">	
+		<section slot="content" class="ContenidoPerfil">
 			<Layout>
-				<section slot="contentColumn1">	
+				<section slot="contentColumn1">
 					<div class="row">
 						<div class="col-sm-12 col-md-12 col-xl-10 offset-md-3 offset-xl-3">
 							<div class="input-group mb-3 w-50">
@@ -11,9 +11,13 @@
 									<button class="btn btn-outline-info2" @click="BuscarAmigo" type="button">Buscar</button>
 								</div>
 							</div>
-						</div>													
+						</div>
 					</div>
-					<div class="row">					
+					<div class="row">
+					<div class="alert alert-info alert-dismissible col-md-12 col-sm-12 col-xs-12 " v-if="infoAmigo.length == 0">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<center><strong>No se encontraron resultados con ese nombre</strong></center>
+					</div>
 						<div v-for="usuario in infoAmigo" v-bind:key="usuario.nombre">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
 								<div class="card border-primary mb-3" style="max-width: 18rem;">
@@ -21,8 +25,8 @@
 										<img  class="img-fluid  rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
 									</div>
 									<div class="card-body">
-										<h6 class="card-title">{{usuario.nickname}}</h6>		
-										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>									
+										<h6 class="card-title">{{usuario.nickname}}</h6>
+										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>
 									</div>
 									<div class="card-footer">
 										<div class="row">
@@ -35,15 +39,15 @@
 												</div>
 												<div v-if="usuario.siguiendo==true">
 													<button @click="noSeguir(usuario.id)" class="btn btn-outline-info2 btn-sm"><span class="icon-user-unfollow"></span> No seguir</button>
-												</div>											
-											</div>											
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 				</section>
 			</Layout>
 		</section>
@@ -58,8 +62,8 @@ export default{
 	name:'PerfilAmigo',
 	data(){
 		return {
-			nombreBuscar:'',			
-			urlBase:'http://a8b88f32.ngrok.io',	
+			nombreBuscar:'',
+			urlBase:'http://a8b88f32.ngrok.io',
 			infoAmigo:[]
 		}
 	},
@@ -67,12 +71,12 @@ export default{
 		DefaultLayout,
 		Layout
 	},
-	mounted: function (){		
+	mounted: function (){
 		this.nombreBuscar=''
 	},
 	methods:{
-		BuscarAmigo(){				
-			console.log("buscaramigo");			 
+		BuscarAmigo(){
+			console.log("buscaramigo");
 			var value= this.getCookie('Autorizacion');
 			var config = {
 				headers: {'Authorization': value}
@@ -81,8 +85,8 @@ export default{
 			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,config,{
 			})
 			.then(response =>{
-				this.infoAmigo=response.data			
-			})									
+				this.infoAmigo=response.data
+			})
 		},
 		enviarIdAmigo(id){
 
@@ -90,7 +94,7 @@ export default{
 			this.$router.push({
 				name:'PublicacionesAmigo',
 				params:{idAmigo:id}
-			})	
+			})
 		},
 		seguir(id){
 			var value= this.getCookie('Autorizacion');
