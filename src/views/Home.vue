@@ -161,6 +161,7 @@ export default{
 	border-color: #ff7043;
 }
 
+
 .borde{
 	border: 1px #ff7043 solid;
 }
