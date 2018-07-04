@@ -76,7 +76,7 @@
 										<br>
 										<div class="alert alert-success alert-dismissible" v-if="exito == true">
 											<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-											<strong>Registro Exitoso</strong>
+											<strong>Perfil actualizado</strong>
 										</div>
 									</div>
 								</div>

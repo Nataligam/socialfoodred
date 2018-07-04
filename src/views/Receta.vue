@@ -122,7 +122,7 @@
       </div>
 			<div class="alert alert-success alert-dismissible" v-if="exito == true">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>Registro Exitoso</strong>
+				<strong>Receta registrada</strong>
 			</div>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2" data-toggle="modal" data-target="#exampleModal">
