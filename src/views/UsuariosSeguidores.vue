@@ -1,20 +1,12 @@
 <template>
 	<DefaultLayout>
-		<section slot="content" class="ContenidoPerfil">	
+		<section slot="content" class="ContenidoUsuariosSeguidores">
 			<Layout>
-				<section slot="contentColumn1">	
-					<div class="row">
-						<div class="col-sm-12 col-md-12 col-xl-10 offset-md-3 offset-xl-3">
-							<div class="input-group mb-3 w-50">
-								<input type="text" v-model="nombreBuscar" class="form-control" placeholder="Ingrese el nombre">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" @click="BuscarAmigo" type="button">Buscar</button>
-								</div>
-							</div>
-						</div>													
-					</div>
+				<section slot="contentColumn1" >
+					<center><h4>Usuarios Seguidores</h4></center>
+					<hr>
 					<div class="row">					
-						<div v-for="usuario in infoAmigo" v-bind:key="usuario.nombre">
+						<div v-for="usuario in usuariosSeguidores" v-bind:key="usuario.nombre">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
 								<div class="card border-primary mb-3" style="max-width: 18rem;">
 									<div class="card-header">
@@ -22,7 +14,7 @@
 									</div>
 									<div class="card-body">
 										<h6 class="card-title">{{usuario.nickname}}</h6>		
-										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>									
+										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>												
 									</div>
 									<div class="card-footer">
 										<div class="row">
@@ -43,46 +35,45 @@
 							</div>
 						</div>
 					</div>
-					
 				</section>
 			</Layout>
 		</section>
 	</DefaultLayout>
 </template>
+
 <script >
 import DefaultLayout from '@/layout/DefaultLayout'
 import Layout from '@/layout/Layout'
 import axios from 'axios'
 
+/* eslint-disable */
 export default{
-	name:'PerfilAmigo',
+	name:'UsuariosSeguidores',
 	data(){
 		return {
-			nombreBuscar:'',			
-			urlBase:'http://78de270a.ngrok.io',	
-			infoAmigo:[]
+			id:'',
+			urlBase:'http://78de270a.ngrok.io',
+			usuariosSeguidores:[],
+			idAmigo:''
+
 		}
+	},mounted: function (){
+		this.ListarUsuariosSeguidores();
+
 	},
-	components:{
-		DefaultLayout,
-		Layout
-	},
-	mounted: function (){		
-		this.nombreBuscar=''
-	},
-	methods:{
-		BuscarAmigo(){				
-			console.log("buscaramigo");			 
+	methods:{	
+		ListarUsuariosSeguidores(){
 			var value= this.getCookie('Autorizacion');
 			var config = {
 				headers: {'Authorization': value}
 			};
 			console.log(value+ "TOKEN QUE SE ENVIA")
-			axios.get(this.urlBase+'/v1/usuarios/' + this.nombreBuscar,config,{
+			axios.get(this.urlBase+'/v1/usuario/seguidores', config,{        
 			})
 			.then(response =>{
-				this.infoAmigo=response.data			
-			})									
+				console.log(response.data)
+				this.usuariosSeguidores=response.data;
+			})
 		},
 		getCookie(nombre) {
 			var name = nombre + "=";
@@ -100,12 +91,17 @@ export default{
 			return "";
 		}
 
+	},
+	components:{
+		DefaultLayout,
+		Layout
 
-	}
+	},
 }
 </script>
 
 <style>
+
 .btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;
@@ -118,14 +114,29 @@ export default{
 	background-color: #ff7043;
 	border-color: #ff7043;
 }
+.recervada{
+	color: blue;
+}
+
+.centro{
+	margin: auto;
+	
+}
+.slaider{
+	width: 100%;
+	max-height: 400px;
+}
+
 
 .borde{
 	border: 1px #ff7043 solid;
 }
 
-.dimensiones{
-	max-width: 300px;
-	min-width: 270px;
+.divpublicar{
+	
+	width: 70% !important;
 }
+
+
 
 </style>

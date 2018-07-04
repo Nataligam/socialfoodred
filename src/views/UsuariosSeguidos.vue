@@ -3,21 +3,35 @@
 		<section slot="content" class="ContenidoUsuariosSeguidos">
 			<Layout>
 				<section slot="contentColumn1" >
-					<div class="row">
-
-						<div v-for="usuario in UsuariosSeguidos" v-bind:key="usuario.nombre">
+					<center><h4>Usuarios Seguidos</h4></center>
+					<hr>
+					<div class="row">					
+						<div v-for="usuario in usuariosSeguidos" v-bind:key="usuario.nombre">
 							<div class="col-md-12 col-sm-12 col-xs-12  p-4 m-3">
-							<div class="card border-primary mb-3" style="max-width: 18rem;">
-								
-							 <div class="card-header">
-								 <img  class="img-fluid  rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
-							 </div>
-							<div class="card-body">
-								<h5 class="card-title">{{usuario.nickname}}</h5>
-								<p class="card-text"></p>
-								<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-sm" type="submit">ver publicaciones</button>								
-							</div>
-							</div>
+								<div class="card border-primary mb-3" style="max-width: 18rem;">
+									<div class="card-header">
+										<img  class="img-fluid rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
+									</div>
+									<div class="card-body">
+										<h6 class="card-title">{{usuario.nickname}}</h6>		
+										<p class="card-text"><small>Correo: {{usuario.correo}}</small></p>											
+									</div>
+									<div class="card-footer">
+										<div class="row">
+											<div class="col-6">
+												<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-sm" type="submit"><span class="icon-grid"></span> Ver</button>
+											</div>
+											<div class="col-6">
+												<div v-if="usuario.siguiendo==false">
+													<button class="btn btn-outline-info2 btn-sm"><span class="icon-user-follow"></span> Seguir</button>
+												</div>
+												<div v-if="usuario.siguiendo==true">
+													<button class="btn btn-outline-info2 btn-sm"><span class="icon-user-unfollow"></span> No seguir</button>
+												</div>											
+											</div>											
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -46,36 +60,34 @@ export default{
 			pasos:[],
 			idAmigo:''
 
-}
-},mounted: function (){
-	this.ListarPublicaciones();
-},
-methods:{
-	enviarIdAmigo(id){
-
-		this.idAmigo=id;
-		this.$router.push(
-		{
-			name:'PublicacionesAmigo',
-			params:{idAmigo:id}
 		}
-		)
-		
-	},
-	
-	ListarPublicaciones(){
+	},mounted: function (){
+		this.ListarUsuariosSeguidos();
 
-		var value= this.getCookie('Autorizacion');
+	},
+	methods:{
+		enviarIdAmigo(id){
+
+			this.idAmigo=id;
+			this.$router.push({
+				name:'PublicacionesAmigo',
+				params:{idAmigo:id}
+			})	
+		},	
+		ListarUsuariosSeguidos(){
+			var value= this.getCookie('Autorizacion');
 			var config = {
 				headers: {'Authorization': value}
 			};
-		axios.get(this.urlBase+'/v1/usuario/seguidos',config,{        
-		})
-		.then(response =>{
-			this.UsuariosSeguidos=response.data;
-		})
-	},
-	getCookie(nombre) {
+			console.log(value+ "TOKEN QUE SE ENVIA")
+			axios.get(this.urlBase+'/v1/usuario/seguidos', config,{        
+			})
+			.then(response =>{
+				console.log(response.data)
+				this.usuariosSeguidos=response.data;
+			})
+		},
+		getCookie(nombre) {
 			var name = nombre + "=";
 			var decodedCookie = decodeURIComponent(document.cookie);
 			var ca = decodedCookie.split(';');
@@ -90,30 +102,30 @@ methods:{
 			}
 			return "";
 		}
-	
-},
-components:{
-	DefaultLayout,
-	Layout
 
-},
+	},
+	components:{
+		DefaultLayout,
+		Layout
+
+	},
 }
 </script>
 
 <style>
 
 ..btn-outline-info2 {
-		color: #ff7043;
-		background-color: transparent;
-		background-image: none;
-		border-color:#ff7043;
-	}
+	color: #ff7043;
+	background-color: transparent;
+	background-image: none;
+	border-color:#ff7043;
+}
 
-	.btn-outline-info2:hover {
-		color: #fff;
-		background-color: #ff7043;
-		border-color: #ff7043;
-	}
+.btn-outline-info2:hover {
+	color: #fff;
+	background-color: #ff7043;
+	border-color: #ff7043;
+}
 .recervada{
 	color: blue;
 }

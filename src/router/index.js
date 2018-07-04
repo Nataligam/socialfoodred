@@ -7,6 +7,7 @@ import Perfil from '@/views/Perfil'
 import Receta from '@/views/Receta'
 import PerfilAmigo from '@/views/PerfilAmigo'
 import UsuariosSeguidos from '@/views/UsuariosSeguidos'
+import UsuariosSeguidores from '@/views/UsuariosSeguidores'
 import PublicacionesAmigo from '@/views/PublicacionesAmigo'
 
 Vue.use(Router)
@@ -36,7 +37,8 @@ export default new Router({
 	{
 		path:'/PerfilAmigo/',
 		name:'PerfilAmigo',
-		component: PerfilAmigo,		
+		component: PerfilAmigo,	
+		props: true
 	},
 	{
 		path:'/UsuariosSeguidos',
@@ -44,9 +46,15 @@ export default new Router({
 		component: UsuariosSeguidos,
 	},
 	{
+		path:'/UsuariosSeguidores',
+		name:'UsuariosSeguidores',
+		component: UsuariosSeguidores,
+	},
+	{
 		path:'/PublicacionesAmigo/:idAmigo',
 		name:'PublicacionesAmigo',
 		component: PublicacionesAmigo,
-	}
+	},
+
 	]
 })
