@@ -10,7 +10,7 @@
 							<div class="card border-primary mb-3" style="max-width: 18rem;">
 								
 							 <div class="card-header">
-								 <img  class="img-fluid  rounded mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS50Qe1IT1Df3dhW1EJbAyhTH-BuvICovv8y01k_zGDRU180_ya" width="100px;">
+								 <img  class="img-fluid  rounded mx-auto d-block" v-bind:src="usuario.imagen_usuario" width="100px;">
 							 </div>
 							<div class="card-body">
 								<h5 class="card-title">{{usuario.nickname}}</h5>
@@ -38,62 +38,13 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://f5b62ead.ngrok.io',
-			UsuariosSeguidos:[{
-				id:'1',
-				nickname:'pedro',
-				correo:'pedrolop90@hotmail.com',
-				password:'12345',
-				imagen_usuario:'url de la imagen',
-				privacidad:'true'
-			},
-			{ id:'2',
-			nickname:'Gabriel',
-			correo:'pedrolop90@hotmail.com',
-			password:'12345',
-			imagen_usuario:'url de la imagen',
-			privacidad:'true'
-		},
-		{ id:'3',
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-	},
-	{ id:'4',
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-},
-{	id:'5',
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-},{ id:'6',
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-}
-,{	id:'7',
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-}
-],
-publicaciones:[],
-publicaciones2:[],
-ingrdiente:[],
-pasos:[],
-idAmigo:''
+			urlBase:'http://81c79b11.ngrok.io',
+			UsuariosSeguidos:[],
+			publicaciones:[],
+			publicaciones2:[],
+			ingrdiente:[],
+			pasos:[],
+			idAmigo:''
 
 }
 },mounted: function (){
@@ -114,12 +65,31 @@ methods:{
 	
 	ListarPublicaciones(){
 
-		axios.get(this.urlBase+'/v1/usuario/seguidos',{        
+		var value= this.getCookie('Autorizacion');
+			var config = {
+				headers: {'Authorization': value}
+			};
+		axios.get(this.urlBase+'/v1/usuario/seguidos',config,{        
 		})
 		.then(response =>{
-			this.publicaciones=response.data;
+			this.UsuariosSeguidos=response.data;
 		})
 	},
+	getCookie(nombre) {
+			var name = nombre + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
 	
 },
 components:{

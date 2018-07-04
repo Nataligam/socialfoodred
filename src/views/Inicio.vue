@@ -5,12 +5,12 @@
 			<Layout>
 				<section slot="contentColumn1" >
 					<div class="row">
-						<div class="col-md-6 offset-md-3">
-							<div class="borde p-3 ">
+						<div class="col-md-8 offset-md-2">
+							<div class="borde p-3 m-2">
 								<form class="form-inline">
 									<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xl-8 ">
-											<h4 >¡Crea y comparte tu receta!  {{hola}}</h4>
+											<h4 >¡Crea y comparte tu receta!  </h4>
 										</div>
 										<div class=" col-lg-12 col-md-12 col-sm-12 col-xl-4">
 											<router-link to="/Receta">
@@ -44,11 +44,8 @@
 												<!-- The slideshow -->
 												<div class="carousel-inner col-md-12 ">
 													<div class="carousel-item active">
-														<img  class="img-fluid slaider rounded mx-auto d-block" src="http://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2016/07/istock89179523small.jpg" alt="Los Angeles">
-														<div class="carousel-caption d-none d-md-block">
-
-															<p>Aqui pos iria la descipccion de la la receta</p>
-														</div>
+														<img  class="img-fluid slaider rounded mx-auto d-block" v-bind:src="publicacion.imagen_receta" alt="Los Angeles">
+														
 													</div>
 													<div class="carousel-item centro">
 														<div class="col-md-12">
@@ -57,8 +54,8 @@
 																<span v-for="ingrediente in publicacion.receta.ingredientes" v-bind:key="ingrediente.nombre">
 																	<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
 																	<span v-for="paso in  publicacion.receta.pasos" v-bind:key="paso.nombre">
-																		<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in pasos.ingredientes" v-bind:key="parametro">
-																			<span v-if="Object.keys(parametros).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
+																		<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" v-bind:key="parametro">
+																			<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
 																			<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> {{pasos.ingredientes}}
 																			//  {{paso.descripcion}} <br>
 																		}<br></span>
@@ -67,7 +64,7 @@
 															</div>
 														</div>
 													</div>
-
+							
 													<!-- Left and right controls -->
 													<a class="carousel-control-prev" :href="`#demo${index}`" data-slide="prev">
 														<span class="carousel-control-prev-icon"></span>
@@ -80,18 +77,95 @@
 											</div>
 
 											<div class="col-md-2 col-sm-2">
-												<br><button type="button" class="btn btn-outline-primary mb-5"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+												<br><button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-primary mb-5"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+												
 											</div>
 											<div class="col-md-8 col-sm-7 col-xs-12">
-												<br>
-												<input   type="text" class="form-control mb-5"> <button type="button" class="btn btn-outline-primary mb-5"><span class="icon-arrow-right"></span></button>
+											
+											<br><button class="btn btn-outline-info2 mb-5" type="button" data-toggle="collapse" :data-target="`#demo2${index}`" aria-expanded="false" aria-controls="collapseExample">
+													Comentar
+											</button>
 											</div>
+												
+													<div class="col-md-12">
+													<div class="collapse" v-bind:id="['demo2'+index]">
+														<div v-for="comentario in publicacion.comentarios" v-bind:key="comentario" class="card card-body">
+															{{comentario.nickname}}:{{comentario.comentario}}
+														</div>
+														
+														<br>
+														<div class="row">
+															<div class="col-md-10">
+																<input  v-model="comentario" type="text" class="form-control mb-5">
+																</div>
+																<div class="col-md-2">
+																<button @click="Comentar(publicacion.id,comentario)"  type="button" class="btn btn-outline-primary mb-5"><span class="icon-arrow-right"></span></button>
+															</div>
+															</div>
+													
+												</div>
+												</div>
+												<br>
+												
+											
 										</div>
 
 
 									</form>
 								</div>
 							</div>
+						</div>
+						<div class="card border-primary mb-3 w-75" >
+							<div class="card-header">
+								<div class="row">
+									<div class="col">
+									
+										<img  class="img-fluid  rounded mx-auto d-block" src="https://images-gmi-pmc.edge-generalmills.com/3bd48a86-ffd0-475a-a8bc-091ddd0fae3f.jpg" width="400px;">
+									</div>
+									<div class="col">
+										<img  class="img-fluid  rounded mx-auto d-block" src="https://www.analiticaweb.es/wp-content/uploads/2010/07/ga001ok1.png" width="400px;">
+									</div>
+								</div>																		
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col">
+										<center>
+											<button class="btn btn-outline-info2"><span class="icon-like"></span></button>
+											<button class="btn btn-outline-info2"><span class="icon-dislike"></span></button>
+										</center>	
+									</div>
+									<div class="col">
+										<center>
+											<button class="btn btn-outline-info2 mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+												Comentarios
+											</button>
+										</center>
+									</div>														
+								</div>
+								
+									<div class="col-md-12">
+									<div class="collapse" id="collapseExample">
+										<div class="card card-body">
+											Deliciosa receta.
+										</div>
+										<div class="card card-body">
+											Deliciosa receta.
+										</div>
+										<div class="card card-body">
+											Deliciosa receta.
+										</div>
+										<div class="card card-body">
+											Deliciosa receta.
+										</div>
+										<div class="card card-body">
+											Deliciosa receta.
+										</div>
+									</div>
+								
+								</div>
+							</div>
+																
 						</div>
 
 					</section>
@@ -114,34 +188,92 @@
 				publicaciones:[],
 				publicaciones2:[],
 				ingrdiente:[],
+				comentario:'',
+				parametros:[],
 				pasos:[],
-				urlBase:'http://f5b62ead.ngrok.io'
+				
+				urlBase:'http://81c79b11.ngrok.io'
 
 			}
+		},
+		mounted: function (){
+		this.ListarPublicaciones();		
 		},
 		methods:{
 			toggleMostrar(pos){
 				pos=!pos;
 			},
 			ListarPublicaciones(){
-
-				axios.get(this.urlBase+'/v1/publicacion/publicas',{        
+				
+			var value= this.getCookie('Autorizacion');
+			var config = {
+				headers: {'Authorization': value}
+			}; 
+				axios.get(this.urlBase+'/v1/publicacion/publicas',config,{        
 				})
 				.then(response =>{
-					this.publicaciones=response.data;											
+					this.publicaciones=response.data;	
+					console.log(response);									
 				})
 			},
+			Boton(){
+				console.log(this.parametros);
+			},
+			MeGusta(publicacion,like){
 
-			ListarPublicacionesseguidores(){
+				if (like===false){
+				var value= this.getCookie('Autorizacion');
 
-				axios.get(this.urlBase+'/v1/publicacion/publicas',{        
+				axios.post(this.urlBase+'/v1/like',{
+					publicacion_id:publicacion
+				},{
+					headers: {'Authorization': value}
 				})
 				.then(response =>{
-					this.publicaciones=response.data;
-					alert("hola que mas ");
+					console.log(response);
+					this.ListarPublicaciones();
+				
+    		})
+				}else {
+					console.log('no di like');
+				}
 
+		
+			},
+			Comentar(id,comentario){
+
+				var value= this.getCookie('Autorizacion');
+				axios.post(this.urlBase+'/v1/comentario',{
+					
+					comentario:comentario,
+					publicacion_id:id
+
+				},{
+					headers: {'Authorization': value}
 				})
+				.then(response =>{
+					console.log(response);
+					this.ListarPublicaciones();
+				
+    		})
+			
+			this.comentario='';
+			},
+			getCookie(nombre) {
+			var name = nombre + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
 			}
+			return "";
+		}
 
 		},
 		components:{
@@ -175,6 +307,9 @@
 	.divpublicar{
 		width: 70% !important;
 	}
+	.recervada{
+  color: blue;
+}
 
 
 

@@ -39,8 +39,8 @@
 													<span v-for="ingrediente in publicacion.receta.ingredientes" v-bind:key="ingrediente.nombre">
 													<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
 													<span v-for="paso in  publicacion.receta.pasos" v-bind:key="paso.nombre">
-													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in pasos.ingredientes" v-bind:key="parametro">
-													<span v-if="Object.keys(parametros).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
+													<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" v-bind:key="parametro">
+													<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
 													<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> {{pasos.ingredientes}}
 														//  {{paso.descripcion}} <br>
 													}<br></span>
@@ -93,80 +93,38 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://f5b62ead.ngrok.io',
-			UsuariosSeguidos:[{
-				id:'1',
-				nickname:'pedro',
-				correo:'pedrolop90@hotmail.com',
-				password:'12345',
-				imagen_usuario:'url de la imagen',
-				privacidad:'true'
-			},
-			{ id:'2',
-			nickname:'Gabriel',
-			correo:'pedrolop90@hotmail.com',
-			password:'12345',
-			imagen_usuario:'url de la imagen',
-			privacidad:'true'
-		},
-		{ id:'3',
-		nickname:'Juan',
-		correo:'pedrolop90@hotmail.com',
-		password:'12345',
-		imagen_usuario:'url de la imagen',
-		privacidad:'true'
-	},
-	{ id:'4',
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-},
-{
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-},{
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-}
-,{
-	nickname:'Juan',
-	correo:'pedrolop90@hotmail.com',
-	password:'12345',
-	imagen_usuario:'url de la imagen',
-	privacidad:'true'
-}
-],
-publicaciones:[],
-publicaciones2:[],
-ingrdiente:[],
-pasos:[],
-idAmigo:'1'
+			urlBase:'http://81c79b11.ngrok.io',
+			UsuariosSeguidos:[],
+			publicaciones:[],
+			publicaciones2:[],
+			ingrdiente:[],
+			pasos:[],
+			idAmigo:'1'
 
 }
 },mounted: function (){
     this.leerIdRuta();
-	this.ListarPublicaciones();
+	this.ListarPublicacionesSeguidores();
 },
 methods:{
 	leerIdRuta(){
-	 console.log("inicio");
+	 console.log(this.$route.params.id);
 	  this.id = this.$route.params.id;
 		console.log(this.id);
 	 },
 	toggleMostrar(pos){
 		pos=!pos;
 	},
-	ListarPublicacionesseguidores(){
+	ListarPublicacionesSeguidores(){
+		
+		var value= this.getCookie('Autorizacion');
+		var config = {
+			headers: {'Authorization': value}
+		}; 
 
-		axios.get(this.urlBase+'/v1/publicacion/'+this.id,{        
+		console.log(this.id);
+
+		axios.get(this.urlBase+'/v1/publicacion/'+this.id,config,{        
 		})
 		.then(response =>{
 			this.publicaciones=response.data;
@@ -175,7 +133,22 @@ methods:{
 
 
 		})
-	}
+	},
+	getCookie(nombre) {
+			var name = nombre + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
 },
 components:{
 	DefaultLayout,
