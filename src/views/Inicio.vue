@@ -143,6 +143,7 @@
 			},
 			
 			MeGusta(publicacion,like,idLike){
+				console.log(publicacion);
 				var value= this.getCookie('Autorizacion');
 				if (like===false){
 				

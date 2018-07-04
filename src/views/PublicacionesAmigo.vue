@@ -5,7 +5,7 @@
 				<section slot="contentColumn1" >
 					
 
-						<div v-for="(publicacion,index) in publicaciones" v-bind:key="publicacion.id" class="row">
+					<div v-for="(publicacion,index) in publicaciones"  class="row">
 						
 						<div class="col-md-8 offset-md-2">
 							<div class="p-3 m-2 ">
@@ -20,10 +20,10 @@
 												
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
-													<span v-for="ingrediente in publicacion.receta.ingredientes" v-bind:key="ingrediente.nombre">
+													<span v-for="ingrediente in publicacion.receta.ingredientes" >
 														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
-														<span v-for="paso in  publicacion.receta.pasos" v-bind:key="paso.nombre">
-															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" v-bind:key="parametro">
+														<span v-for="paso in  publicacion.receta.pasos" >
+															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" >
 																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
 																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> 
 																//  {{paso.descripcion}} <br>
@@ -53,7 +53,7 @@
 											
 											<div class="col-md-12">
 												<div class="collapse" v-bind:id="['demo2'+index]">
-													<div v-for="comentario in publicacion.comentarios" v-bind:key="comentario" class="card card-body">
+													<div v-for="comentario in publicacion.comentarios" class="card card-body">
 														{{comentario.nickname}}:{{comentario.comentario}}
 													</div>
 													
@@ -75,7 +75,6 @@
 								
 							</div>
 						</div>
-						
 					</section>
 				</Layout>
 			</section>
@@ -124,31 +123,46 @@
 				})
 				.then(response =>{
 					this.publicaciones=response.data;
-					alert("hola que mas ");
+					a
 
 
 
 				})
 			},
-			MeGusta(publicacion,like){
-
+			MeGusta(publicacion,like,idLike){
+				console.log(publicacion);
+				var value= this.getCookie('Autorizacion');
 				if (like===false){
-					var value= this.getCookie('Autorizacion');
-
-					axios.post(this.urlBase+'/v1/like',{
-						publicacion_id:publicacion
-					},{
+				
+				axios.post(this.urlBase+'/v1/like',{
+					publicacion_id:publicacion
+				},{
+					headers: {'Authorization': value}
+				})
+				.then(response =>{
+					console.log(response);
+					this.ListarPublicacionesSeguidores();
+				
+    		})
+				}else {
+					console.log(publicacion);
+					axios.delete(this.urlBase+'/v1/like/'+publicacion,{
 						headers: {'Authorization': value}
 					})
 					.then(response =>{
 						console.log(response);
-						this.ListarPublicaciones();
+					
+					if (response.data==true){
+						console.log("Elimino");
+						this.ListarPublicacionesSeguidores();
 						
+					}else {
+						console.log(response);
+					}
+					
 					})
-				}else {
-					console.log('no di like');
+					
 				}
-
 				
 			},
 			Comentar(id,comentario){
@@ -164,7 +178,7 @@
 				})
 				.then(response =>{
 					console.log(response);
-					this.ListarPublicaciones();
+					this.ListarPublicacionesSeguidores();
 					
 				})
 				
