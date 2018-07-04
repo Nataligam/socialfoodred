@@ -52,7 +52,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://78de270a.ngrok.io',
+			urlBase:'http://6ff53e3f.ngrok.io',
 			usuariosSeguidores:[],
 			idAmigo:''
 
@@ -61,7 +61,14 @@ export default{
 		this.ListarUsuariosSeguidores();
 
 	},
-	methods:{	
+	methods:{
+		enviarIdAmigo(id){
+			this.idAmigo=id;
+			this.$router.push({
+				name:'PublicacionesAmigo',
+				params:{idAmigo:id}
+			})	
+		},	
 		ListarUsuariosSeguidores(){
 			var value= this.getCookie('Autorizacion');
 			var config = {

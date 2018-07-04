@@ -93,7 +93,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://81c79b11.ngrok.io',
+			urlBase:'http://6ff53e3f.ngrok.io',
 			UsuariosSeguidos:[],
 			publicaciones:[],
 			publicaciones2:[],
@@ -108,8 +108,8 @@ export default{
 },
 methods:{
 	leerIdRuta(){
-	 console.log(this.$route.params.id);
-	  this.id = this.$route.params.id;
+	 console.log(this.$route.params.idAmigo);
+	  this.id = this.$route.params.idAmigo;
 		console.log(this.id);
 	 },
 	toggleMostrar(pos){

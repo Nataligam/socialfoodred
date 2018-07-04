@@ -52,8 +52,8 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://81c79b11.ngrok.io',
-			UsuariosSeguidos:[],
+			urlBase:'http://6ff53e3f.ngrok.io',
+			usuariosSeguidos:[],
 			publicaciones:[],
 			publicaciones2:[],
 			ingrdiente:[],
@@ -114,7 +114,7 @@ export default{
 
 <style>
 
-..btn-outline-info2 {
+.btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;
 	background-image: none;
