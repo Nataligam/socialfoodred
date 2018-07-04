@@ -78,7 +78,7 @@ export default{
 			contrasena:'',
 			username:'',
 			password:'',
-			urlBase:'http://6ff53e3f.ngrok.io'
+			urlBase:'http://a8b88f32.ngrok.io'
 		};
 	},
 	methods:{	
@@ -144,14 +144,17 @@ export default{
 	background: #f7f7f9!important;
 	box-shadow: 2px 2px 5px #999;
 }
-
+.btn {
+	background: transparent;
+	border-color: #ff7043;
+	color: #ff7043;
+}
 .btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;
 	background-image: none;
 	border-color:#ff7043;
 }
-
 .btn-outline-info2:hover {
 	color: #fff;
 	background-color: #ff7043;

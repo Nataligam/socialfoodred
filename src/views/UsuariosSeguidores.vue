@@ -52,7 +52,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://6ff53e3f.ngrok.io',
+			urlBase:'http://a8b88f32.ngrok.io',
 			usuariosSeguidores:[],
 			idAmigo:''
 
@@ -109,6 +109,11 @@ export default{
 
 <style>
 
+.btn {
+	background: transparent;
+	border-color: #ff7043;
+	color: #ff7043;
+}
 .btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;

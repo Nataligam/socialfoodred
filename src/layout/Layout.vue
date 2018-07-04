@@ -65,7 +65,7 @@ export default{
 	data(){
 		return {
 			nombreBuscar:'',
-			urlBase:'http://f7a05d93.ngrok.io'
+			urlBase:'http://a8b88f32.ngrok.io'
 
 		};
 	},
