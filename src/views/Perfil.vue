@@ -94,7 +94,7 @@ export default{
 			usuarioFoto:'',
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://6ff53e3f.ngrok.io'
+			urlBase:'http://a8b88f32.ngrok.io'
 
 		}
 	},
