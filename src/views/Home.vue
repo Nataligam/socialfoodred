@@ -15,7 +15,7 @@
 			<div class="container mt-5 mb-5">
 				<div class="row">
 					<div class="col-md-7 col-sm-12  p-4">
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">							
+						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
 									<img class="d-block w-100" src="../assets/socialfoodnew.jpg" alt="First slide">
@@ -32,7 +32,7 @@
 								<span class="carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="sr-only">Next</span>
 							</a>
-						</div>						
+						</div>
 						<hr>
 						<p class="mt-5 text-justify">Social food es una red social diseñada para aquellos programadores amantes de la cocina que deseen abrir un espacio dentro de su quehacer diario para compartir sus mejores recetas, con un toque de codigo y conocer mas sobre la gastronomia preferida de otros colegas.</p>
 
@@ -54,8 +54,15 @@
 							</div>
 							<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="registrarUsuario">Registrarse</button>
 						</form>
+						<br>
+						<div class="alert alert-success alert-dismissible" v-if="exito == true">
+						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						  <strong>Registro Exitoso</strong>
+						</div>
+					
 
 					</div>
+
 				</div>
 			</div>
 		</section>
@@ -78,10 +85,11 @@ export default{
 			contrasena:'',
 			username:'',
 			password:'',
+			exito:'false',
 			urlBase:'http://a8b88f32.ngrok.io'
 		};
 	},
-	methods:{	
+	methods:{
 
 		registrarUsuario(){
 			console.log('registrar')
@@ -94,9 +102,11 @@ export default{
 				if(response.data != -1){
 					console.log(response.data);
 					this.setCookie('Autorizacion',response.data,1);
+					this.exito = true;
 				}else{
-					console.log("no registro")	
-					console.log(response.data)				
+
+					console.log("no registro")
+					console.log(response.data)
 				}
 
 			})
@@ -107,14 +117,14 @@ export default{
 				correo:this.username,
 				password:this.password
 			})
-			.then(response =>{		 		
-				console.log(response.data)		 		
+			.then(response =>{
+				console.log(response.data)
 				if(response.data != -1){
 					console.log("entro");
-					this.setCookie('Autorizacion',response.data,1);			
+					this.setCookie('Autorizacion',response.data,1);
 					this.$router.push(
 					{
-						name:'Inicio',		 			
+						name:'Inicio',
 					}
 					)
 				}else{
