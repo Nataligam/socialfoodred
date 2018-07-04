@@ -8,7 +8,7 @@
 							<div class="input-group mb-3 w-50">
 								<input type="text" v-model="nombreBuscar" class="form-control" placeholder="Ingrese el nombre">
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" @click="BuscarAmigo" type="button">Buscar</button>
+									<button class="btn btn-outline-info2" @click="BuscarAmigo" type="button">Buscar</button>
 								</div>
 							</div>
 						</div>													
