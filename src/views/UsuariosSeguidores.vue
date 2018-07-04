@@ -18,10 +18,10 @@
 									</div>
 									<div class="card-footer">
 										<div class="row">
-											<div class="col-7">
-												<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-sm" type="submit"><span class="icon-grid"></span> Publicaciones</button>
+											<div class="col-6">
+												<button @click="enviarIdAmigo(usuario.id)" class="btn btn-outline-info2 btn-sm" type="submit"><span class="icon-grid"></span> Ver</button>
 											</div>
-											<div class="col-4">
+											<div class="col-6">
 												<div v-if="usuario.siguiendo==false">
 													<button class="btn btn-outline-info2 btn-sm"><span class="icon-user-follow"></span> Seguir</button>
 												</div>
@@ -52,7 +52,7 @@ export default{
 	data(){
 		return {
 			id:'',
-			urlBase:'http://f7a05d93.ngrok.io',
+			urlBase:'http://78de270a.ngrok.io',
 			usuariosSeguidores:[],
 			idAmigo:''
 

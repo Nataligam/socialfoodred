@@ -83,6 +83,7 @@ import axios from 'axios'
 
 
 export default{
+
 	name:'Perfil',
 	data(){
 		return {
@@ -93,7 +94,7 @@ export default{
 			usuarioFoto:'',
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://f7a05d93.ngrok.io'
+			urlBase:'http://78de270a.ngrok.io'
 
 		}
 	},
@@ -104,22 +105,32 @@ export default{
 	mounted: function (){
 		this.CargarPerfil();		
 	},
+	notifications: {
+      Error: {
+        message: 'Error al cargar información',
+        type: 'error'
+      }
+    },
 	methods:{
 		CargarPerfil(){
+			var self = this;
 			var value= this.getCookie('Autorizacion');
 			var config = {
 				headers: {'Authorization': value}
 			};
-			console.log(value+ "TOKEN QUE SE ENVIA")
 			axios.get(this.urlBase+'/v1/usuario',config,{
 			})
-			.then(response =>{
-				console.log(response.data)
+			.then(response =>{	
+						
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
 				this.privacidadUsuario=response.data.privacidad;
 				this.usuarioFoto= response.data.imagen_usuario;				
+			})
+			.catch(function (error) {				
+				
+				
 			})
 		},
 		cargarImagen(){

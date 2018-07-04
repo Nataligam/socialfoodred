@@ -115,7 +115,7 @@
 				publicaciones2:[],
 				ingrdiente:[],
 				pasos:[],
-				urlBase:'http://f7a05d93.ngrok.io'
+				urlBase:'http://78de270a.ngrok.io'
 
 			}
 		},
