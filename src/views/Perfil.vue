@@ -70,9 +70,13 @@
 							</div>
 						</div>
 						<div v-for="(publicacion,index) in publicaciones"  class="row">
+
+								
 						
 						<div class="col-md-10 offset-md-1">
+							
 							<div class="p-3 m-2 ">
+								
 								<div class="card border-primary mb-3 " >
 									<div class="card-header">
 										<div class="row">
@@ -99,17 +103,26 @@
 										</div>
 										<div class="card-body">
 											<div class="row">
-												<div class="col-xl-6 col-md-6 col-6">
-													<center>
-														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
-													</center>	
+												
+												
+												
+												<div class="col-md-2 col-sm-12">
+													<button @click="BorrarReceta(publicacion.receta.id)" type="button" class="btn btn-outline-info2">Eliminar</button>
 												</div>
-												<div class="col-xl-6 col-md-6 col-6">
-													<center>
+								
+								
+												
+												<div class="col-md-2 ol-sm-12">
+													
 														<button class="btn btn-outline-info2" type="button" data-toggle="collapse" :data-target="`#demo2${index}`" aria-expanded="false" aria-controls="collapseExample">
 															Comentar
 														</button>
-													</center>
+													
+												</div>
+												<div class="col-md-2 ol-sm-12">
+													
+														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+													
 												</div>														
 											</div>
 											
@@ -315,6 +328,36 @@ export default{
 				
 				this.comentario='';
 			},
+			BorrarReceta(id){
+
+					console.log(id);
+   
+				axios.delete(this.urlBase+'/v1/publicacion/'+id)
+				.then(response =>{
+					console.log(response);
+					
+					if (response.data==true){
+					console.log("Elimino");
+					this.ListarPublicacionesMias();
+					}
+					
+				})
+				
+				
+				
+				},
+				CambiarPrivacidad(id){
+					
+					axios.put(this.urlBase+'/v1/publicacion/privacidad',{
+						publicacion_id:id
+					})
+					.then(response =>{
+						console.log(response);
+						this.ListarPublicacionesMias();
+
+					})
+
+				},
 
 		getCookie(nombre) {
 			var name = nombre + "=";
@@ -432,6 +475,10 @@ export default{
 .switch input:disabled + label::before {
 	background-color: #e9ecef;
 }
+.recervada{
+		color: blue;
+	}
+
 
 
 

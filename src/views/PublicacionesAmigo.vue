@@ -248,6 +248,10 @@
 		
 		width: 70% !important;
 	}
+	.recervada{
+		color: blue;
+	}
+
 
 
 

@@ -38,16 +38,16 @@
                       <label>Nombre:</label>
                       <input v-model="nombreing" type="text" class="form-control" placeholder="Nombre del ingrediente">
                     </div>
-                    <div class="col-3">
+                    <div class="col">
                      <label>Cantidad:</label>
                      <input v-model="cantidading" type="number" class="form-control" placeholder="100">
                    </div>
-                   <div class="col-2">
+                   <div class="col">
                      <label>Unidad:</label>
                      <input v-model="unidading" type="text" class="form-control" placeholder="g">
                    </div>
-                   <div class="col-2">
-                    <label>Añadir:</label>
+                   <div class="col">
+                    <label>Añadir:</label><br>
                     <button v-on:click="regIngredientes" class="btn btn-outline-info2" type="submit"><span class="icon-plus"></span></button>
                   </div>
                 </div>
