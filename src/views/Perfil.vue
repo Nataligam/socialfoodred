@@ -106,11 +106,11 @@ export default{
 		this.CargarPerfil();		
 	},
 	notifications: {
-      Error: {
-        message: 'Error al cargar información',
-        type: 'error'
-      }
-    },
+		Error: {
+			message: 'Error al cargar información',
+			type: 'error'
+		}
+	},
 	methods:{
 		CargarPerfil(){
 			var self = this;
@@ -121,7 +121,7 @@ export default{
 			axios.get(this.urlBase+'/v1/usuario',config,{
 			})
 			.then(response =>{	
-						
+				
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
@@ -199,6 +199,12 @@ export default{
 </script>
 
 <style>
+
+.btn {
+	background: transparent;
+	border-color: #ff7043;
+	color: #ff7043;
+}
 .btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;

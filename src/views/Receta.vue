@@ -115,11 +115,11 @@
         Vista previa
       </button>
       <router-link to="/Inicio">
-              <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2">Guardar</button>
-              </router-link>
-              <router-link to="/Inicio">
-              <button @click="BorrarReceta()" type="button" class="btn btn-outline-info2 mb-5 btnIzq">Rechazar</button>
-              </router-link>
+        <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2">Guardar</button>
+      </router-link>
+      <router-link to="/Inicio">
+        <button @click="BorrarReceta()" type="button" class="btn btn-outline-info2 mb-5 btnIzq">Rechazar</button>
+      </router-link>
 
       <!-- Modal plantilla para crear la img de la receta -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -201,7 +201,7 @@ export default{
   },
   methods:{
     cargarCategorias(){ 
-           
+     
       axios.get(this.urlBase+'/v1/categoria',{
       })
       .then(response =>{
@@ -211,29 +211,29 @@ export default{
 
     },
     regIngredientes(){
-    if(this.idReceta==='') {
-      this.agregarReceta();
-    }else {
-      this.agregarIng();
-    }
+      if(this.idReceta==='') {
+        this.agregarReceta();
+      }else {
+        this.agregarIng();
+      }
     },
     agregarReceta(){
-    console.log(this.ingredientes);
-    
-    var lista = [];
-    var value= this.getCookie('Autorizacion');
-     
-		var config = {
-				headers: {'Authorization': value}
-			};
-     lista.push({
-      nombre:this.nombreing,
-      cantidad:this.cantidading,
-      medida:this.unidading
-    });
-     
-     axios.post(this.urlBase+'/v1/receta',{
-       	
+      console.log(this.ingredientes);
+      
+      var lista = [];
+      var value= this.getCookie('Autorizacion');
+      
+      var config = {
+        headers: {'Authorization': value}
+      };
+      lista.push({
+        nombre:this.nombreing,
+        cantidad:this.cantidading,
+        medida:this.unidading
+      });
+      
+      axios.post(this.urlBase+'/v1/receta',{
+        
        nombre:this.titulo,
        imagen_receta:this.recetaFoto,
        id_categoria:this.selectCategoria,
@@ -241,193 +241,193 @@ export default{
        ingredientes:lista
 
      },{
-       	headers: {'Authorization': value}
-     })
-     .then(response =>{
-       	console.log(response);
-      this.idReceta=response.data.id;
-      this.ingredientes=response.data.ingredientes;
-      this.ingredientesPasos=response.data.ingredientes;
-      this.nombreing='';
-      this.cantidading='';
-      this.unidading='';
-      
+      headers: {'Authorization': value}
     })
-   },
-   agregarIng(){
+      .then(response =>{
+        console.log(response);
+        this.idReceta=response.data.id;
+        this.ingredientes=response.data.ingredientes;
+        this.ingredientesPasos=response.data.ingredientes;
+        this.nombreing='';
+        this.cantidading='';
+        this.unidading='';
+        
+      })
+    },
+    agregarIng(){
 
       
-    console.log(this.recetaFoto);
-    var lista = [];
-    var value= this.getCookie('Autorizacion');
-     console.log(value);
-		var config = {
-				headers: {'Authorization': value}
-			};
-     lista.push({
-      nombre:this.nombreing,
-      cantidad:this.cantidading,
-      medida:this.unidading
-    });
-     
-		console.log(value+ "TOKEN QUE SE ENVIA")
-     axios.post(this.urlBase+'/v1/ingrediente',{
-       	
+      console.log(this.recetaFoto);
+      var lista = [];
+      var value= this.getCookie('Autorizacion');
+      console.log(value);
+      var config = {
+        headers: {'Authorization': value}
+      };
+      lista.push({
+        nombre:this.nombreing,
+        cantidad:this.cantidading,
+        medida:this.unidading
+      });
+      
+      console.log(value+ "TOKEN QUE SE ENVIA")
+      axios.post(this.urlBase+'/v1/ingrediente',{
+        
        id:this.idReceta,
        ingredientes:lista
 
      },{
-       	headers: {'Authorization': value}
-     })
-     .then(response =>{
-       	console.log(response);
-     
-      this.ingredientes.push(response.data);
-      tis.nombreing='';
-      this.cantidading=' ';
-      this.unidading=' ';
-      
+      headers: {'Authorization': value}
     })
-    
-   },
-  agregarpasos(){
-    console.log(this.idReceta)
-    
-    var value= this.getCookie('Autorizacion');
-     console.log(value);
-		var config = {
-				headers: {'Authorization': value}
+      .then(response =>{
+        console.log(response);
+        
+        this.ingredientes.push(response.data);
+        tis.nombreing='';
+        this.cantidading=' ';
+        this.unidading=' ';
+        
+      })
+      
+    },
+    agregarpasos(){
+      console.log(this.idReceta)
+      
+      var value= this.getCookie('Autorizacion');
+      console.log(value);
+      var config = {
+        headers: {'Authorization': value}
       };
-    var lista = [];
-    lista.push({
-      nombre:this.nombrepaso,
-      descripcion:this.descripcionpaso,
-      ingredientes:this.parametros
-    });
+      var lista = [];
+      lista.push({
+        nombre:this.nombrepaso,
+        descripcion:this.descripcionpaso,
+        ingredientes:this.parametros
+      });
 
-    console.log(lista);
-     
-		console.log(value+ "TOKEN QUE SE ENVIA")
-     axios.post(this.urlBase+'/v1/paso',{
-       	
-      id:this.idReceta,
-      pasos:lista,
+      console.log(lista);
+      
+      console.log(value+ "TOKEN QUE SE ENVIA")
+      axios.post(this.urlBase+'/v1/paso',{
+        
+        id:this.idReceta,
+        pasos:lista,
 
-     },{
-       	headers: {'Authorization': value}
+      },{
+        headers: {'Authorization': value}
+      })
+      .then(response =>{
+       console.log(response);
+       
+       this.pasos.push(response.data);
+       this.nombrepaso='';
+       this.descripcionpaso='';
+       
      })
+      
+
+
+    },
+    eliminarIng(index,id){
+      
+      console.log(id);
+      
+      axios.delete(this.urlBase+'/v1/ingrediente/'+id)
+      .then(response =>{
+        console.log(response);
+        
+        if (response.data==true){
+          console.log("Elimino");
+          this.ingredientes.splice(index,1);
+        }
+        
+      })
+
+    },
+    modificarIng(id,nombre, cantidad, unidad, index){
+
+     this.nombreing=nombre;
+     this.cantidading=cantidad;
+     this.unidading=unidad;
+     this.eliminarIng(index,id);
+   },
+   eliminarpaso(index,id){
+    
+     console.log(id);
+     this.pasos.splice(index,1);
+     axios.delete(this.urlBase+'/v1/paso/'+id)
      .then(response =>{
-         console.log(response);
-         
-      this.pasos.push(response.data);
-      this.nombrepaso='';
-      this.descripcionpaso='';
+      console.log(response);
+      
+      if (response.data==true){
+        console.log("Elimino");
+      }
       
     })
-    
 
+   },
+   modificarpaso(id,nombrepaso,descripcionpaso,index){
+
+    alert(nombrepaso);
+    this.nombrepaso=nombrepaso;
+    this.descripcionpaso=descripcionpaso;
+    this.eliminarpaso(index,id);
 
   },
-  eliminarIng(index,id){
-    
-    console.log(id);
-  
-  axios.delete(this.urlBase+'/v1/ingrediente/'+id)
-     .then(response =>{
-       	console.log(response);
-     
-      if (response.data==true){
-        console.log("Elimino");
-        this.ingredientes.splice(index,1);
-      }
-      
-    })
+  subirImagen(){
+   var self = this;
+   var fichero;
+   var storageRef;
 
- },
- modificarIng(id,nombre, cantidad, unidad, index){
+   storageRef = firebase.storage().ref();
+   
+   fichero = document.getElementById("fichero");
 
-   this.nombreing=nombre;
-   this.cantidading=cantidad;
-   this.unidading=unidad;
-   this.eliminarIng(index,id);
- },
- eliminarpaso(index,id){
-  
-   console.log(id);
-   this.pasos.splice(index,1);
-   axios.delete(this.urlBase+'/v1/paso/'+id)
-     .then(response =>{
-       	console.log(response);
-     
-      if (response.data==true){
-        console.log("Elimino");
-      }
-      
-    })
+   var img = fichero.files[0];
 
- },
- modificarpaso(id,nombrepaso,descripcionpaso,index){
+   var uploadTask = storageRef.child("imagenes/" + img.name).put(img);
 
-  alert(nombrepaso);
-  this.nombrepaso=nombrepaso;
-  this.descripcionpaso=descripcionpaso;
-  this.eliminarpaso(index,id);
-
-},
-subirImagen(){
- var self = this;
- var fichero;
- var storageRef;
-
- storageRef = firebase.storage().ref();
- 
- fichero = document.getElementById("fichero");
-
- var img = fichero.files[0];
-
- var uploadTask = storageRef.child("imagenes/" + img.name).put(img);
-
- uploadTask.on('state_changed',
-  function(snapshot){
-  }, function(error) {
-  }, function() {
-    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      console.log('File available at', downloadURL);
-      self.recetaFoto = downloadURL;
+   uploadTask.on('state_changed',
+    function(snapshot){
+    }, function(error) {
+    }, function() {
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        console.log('File available at', downloadURL);
+        self.recetaFoto = downloadURL;
+      });
     });
-  });
-},
-BorrarReceta(){
+ },
+ BorrarReceta(){
    
    
-      axios.delete(this.urlBase+'/v1/publicacion/'+this.idReceta)
-        .then(response =>{
-            console.log(response);
-        
-          if (response.data==true){
-            console.log("Elimino");
-          }
-          
-        })
-   
-      
-     
+  axios.delete(this.urlBase+'/v1/publicacion/'+this.idReceta)
+  .then(response =>{
+    console.log(response);
+    
+    if (response.data==true){
+      console.log("Elimino");
+    }
+    
+  })
+  
+  
+  
 },
 getCookie(nombre) {
-			var name = nombre + "=";
-			var decodedCookie = decodeURIComponent(document.cookie);
-			var ca = decodedCookie.split(';');
-			for(var i = 0; i <ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
-			}
-			return "";
-		}
+ var name = nombre + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(';');
+ for(var i = 0; i <ca.length; i++) {
+  var c = ca[i];
+  while (c.charAt(0) == ' ') {
+   c = c.substring(1);
+ }
+ if (c.indexOf(name) == 0) {
+   return c.substring(name.length, c.length);
+ }
+}
+return "";
+}
 },
 components:{
   DefaultLayout,
@@ -439,19 +439,24 @@ components:{
 
 
 <style>
+.btn {
+  background: transparent;
+  border-color: #ff7043;
+  color: #ff7043;
+}
 
 .btn-outline-info2 {
-    color: #ff7043;
-    background-color: transparent;
-    background-image: none;
-    border-color:#ff7043;
-  }
+  color: #ff7043;
+  background-color: transparent;
+  background-image: none;
+  border-color:#ff7043;
+}
 
-  .btn-outline-info2:hover {
-    color: #fff;
-    background-color: #ff7043;
-    border-color: #ff7043;
-  }
+.btn-outline-info2:hover {
+  color: #fff;
+  background-color: #ff7043;
+  border-color: #ff7043;
+}
 
 .borde{
 	border: 1px #ff7043 solid;

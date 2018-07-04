@@ -145,6 +145,12 @@ export default{
 	box-shadow: 2px 2px 5px #999;
 }
 
+.btn {
+	background: transparent;
+	border-color: #ff7043;
+	color: #ff7043;
+}
+
 .btn-outline-info2 {
 	color: #ff7043;
 	background-color: transparent;
