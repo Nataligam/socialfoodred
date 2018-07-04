@@ -78,9 +78,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <div class="input-group-append">
-             <input type="button" @click="agregarReceta" class="input-group-text" value="cargar">
-           </div>
+            
          </div>
          <div class="form-group">
           <h5>Pasos:</h5>
