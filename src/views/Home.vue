@@ -149,12 +149,7 @@ export default{
 	border-color: #ff7043;
 	color: #ff7043;
 }
-.btn-outline-info2 {
-	color: #ff7043;
-	background-color: transparent;
-	background-image: none;
-	border-color:#ff7043;
-}
+
 .btn-outline-info2:hover {
 	color: #fff;
 	background-color: #ff7043;
