@@ -111,11 +111,11 @@
         </div>
       </div>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-outline-info2 mb-5 btnIzq" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2" data-toggle="modal" data-target="#exampleModal">
         Vista previa
       </button>
       <router-link to="/Inicio">
-              <button type="button" class="btn btn-outline-info2 mb-5 btnIzq">Guardar</button>
+              <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2">Guardar</button>
               </router-link>
               <router-link to="/Inicio">
               <button @click="BorrarReceta()" type="button" class="btn btn-outline-info2 mb-5 btnIzq">Rechazar</button>
@@ -149,7 +149,7 @@
             </div>
             <div class="modal-footer">
               
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-outline-info2" data-dismiss="modal">Cerrar</button>
               
             </div>
           </div>
