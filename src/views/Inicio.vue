@@ -5,7 +5,7 @@
 			<Layout>
 				<section slot="contentColumn1" >
 					<div class="row">
-						<div class="col-md-8 offset-md-2">
+						<div class="col-md-6 offset-md-3">
 							<div class="borde p-3 m-2">
 								<form class="form-inline">
 									<div class="row">
