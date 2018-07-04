@@ -11,7 +11,13 @@
 					<button class="btn btn-outline-info2 my-2 my-sm-0" type="submit" v-on:click="login">Iniciar Sesión</button>
 
 				</form>
+
 			</nav>
+			<br>
+			<div class="alert alert-danger alert-dismissible" v-if="entro == false">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			  <center><strong>Usuario o contras  incorrectos</strong></center>
+			</div>
 			<div class="container mt-5 mb-5">
 				<div class="row">
 					<div class="col-md-7 col-sm-12  p-4">
@@ -59,7 +65,10 @@
 						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 						  <strong>Registro Exitoso</strong>
 						</div>
-					
+						<div class="alert alert-danger alert-dismissible" v-if="exito2 == false">
+						  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						  <strong>Ocurrio un error, verificar datos</strong>
+						</div>
 
 					</div>
 
@@ -86,6 +95,8 @@ export default{
 			username:'',
 			password:'',
 			exito:'false',
+			entro:true,
+			exito2:true,
 			urlBase:'http://a8b88f32.ngrok.io'
 		};
 	},
@@ -104,7 +115,7 @@ export default{
 					this.setCookie('Autorizacion',response.data,1);
 					this.exito = true;
 				}else{
-
+          this.exito2=false;
 					console.log("no registro")
 					console.log(response.data)
 				}
@@ -128,6 +139,7 @@ export default{
 					}
 					)
 				}else{
+				  this.entro = false;
 					console.log("no entro")
 					this.$router.push('/')
 				}
