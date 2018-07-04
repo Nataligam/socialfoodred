@@ -84,6 +84,14 @@ export default{
 				this.infoAmigo=response.data			
 			})									
 		},
+		enviarIdAmigo(id){
+
+			this.idAmigo=id;
+			this.$router.push({
+				name:'PublicacionesAmigo',
+				params:{idAmigo:id}
+			})	
+		},
 		seguir(id){
 			var value= this.getCookie('Autorizacion');
 			var config = {

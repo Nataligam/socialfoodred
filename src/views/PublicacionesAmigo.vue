@@ -7,17 +7,15 @@
 
 					<div v-for="(publicacion,index) in publicaciones"  class="row">
 						
-						<div class="col-md-8 offset-md-2">
+						<div class="col-md-10 offset-md-1">
 							<div class="p-3 m-2 ">
 								<div class="card border-primary mb-3 " >
 									<div class="card-header">
 										<div class="row">
-											<div class="col">
-												
-												<img  class="img-fluid slaider rounded mx-auto d-block" v-bind:src="publicacion.imagen_receta" alt="Los Angeles">
+											<div class="col-xl-6 col-md-12 col-sm-12 mb-3">								
+												<img  class="img-fluid slaider rounded mx-auto d-block" v-bind:src="publicacion.imagen_receta">
 											</div>
-											<div class="col">
-												
+											<div class="col-xl-6 col-md-12 col-sm-12">								
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
 													<span v-for="ingrediente in publicacion.receta.ingredientes" >
@@ -37,21 +35,21 @@
 										</div>
 										<div class="card-body">
 											<div class="row">
-												<div class="col">
+												<div class="col-xl-6 col-md-6 col-6">
 													<center>
-														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-primary mb-5"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
 													</center>	
 												</div>
-												<div class="col">
+												<div class="col-xl-6 col-md-6 col-6">
 													<center>
-														<button class="btn btn-outline-info2 mb-5" type="button" data-toggle="collapse" :data-target="`#demo2${index}`" aria-expanded="false" aria-controls="collapseExample">
+														<button class="btn btn-outline-info2" type="button" data-toggle="collapse" :data-target="`#demo2${index}`" aria-expanded="false" aria-controls="collapseExample">
 															Comentar
 														</button>
 													</center>
 												</div>														
 											</div>
 											
-											<div class="col-md-12">
+											<div class="col-md-12 mt-3">
 												<div class="collapse" v-bind:id="['demo2'+index]">
 													<div v-for="comentario in publicacion.comentarios" class="card card-body">
 														{{comentario.nickname}}:{{comentario.comentario}}
@@ -63,7 +61,7 @@
 															<input  v-model="comentario" type="text" class="form-control mb-5">
 														</div>
 														<div class="col-md-2">
-															<button @click="Comentar(publicacion.id,comentario)"  type="button" class="btn btn-outline-primary mb-5"><span class="icon-arrow-right"></span></button>
+															<button @click="Comentar(publicacion.id,comentario)"  type="button" class="btn btn-outline-info2 mb-5"><span class="icon-arrow-right"></span></button>
 														</div>
 													</div>
 													
