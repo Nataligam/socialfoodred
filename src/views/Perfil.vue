@@ -8,11 +8,11 @@
 					</center>
 					<div class=" p-3 ">
 						<div class="row">
-							<div class="col-md-3 offset-md-2 col-sm-12 mt-5">
+							<div class="col-md-3 offset-md-2 col-sm-12">
 								<center>
 									<div class="row">
 										<div class="col">
-											<img v-bind:src="usuarioFoto" class="img-fluid dimensiones" >
+											<img v-bind:src="usuarioFoto" class="img-fluid" width="200px" >
 										</div>
 									</div>
 									<div class="row mt-5">
@@ -94,7 +94,7 @@ export default{
 			usuarioFoto:'',
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://78de270a.ngrok.io'
+			urlBase:'http://6ff53e3f.ngrok.io'
 
 		}
 	},
@@ -213,9 +213,6 @@ export default{
 }
 .borde{
 	border: 1px #ff7043 solid;
-}
-.dimensiones{
-	max-height: 250px;
 }
 .switch {
 	font-size: 1rem;
