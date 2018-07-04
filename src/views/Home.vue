@@ -16,7 +16,7 @@
 			<br>
 			<div class="alert alert-danger alert-dismissible" v-if="entro == false">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			  <center><strong>Usuario o contras  incorrectos</strong></center>
+			  <center><strong>Usuario o contraseña  incorrectos</strong></center>
 			</div>
 			<div class="container mt-5 mb-5">
 				<div class="row">
