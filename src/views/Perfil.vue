@@ -184,7 +184,7 @@ export default{
 			publicaciones:[],
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://a8b88f32.ngrok.io'
+			urlBase:'http://35.188.111.107:8080/socialfood'
 
 		}
 	},

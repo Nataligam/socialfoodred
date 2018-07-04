@@ -90,7 +90,7 @@
 		data(){
 			return {
 				id:'',
-				urlBase:'http://a8b88f32.ngrok.io',
+				urlBase:'http://35.188.111.107:8080/socialfood',
 				publicaciones:[],
 				idAmigo:'1'
 
