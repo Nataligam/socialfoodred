@@ -6,12 +6,16 @@
 				<section slot="contentColumn1" >
           <div class="bordeSombra p-5 col-md-8 offset-md-2 col-sm-12">
             <center><h4>Crear y Compartir Receta:</h4></center>
+						<div class="alert alert-success alert-dismissible" v-if="exito == true">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Registro Exitoso</strong>
+						</div>
             <div class="row mt-5">
               <div class="col-md-10 offset-md-1 col-sm-12">
                <form >
                 <div class="form-group">
                   <input v-model="titulo" type="text" class="form-control" placeholder="Ingrese el nombre de la receta">
-                  
+
                 </div>
                 <label>Seleccione las imagenes:</label>
                 <div class="input-group mb-3">
@@ -21,9 +25,16 @@
                   </div>
                   <div class="input-group-append">
                    <input type="button" @click="subirImagen" class="input-group-text" value="cargar">
-
                  </div>
                </div>
+							 <div class="hidden" id="progreso">
+							 <div class="progress">
+								 <div class="progress-bar" role="progressbar" aria-valuenow="0"
+								 aria-valuemin="0" aria-valuemax="100" id="barra">
+									 <span class="sr-only">70% Complete</span>
+								 </div>
+							 </div>
+							 </div>
                <div class="form-group">
                 <label >Nombre de la categoria:</label>
                 <select v-model="selectCategoria" class="form-control">
@@ -56,7 +67,7 @@
                  <ul class="list-group">
                   <label>Ingredientes agregados:</label>
                   <li v-for="(ingrediente, index) in ingredientes" v-bind:key="ingrediente.id" class="list-group-item">
-                    {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.medida}} 
+                    {{ingrediente.nombre }} {{ingrediente.cantidad }} {{ingrediente.medida}}
                     <button @click="modificarIng(ingrediente.id,ingrediente.nombre,ingrediente.cantidad,ingrediente.medida,index)" class="btn btn-outline-primary btnIzq ml-2"><span class="icon-note"></span></button>
                     <button @click="eliminarIng(index,ingrediente.id)" class="btn btn-outline-danger btnIzq"><span class="icon-close"></span></button>
                   </li>
@@ -69,7 +80,6 @@
           <div class="input-group mb-3">
             <div class="input-group-append">
              <input type="button" @click="agregarReceta" class="input-group-text" value="cargar">
-
            </div>
          </div>
          <div class="form-group">
@@ -110,6 +120,10 @@
           <!--Lista de pasos-->
         </div>
       </div>
+			<div class="alert alert-success alert-dismissible" v-if="exito == true">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Registro Exitoso</strong>
+			</div>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-outline-info2 mb-5 btnIzq ml-2" data-toggle="modal" data-target="#exampleModal">
         Vista previa
@@ -148,9 +162,9 @@
               </div>
             </div>
             <div class="modal-footer">
-              
+
               <button type="button" class="btn btn-outline-info2" data-dismiss="modal">Cerrar</button>
-              
+
             </div>
           </div>
         </div>
@@ -191,17 +205,18 @@ export default{
       recetaFoto:'',
       idReceta:'',
       actualizarIng:'0',
+			exito:false,
       urlBase:'http://a8b88f32.ngrok.io'
 
     }
   },
   mounted: function (){
     this.cargarCategorias();
-    
+
   },
   methods:{
-    cargarCategorias(){ 
-     
+    cargarCategorias(){
+
       axios.get(this.urlBase+'/v1/categoria',{
       })
       .then(response =>{
@@ -219,10 +234,10 @@ export default{
     },
     agregarReceta(){
       console.log(this.ingredientes);
-      
+
       var lista = [];
       var value= this.getCookie('Autorizacion');
-      
+
       var config = {
         headers: {'Authorization': value}
       };
@@ -231,13 +246,13 @@ export default{
         cantidad:this.cantidading,
         medida:this.unidading
       });
-      
+
       axios.post(this.urlBase+'/v1/receta',{
-        
+
        nombre:this.titulo,
        imagen_receta:this.recetaFoto,
        id_categoria:this.selectCategoria,
-       
+
        ingredientes:lista
 
      },{
@@ -248,15 +263,16 @@ export default{
         this.idReceta=response.data.id;
         this.ingredientes=response.data.ingredientes;
         this.ingredientesPasos=response.data.ingredientes;
+				this.exito = true;
         this.nombreing='';
         this.cantidading='';
         this.unidading='';
-        
+
       })
     },
     agregarIng(){
 
-      
+
       console.log(this.recetaFoto);
       var lista = [];
       var value= this.getCookie('Autorizacion');
@@ -269,10 +285,10 @@ export default{
         cantidad:this.cantidading,
         medida:this.unidading
       });
-      
+
       console.log(value+ "TOKEN QUE SE ENVIA")
       axios.post(this.urlBase+'/v1/ingrediente',{
-        
+
        id:this.idReceta,
        ingredientes:lista
 
@@ -281,18 +297,18 @@ export default{
     })
       .then(response =>{
         console.log(response);
-        
+
         this.ingredientes.push(response.data);
         tis.nombreing='';
         this.cantidading=' ';
         this.unidading=' ';
-        
+
       })
-      
+
     },
     agregarpasos(){
       console.log(this.idReceta)
-      
+
       var value= this.getCookie('Autorizacion');
       console.log(value);
       var config = {
@@ -306,10 +322,10 @@ export default{
       });
 
       console.log(lista);
-      
+
       console.log(value+ "TOKEN QUE SE ENVIA")
       axios.post(this.urlBase+'/v1/paso',{
-        
+
         id:this.idReceta,
         pasos:lista,
 
@@ -318,29 +334,29 @@ export default{
       })
       .then(response =>{
        console.log(response);
-       
+
        this.pasos.push(response.data);
        this.nombrepaso='';
        this.descripcionpaso='';
-       
+
      })
-      
+
 
 
     },
     eliminarIng(index,id){
-      
+
       console.log(id);
-      
+
       axios.delete(this.urlBase+'/v1/ingrediente/'+id)
       .then(response =>{
         console.log(response);
-        
+
         if (response.data==true){
           console.log("Elimino");
           this.ingredientes.splice(index,1);
         }
-        
+
       })
 
     },
@@ -352,17 +368,17 @@ export default{
      this.eliminarIng(index,id);
    },
    eliminarpaso(index,id){
-    
+
      console.log(id);
      this.pasos.splice(index,1);
      axios.delete(this.urlBase+'/v1/paso/'+id)
      .then(response =>{
       console.log(response);
-      
+
       if (response.data==true){
         console.log("Elimino");
       }
-      
+
     })
 
    },
@@ -380,15 +396,17 @@ export default{
    var storageRef;
 
    storageRef = firebase.storage().ref();
-   
+
    fichero = document.getElementById("fichero");
 
    var img = fichero.files[0];
 
    var uploadTask = storageRef.child("imagenes/" + img.name).put(img);
-
+   document.getElementById("progreso").className="";
    uploadTask.on('state_changed',
     function(snapshot){
+		var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		document.getElementById("barra").style.width=progress + "%";
     }, function(error) {
     }, function() {
       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
@@ -398,20 +416,20 @@ export default{
     });
  },
  BorrarReceta(){
-   
-   
+
+
   axios.delete(this.urlBase+'/v1/publicacion/'+this.idReceta)
   .then(response =>{
     console.log(response);
-    
+
     if (response.data==true){
       console.log("Elimino");
     }
-    
+
   })
-  
-  
-  
+
+
+
 },
 getCookie(nombre) {
  var name = nombre + "=";
@@ -444,7 +462,9 @@ components:{
   border-color: #ff7043;
   color: #ff7043;
 }
-
+.progress-bar{
+	width:0%;
+}
 .btn-outline-info2 {
   color: #ff7043;
   background-color: transparent;

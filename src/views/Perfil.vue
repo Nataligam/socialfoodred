@@ -62,24 +62,38 @@
 															<input type="button" @click="cargarImagen" class="input-group-text" value="cargar">
 														</div>
 													</div>
+													<div class="hidden" id="progreso">
+													<div class="progress">
+														<div class="progress-bar" role="progressbar" aria-valuenow="0"
+														aria-valuemin="0" aria-valuemax="100" id="barra">
+															<span class="sr-only">70% Complete</span>
+														</div>
+													</div>
+													</div>
 												</div>
 											</div>
 										</form>
+										<br>
+										<div class="alert alert-success alert-dismissible" v-if="exito == true">
+											<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+											<strong>Registro Exitoso</strong>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<div v-for="(publicacion,index) in publicaciones"  class="row">
-						
+
 						<div class="col-md-10 offset-md-1">
 							<div class="p-3 m-2 ">
 								<div class="card border-primary mb-3 " >
 									<div class="card-header">
 										<div class="row">
-											<div class="col-xl-6 col-md-12 col-sm-12 mb-3">								
+											<div class="col-xl-6 col-md-12 col-sm-12 mb-3">
 												<img  class="img-fluid slaider rounded mx-auto d-block" v-bind:src="publicacion.imagen_receta">
 											</div>
-											<div class="col-xl-6 col-md-12 col-sm-12">								
+											<div class="col-xl-6 col-md-12 col-sm-12">
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
 													<span v-for="ingrediente in publicacion.receta.ingredientes" >
@@ -87,22 +101,22 @@
 														<span v-for="paso in  publicacion.receta.pasos" >
 															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" >
 																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
-																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> 
+																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br>
 																//  {{paso.descripcion}} <br>
 															}<br></span>
 														}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
 													</p>
-													
-													
+
+
 												</div>
-											</div>																		
+											</div>
 										</div>
 										<div class="card-body">
 											<div class="row">
 												<div class="col-xl-6 col-md-6 col-6">
 													<center>
 														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
-													</center>	
+													</center>
 												</div>
 												<div class="col-xl-6 col-md-6 col-6">
 													<center>
@@ -110,15 +124,15 @@
 															Comentar
 														</button>
 													</center>
-												</div>														
+												</div>
 											</div>
-											
+
 											<div class="col-md-12 mt-3">
 												<div class="collapse" v-bind:id="['demo2'+index]">
 													<div v-for="comentario in publicacion.comentarios" class="card card-body">
 														{{comentario.nickname}}:{{comentario.comentario}}
 													</div>
-													
+
 													<br>
 													<div class="row">
 														<div class="col-md-10">
@@ -128,13 +142,13 @@
 															<button @click="Comentar(publicacion.id,comentario)"  type="button" class="btn btn-outline-info2 mb-5"><span class="icon-arrow-right"></span></button>
 														</div>
 													</div>
-													
+
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 							</div>
 						</div>
 				</section>
@@ -162,6 +176,7 @@ export default{
 			publicaciones:[],
 			privacidadUsuario:false,
 			isDisabled: true,
+			exito:false,
 			urlBase:'http://a8b88f32.ngrok.io'
 
 		}
@@ -171,8 +186,8 @@ export default{
 		Layout,
 	},
 	mounted: function (){
-		this.CargarPerfil();	
-		this.ListarPublicacionesMias();	
+		this.CargarPerfil();
+		this.ListarPublicacionesMias();
 	},
 	notifications: {
 		Error: {
@@ -189,17 +204,17 @@ export default{
 			};
 			axios.get(this.urlBase+'/v1/usuario',config,{
 			})
-			.then(response =>{	
-				
+			.then(response =>{
+
 				this.usuarioCorreo=response.data.correo;
 				this.usuarioNickname=response.data.nickname;
 				this.usuarioPassword=response.data.password;
 				this.privacidadUsuario=response.data.privacidad;
-				this.usuarioFoto= response.data.imagen_usuario;				
+				this.usuarioFoto= response.data.imagen_usuario;
 			})
-			.catch(function (error) {				
-				
-				
+			.catch(function (error) {
+
+
 			})
 		},
 		cargarImagen(){
@@ -212,9 +227,12 @@ export default{
 			fichero = document.getElementById("fichero");
 			var img = fichero.files[0];
 			console.log(img);
-			var uploadTask = storageRef.child("perfil/" + img.name).put(img);			
+			var uploadTask = storageRef.child("perfil/" + img.name).put(img);
+			document.getElementById("progreso").className="";
 			uploadTask.on('state_changed',
 				function(snapshot){
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				document.getElementById("barra").style.width=progress + "%";
 				}, function(error) {
 				}, function() {
 					uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
@@ -236,6 +254,7 @@ export default{
 
 			})
 			.then(response =>{
+			  this.exito=true;
 				console.log(response);
 			})
 		},
@@ -243,15 +262,15 @@ export default{
 			this.isDisabled=false
 		},
 		ListarPublicacionesMias(){
-				
+
 				var value= this.getCookie('Autorizacion');
 				var config = {
 					headers: {'Authorization': value}
-				}; 
+				};
 
 				console.log(this.id);
 
-				axios.get(this.urlBase+'/v1/publicacion',config,{        
+				axios.get(this.urlBase+'/v1/publicacion',config,{
 				})
 				.then(response =>{
 					this.publicaciones=response.data;
@@ -264,7 +283,7 @@ export default{
 				console.log(publicacion);
 				var value= this.getCookie('Autorizacion');
 				if (like===false){
-				
+
 				axios.post(this.urlBase+'/v1/like',{
 					publicacion_id:publicacion
 				},{
@@ -273,7 +292,7 @@ export default{
 				.then(response =>{
 					console.log(response);
 					this.ListarPublicacionesMias();
-				
+
     		})
 				}else {
 					console.log(publicacion);
@@ -282,25 +301,25 @@ export default{
 					})
 					.then(response =>{
 						console.log(response);
-					
+
 					if (response.data==true){
 						console.log("Elimino");
 						this.ListarPublicacionesMias();
-						
+
 					}else {
 						console.log(response);
 					}
-					
+
 					})
-					
+
 				}
-				
+
 			},
 			Comentar(id,comentario){
-				
+
 				var value= this.getCookie('Autorizacion');
 				axios.post(this.urlBase+'/v1/comentario',{
-					
+
 					comentario:comentario,
 					publicacion_id:id
 
@@ -310,9 +329,9 @@ export default{
 				.then(response =>{
 					console.log(response);
 					this.ListarPublicacionesMias();
-					
+
 				})
-				
+
 				this.comentario='';
 			},
 
@@ -353,7 +372,9 @@ export default{
 	background-image: none;
 	border-color:#ff7043;
 }
-
+.progress-bar{
+  width:0%;
+}
 .btn-outline-info2:hover {
 	color: #fff;
 	background-color: #ff7043;
