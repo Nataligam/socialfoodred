@@ -19,10 +19,10 @@
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
 													<span v-for="ingrediente in publicacion.receta.ingredientes" >
-														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
+														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}&nbsp;{{ingrediente.cantidad}} &nbsp;{{ingrediente.medida}}";<br></span><br>
 														<span v-for="paso in  publicacion.receta.pasos" >
 															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" >
-																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
+																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.medida}},  </span>
 																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> 
 																//  {{paso.descripcion}} <br>
 															}<br></span>
