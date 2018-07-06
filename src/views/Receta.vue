@@ -204,7 +204,7 @@ export default{
       idReceta:'',
       actualizarIng:'0',
 			exito:false,
-      urlBase:'http://35.188.111.107:8080/socialfood',
+      urlBase:'http://35.239.220.4:8080/socialfood',
     }
   },
   mounted: function (){

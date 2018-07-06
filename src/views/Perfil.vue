@@ -193,7 +193,7 @@ export default{
 			privacidadUsuario:false,
 			isDisabled: true,
 			isDisable: true,
-			urlBase:'http://35.188.111.107:8080/socialfood',
+			urlBase:'http://35.239.220.4:8080/socialfood',
 
 		}
 	},
