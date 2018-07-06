@@ -4,7 +4,6 @@
 			<Layout>
 				<section slot="contentColumn1" >
 					
-
 					<div v-for="(publicacion,index) in publicaciones"  class="row">
 						
 						<div class="col-md-10 offset-md-1">
@@ -19,11 +18,11 @@
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
 													<span v-for="ingrediente in publicacion.receta.ingredientes" >
-														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
+														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}&nbsp;{{ingrediente.cantidad}} &nbsp;{{ingrediente.medida}}";<br></span><br>
 														<span v-for="paso in  publicacion.receta.pasos" >
 															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" >
-																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
-																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br> 
+																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre_ing}}&nbsp;{{parametro.cantidad}} &nbsp;{{parametro.medida}},  </span>
+																<span v-else> String {{parametro.nombre}}&nbsp;{{parametro.cantidad}} &nbsp;{{parametro.medida}}</span> </span>) { <br> 
 																//  {{paso.descripcion}} <br>
 															}<br></span>
 														}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
@@ -37,7 +36,7 @@
 											<div class="row">
 												<div class="col-xl-6 col-md-6 col-6">
 													<center>
-														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="fas fa-utensils"></span> {{publicacion.cantidadLikes}}</button>
 													</center>	
 												</div>
 												<div class="col-xl-6 col-md-6 col-6">
@@ -52,7 +51,7 @@
 											<div class="col-md-12 mt-3">
 												<div class="collapse" v-bind:id="['demo2'+index]">
 													<div v-for="comentario in publicacion.comentarios" class="card card-body">
-														{{comentario.nickname}}:{{comentario.comentario}}
+														{{comentario.nickname}}&nbsp;:&nbsp;{{comentario.comentario}}
 													</div>
 													
 													<br>
@@ -92,7 +91,7 @@
 				id:'',
 				urlBase:'http://35.188.111.107:8080/socialfood',
 				publicaciones:[],
-				idAmigo:'1'
+				idAmigo:''
 
 			}
 		},mounted: function (){
@@ -121,43 +120,44 @@
 				})
 				.then(response =>{
 					this.publicaciones=response.data;
-					a
+					console.log(response);
 
 
 
 				})
 			},
 			MeGusta(publicacion,like,idLike){
-				console.log(publicacion);
+				
 				var value= this.getCookie('Autorizacion');
-				if (like===false){
-				
-				axios.post(this.urlBase+'/v1/like',{
-					publicacion_id:publicacion
-				},{
-					headers: {'Authorization': value}
-				})
-				.then(response =>{
-					console.log(response);
-					this.ListarPublicacionesSeguidores();
-				
-    		})
+				console.log(value);
+				if (like==false){
+
+					axios.post(this.urlBase+'/v1/like',{
+						publicacion_id:publicacion
+					},{
+						headers: {'Authorization': value}
+					})
+					.then(response =>{
+						console.log(response);
+						this.ListarPublicacionesSeguidores();
+
+					})
 				}else {
 					console.log(publicacion);
 					axios.delete(this.urlBase+'/v1/like/'+publicacion,{
 						headers: {'Authorization': value}
 					})
 					.then(response =>{
-						console.log(response);
-					
-					if (response.data==true){
-						console.log("Elimino");
-						this.ListarPublicacionesSeguidores();
 						
-					}else {
-						console.log(response);
-					}
-					
+
+						if (response.data==true){
+							console.log("Elimino");
+							this.ListarPublicacionesSeguidores();
+
+						}else {
+							console.log(response);
+						}
+
 					})
 					
 				}

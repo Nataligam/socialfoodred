@@ -95,11 +95,11 @@
 												<p class="centro"> <span class="recervada">Package</span>&nbsp;&nbsp;Receta;<br><br>
 													<span class="recervada">public class </span>&nbsp;&nbsp;{{publicacion.receta.nombre}} {<br><br>
 													<span v-for="ingrediente in publicacion.receta.ingredientes" >
-														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}{{ingrediente.cantidad}} {{ingrediente.unidad}}";<br></span><br>
+														<span class="recervada ml-3">private String</span>=&nbsp;"{{ingrediente.nombre}}&nbsp;{{ingrediente.cantidad}} &nbsp;{{ingrediente.medida}}";<br></span><br>
 														<span v-for="paso in  publicacion.receta.pasos" >
 															<span class="recervada">public void </span>&nbsp;{{paso.nombre}} (<span v-for="(parametro, index) in paso.ingredientes" >
-																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}},  </span>
-																<span v-else> String {{parametro.nombre}}{{parametro.cantidad}} {{parametro.unidad}}</span> </span>) { <br>
+																<span v-if="Object.keys(paso.ingredientes).length-1 > index" > String {{parametro.nombre_ing}}&nbsp;{{parametro.cantidad}} &nbsp;{{parametro.medida}},  </span>
+																<span v-else> String {{parametro.nombre}}&nbsp;{{parametro.cantidad}} &nbsp;{{parametro.medida}}</span> </span>) { <br>
 																//  {{paso.descripcion}} <br>
 															}<br></span>
 														}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
@@ -130,7 +130,7 @@
 
 												<div class="col">
 
-														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="icon-like"></span> {{publicacion.cantidadLikes}}</button>
+														<button @click="MeGusta(publicacion.id,publicacion.like)" type="button" class="btn btn-outline-info2"><span class="fas fa-utensils"></span> {{publicacion.cantidadLikes}}</button>
 
 												</div>
 												<div class="col">
@@ -192,7 +192,7 @@ export default{
 			publicaciones:[],
 			privacidadUsuario:false,
 			isDisabled: true,
-			urlBase:'http://35.188.111.107:8080/socialfood'
+			urlBase:'http://35.188.111.107:8080/socialfood',
 
 		}
 	},
@@ -294,8 +294,9 @@ export default{
 
 				})
 			},MeGusta(publicacion,like,idLike){
-				console.log(publicacion);
+
 				var value= this.getCookie('Autorizacion');
+				console.log(value);
 				if (like===false){
 
 				axios.post(this.urlBase+'/v1/like',{
@@ -309,12 +310,12 @@ export default{
 
     		})
 				}else {
-					console.log(publicacion);
+					console.log(value);
 					axios.delete(this.urlBase+'/v1/like/'+publicacion,{
 						headers: {'Authorization': value}
 					})
 					.then(response =>{
-						console.log(response);
+
 
 					if (response.data==true){
 						console.log("Elimino");
