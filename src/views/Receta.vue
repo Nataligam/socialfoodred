@@ -205,7 +205,6 @@ export default{
       actualizarIng:'0',
 			exito:false,
       urlBase:'http://35.188.111.107:8080/socialfood',
-
     }
   },
   mounted: function (){
@@ -297,7 +296,7 @@ export default{
         console.log(response);
 
         this.ingredientes.push(response.data);
-        tis.nombreing='';
+        this.nombreing='';
         this.cantidading=' ';
         this.unidading=' ';
 

@@ -115,6 +115,9 @@ export default{
 					console.log(response.data);
 					this.setCookie('Autorizacion',response.data,1);
 					this.exito = true;
+					this.usuario='',
+					this.correo='',
+					this.contrasena=''
 				}else{
           this.exito2=false;
 					console.log("no registro")

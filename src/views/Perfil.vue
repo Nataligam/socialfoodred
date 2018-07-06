@@ -28,7 +28,7 @@
 									<form >
 										<div class="form-group">
 											<label >Correo:</label>
-											<input type="email" :disabled="isDisabled" class="form-control" v-model="usuarioCorreo"  >
+											<input type="email" :disabled="isDisable" class="form-control" v-model="usuarioCorreo"  >
 										</div>
 										<div class="form-group">
 											<label >Usuario:</label>
@@ -184,6 +184,7 @@ export default{
 			publicaciones:[],
 			privacidadUsuario:false,
 			isDisabled: true,
+			isDisable: true,
 			urlBase:'http://35.188.111.107:8080/socialfood',
 
 		}
@@ -254,12 +255,14 @@ export default{
 				correo: this.usuarioCorreo,
 				password: this.usuarioPassword,
 				privacidad:this.privacidadUsuario,
-				imagen_usuario:this.usuarioFoto
+				imagen_usuario:this.usuarioFoto,
+				
 
 			})
 			.then(response =>{
 				console.log(response);
 			})
+			this.isDisabled=true
 		},
 		HabilitarCampos(){
 			this.isDisabled=false
